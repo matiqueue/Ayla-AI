@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dbExec": "npx tsx database/index.ts",
-    "seed": "npx tsx database/seed.ts"
+    "prisma": "npx tsx database/main.ts",
+    "seed": "npx tsx database/seed/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",
