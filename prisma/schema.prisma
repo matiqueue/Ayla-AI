@@ -1,14 +1,47 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
+model License {
+  id        Int      @id @default(autoincrement())
+  code      String   @unique
+  isUsed    Boolean  @default(false)
+  userId    Int?     @unique
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String? @db.VarChar(255)
-  email String  @unique @db.VarChar(255)
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  username       String    @unique
+  licenceCode    String    @unique
+  firstName      String?
+  lastName       String?
+  profilePicture String?
+  createdAt      DateTime  @default(now())
+  chats          Chat[]
+  license        License?
+}
+
+model Chat {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  title     String?
+  user      User      @relation(fields: [userId], references: [id])
+  messages  Message[]
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  chatId    Int
+  content   String   @db.VarChar(8000)
+  createdAt DateTime @default(now())
+  chat      Chat     @relation(fields: [chatId], references: [id])
 }
