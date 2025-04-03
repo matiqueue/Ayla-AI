@@ -1,5 +1,5 @@
 import { TextChannel } from "discord.js";
-import { client } from "../client/client";
+import { client } from "@/bot/client/client";
 
 // Funkcja tworząca lub pobierająca kanał logs
 export const getOrCreateLogsChannel = async (

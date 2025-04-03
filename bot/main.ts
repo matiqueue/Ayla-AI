@@ -1,5 +1,5 @@
-import { client } from "./client/client";
-import { onReady } from "./events/readyEvent";
+import { client } from "@/bot/client/client";
+import { onReady } from "@/bot/events/readyEvent";
 
 client.once("ready", onReady);
 

@@ -1,7 +1,7 @@
-import { client } from "../client/client";
-import { getOrCreateLogsChannel } from "../utils/channelManager";
-import { sendTempLog } from "../utils/logger";
-import { GUILD_ID } from "../config/config";
+import { client } from "@/bot/client/client";
+import { getOrCreateLogsChannel } from "@/bot/utils/channelManager";
+import { sendTempLog } from "@/bot/utils/logger";
+import { GUILD_ID } from "@/bot/config/config";
 
 // Funkcja obsługująca zdarzenie "ready"
 export const onReady = async () => {
