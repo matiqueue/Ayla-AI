@@ -26,11 +26,13 @@ const prisma = new PrismaClient();
 // }
 
 async function main() {
-  const post = await prisma.post.update({
-    where: { id: 1 },
-    data: { published: true },
+  const allUsers = await prisma.user.findMany({
+    include: {
+      posts: true,
+      profile: true,
+    },
   });
-  console.log(post);
+  console.dir(allUsers, { depth: null });
 }
 
 main()

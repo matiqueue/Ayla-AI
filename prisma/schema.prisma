@@ -30,4 +30,13 @@ model User {
   email   String   @unique @db.VarChar(255)
   posts   Post[]
   profile Profile?
+
+  Chat Chat[]
+}
+
+model Chat {
+  id Int @id @default(autoincrement())
+  title String? @db.VarChar(255)
+  userId Int
+  user User @relation(fields: [userId], references: [id])
 }
