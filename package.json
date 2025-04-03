@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev:next": "next dev --turbopack",
+    "build:next": "next build",
+    "start:next": "next start",
+    "lint:next": "next lint",
     "prisma": "npx tsx database/main.ts",
-    "seed": "npx tsx database/seed/seed.ts"
+    "seed": "npx tsx database/seed/seed.ts",
+    "bot": "npx tsx bot/main.ts",
+    "dev": "concurrently --names \"Next,Prisma,Bot\" --prefix-colors \"blue,green,yellow\" \"npm run dev:next\" \"npm run prisma\" \"npm run bot\""
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",
@@ -30,9 +32,12 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "prisma": "^5.12.1",

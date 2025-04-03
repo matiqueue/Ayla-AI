@@ -1,36 +1,73 @@
-import { Client, GatewayIntentBits, GuildTextBasedChannel } from "discord.js";
+import {
+  Client,
+  GatewayIntentBits,
+  TextChannel,
+  EmbedBuilder,
+} from "discord.js";
+import dotenv from "dotenv";
+
+// Załaduj zmienne środowiskowe
+require("dotenv").config({
+  path: [".env.local", ".env"],
+});
 
 const TOKEN = process.env.DISCORD_TOKEN!;
-const GUILD_ID = process.env.DISCORD_GUILD_ID!; // ID serwera
+const GUILD_ID = process.env.DISCORD_GUILD_ID!;
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMembers,
-  ],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 
 // Funkcja tworząca lub pobierająca kanał logs
-async function getOrCreateLogsChannel() {
-  const guild = await client.guilds.fetch(GUILD_ID);
+async function getOrCreateLogsChannel(guildId: string): Promise<TextChannel> {
+  const guild = await client.guilds.fetch(guildId);
   if (!guild) throw new Error("❌ Nie znaleziono serwera!");
 
-  let channel = guild.channels.cache.find(
-    (ch) => ch.name === "logs" && ch.isTextBased()
-  ) as GuildTextBasedChannel;
+  let logsChannel = guild.channels.cache.find(
+    (channel) => channel.name === "logs" && channel instanceof TextChannel
+  ) as TextChannel | undefined;
 
-  if (!channel) {
-    console.log("📁 Tworzenie kanału logs...");
-    channel = (await guild.channels.create({
+  if (!logsChannel) {
+    console.log("📁 Tworzenie kanału #logs...");
+    logsChannel = await guild.channels.create({
       name: "logs",
-      type: 0, // Typ 0 = kanał tekstowy
-    })) as GuildTextBasedChannel;
+      type: 0, // 0 oznacza kanał tekstowy
+    });
   } else {
-    console.log("✅ Kanał logs już istnieje.");
+    console.log("✅ Kanał #logs już istnieje.");
   }
 
-  return channel;
+  return logsChannel;
+}
+
+// Funkcja wysyłająca osadzoną wiadomość z danymi tymczasowymi
+async function sendTempLog(channel: TextChannel) {
+  // Przykładowe dane tymczasowe
+  const tempData = {
+    description: "Przykładowy opis zdarzenia.",
+    timestamp: new Date(),
+    status: "Sukces",
+  };
+
+  const embed = new EmbedBuilder()
+    .setTitle("📋 Nowe logi tymczasowe")
+    .setColor(0x00ff00)
+    .setDescription(tempData.description)
+    .addFields(
+      {
+        name: "🕒 Czas",
+        value: tempData.timestamp.toISOString(),
+        inline: true,
+      },
+      { name: "✅ Status", value: tempData.status, inline: true }
+    )
+    .setFooter({
+      text: "Logger Bot",
+      iconURL: client.user?.avatarURL() || undefined,
+    })
+    .setTimestamp();
+
+  await channel.send({ embeds: [embed] });
 }
 
 // Obsługa zdarzenia "ready"
@@ -38,10 +75,11 @@ client.once("ready", async () => {
   console.log(`✅ Bot zalogowany jako ${client.user?.tag}`);
 
   try {
-    const logsChannel = await getOrCreateLogsChannel();
-    logsChannel.send("🚀 Bot wystartował i utworzył kanał logs!");
+    const logsChannel = await getOrCreateLogsChannel(GUILD_ID);
+    await sendTempLog(logsChannel);
+    console.log("🚀 Logi tymczasowe zostały wysłane!");
   } catch (error) {
-    console.error("❌ Błąd przy tworzeniu kanału:", error);
+    console.error("❌ Błąd przy wysyłaniu logów:", error);
   }
 });
 
