@@ -1,8 +1,9 @@
 import { client } from "@/bot/client/client";
 import { getOrCreateLogsChannel } from "@/bot/utils/channelManager";
 import { sendTempLog } from "@/bot/utils/logger";
-import { GUILD_ID } from "@/bot/config/config";
+import config from "@/bot/config/config";
 
+const GUILD_ID = config.GUILD_ID;
 // Funkcja obsługująca zdarzenie "ready"
 export const onReady = async () => {
   console.log(`✅ Bot zalogowany jako ${client.user?.tag}`);
