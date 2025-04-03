@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import config from "@/bot/config/config";
+import Config from "@/bot/config/config";
 
-const TOKEN = config.TOKEN;
+const TOKEN = Config.TOKEN;
 
 export const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
