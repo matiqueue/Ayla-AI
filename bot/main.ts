@@ -6,8 +6,7 @@ import {
 } from "discord.js";
 import dotenv from "dotenv";
 
-// Załaduj zmienne środowiskowe
-require("dotenv").config({
+dotenv.config({
   path: [".env.local", ".env"],
 });
 
