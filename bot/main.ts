@@ -1,8 +1,8 @@
 import { Client, GatewayIntentBits, Interaction, ChatInputCommandInteraction } from "discord.js";
-import { createEmbed } from "./layout/embed";
-import Config from "./config/config";
-import { sendEmbedToLogs } from "./functions/sendEmbed";
-import { clearCommand } from './slash_functions/clear';
+import { createEmbed } from "@/bot/layout/embed";
+import Config from "@/bot/config/config";
+import { sendEmbedToLogs } from "@/bot/functions/sendEmbed";
+import { clearCommand } from '@/bot/slash_functions/clear';
 
 export const client = new Client({
   intents: [
@@ -26,7 +26,6 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-// Obsługa interakcji (komendy slash)
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (interaction.isChatInputCommand()) {
     const commandInteraction = interaction as ChatInputCommandInteraction;

@@ -18,7 +18,6 @@ export const clearCommand = {
         });
       }
 
-      // Odpowiadamy od razu, żeby nie było timeouta
       await interaction.deferReply({ ephemeral: true });
 
       const channel = interaction.channel as TextChannel;

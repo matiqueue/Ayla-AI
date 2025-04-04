@@ -1,33 +1,35 @@
 import { Client, TextChannel } from "discord.js";
-import { createEmbed } from "../layout/embed";
-import { deleteLastBotEmbed } from "./delete_latest"; 
-
+import { createEmbed } from "@/bot/layout/embed";
+import { deleteLastBotEmbed } from "./delete_latest";
+import { logEmbedForever } from "./log-4ever";
 
 export async function sendEmbedToLogs(client: Client) {
-  const channelId = "1357349552952311929"; 
-  const channel = await client.channels.fetch(channelId);
+  const mainChannelId = "1357349552952311929"; 
+  const mainChannel = await client.channels.fetch(mainChannelId);
 
-  if (!channel) {
-    console.error("❌ Kanał nie został znaleziony.");
+  if (!mainChannel) {
+    console.error("❌ Kanał główny nie został znaleziony.");
     return;
   }
 
-  if (!(channel instanceof TextChannel)) {
-    console.error("❌ Kanał nie jest typu TextChannel.");
+  if (!(mainChannel instanceof TextChannel)) {
+    console.error("❌ Kanał główny nie jest typu TextChannel.");
     return;
   }
 
   try {
     const embed = await createEmbed(client);
 
-    if (!embed || embed.data.fields?.length === 0) {
+    if (!embed || !embed.data.fields || embed.data.fields.length === 0) {
       console.error("❌ Embed nie zawiera pól.");
       return;
     }
 
     await deleteLastBotEmbed(client);
-    await channel.send({ embeds: [embed] });
-    console.log("✅ Embed wysłany!");
+    await mainChannel.send({ embeds: [embed] });
+    console.log("✅ Embed wysłany do głównego kanału!");
+
+    await logEmbedForever(client);
   } catch (error) {
     console.error("❌ Błąd podczas operacji z embedem:", error);
   }
