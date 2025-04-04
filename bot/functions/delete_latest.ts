@@ -11,7 +11,6 @@ export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
       return;
     }
 
-    // Pobieramy ostatnie 10 wiadomości (można zwiększyć)
     const messages = await channel.messages.fetch({ limit: 10 });
 
     const botEmbedMessage = messages.find(

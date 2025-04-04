@@ -26,12 +26,14 @@ client.on("messageCreate", async (message) => {
   }
 });
 
+// Obsługa interakcji (komendy slash)
 client.on("interactionCreate", async (interaction: Interaction) => {
-  if (interaction.isCommand()) {
+  if (interaction.isChatInputCommand()) {
     const commandInteraction = interaction as ChatInputCommandInteraction;
     const { commandName } = commandInteraction;
 
     if (commandName === "clear") {
+      await clearCommand.execute(commandInteraction);
     }
   }
 });

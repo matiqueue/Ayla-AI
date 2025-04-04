@@ -18,16 +18,13 @@ export async function sendEmbedToLogs(client: Client) {
   }
 
   try {
-    // Create the embed
     const embed = await createEmbed(client);
 
-    // Validate the embed
     if (!embed || embed.data.fields?.length === 0) {
       console.error("❌ Embed nie zawiera pól.");
       return;
     }
 
-    // Send the embed
     await deleteLastBotEmbed(client);
     await channel.send({ embeds: [embed] });
     console.log("✅ Embed wysłany!");

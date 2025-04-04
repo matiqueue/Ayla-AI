@@ -14,4 +14,3 @@ export const getDeviceType = (): string => {
   };
 
   
-//wykrywa urzadzenie na ktorym uruchomiono bota a nie uzytkownika ktory go uzywa 
