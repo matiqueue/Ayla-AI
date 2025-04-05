@@ -3,6 +3,7 @@ import { createEmbed } from "@/bot/layout/embed";
 import Config from "@/bot/config/config";
 import { sendEmbedToLogs } from "@/bot/functions/sendEmbed";
 import { clearCommand } from '@/bot/slash_functions/clear';
+import { log } from "@/bot/utils/log";
 
 export const client = new Client({
   intents: [
@@ -13,7 +14,7 @@ export const client = new Client({
 });
 
 client.once("ready", async () => {
-  console.log(`✅ Bot zalogowany jako ${client.user?.tag}`);
+  log(`Bot zalogowany jako ${client.user?.tag}`);
   await sendEmbedToLogs(client);
 });
 
@@ -38,5 +39,5 @@ client.on("interactionCreate", async (interaction: Interaction) => {
 });
 
 client.login(Config.TOKEN).catch((error) => {
-  console.error("❌ Błąd logowania:", error);
+  console.error("Błąd logowania:", error);
 });

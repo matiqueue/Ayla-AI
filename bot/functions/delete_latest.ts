@@ -1,4 +1,5 @@
 import { Client, TextChannel, Message } from "discord.js";
+import { log } from "@/bot/utils/log";
 
 const LOG_CHANNEL_ID = "1357349552952311929";
 
@@ -7,7 +8,7 @@ export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
     const channel = await client.channels.fetch(LOG_CHANNEL_ID);
 
     if (!channel || !(channel instanceof TextChannel)) {
-      console.error("❌ Nie znaleziono kanału tekstowego logów.");
+      console.error("Nie znaleziono kanału tekstowego logów.");
       return;
     }
 
@@ -20,11 +21,11 @@ export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
 
     if (botEmbedMessage) {
       await botEmbedMessage.delete();
-      console.log("🗑️ Poprzedni embed został usunięty.");
+      log("Poprzedni embed został usunięty.");
     } else {
-      console.log("ℹ️ Nie znaleziono wcześniejszego embeda do usunięcia.");
+      log("Nie znaleziono wcześniejszego embeda do usunięcia.");
     }
   } catch (error) {
-    console.error("❌ Błąd podczas usuwania embeda:", error);
+    console.error("Błąd podczas usuwania embeda:", error);
   }
 };
