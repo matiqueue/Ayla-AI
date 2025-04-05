@@ -1,15 +1,13 @@
-import Link from "next/link";
+"use client";
+
+import BackgroundPaths from "@/components/background-paths";
 
 export default function Home() {
   return (
     <div>
-      <p>Aby przejść dalej, wpisz kod licencyjny</p>
-      <Link href="/create-licence">
-        <button>Stwórz licencję</button>
-      </Link>
-      <Link href="/auth">
-        <button>Podaj kod licencji</button>
-      </Link>
+      
+      <BackgroundPaths />
+
     </div>
   );
 }
