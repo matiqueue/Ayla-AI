@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
 
         if (visitedHome) {
             // Przekierowywyje na '/home'
-            return NextResponse.redirect(new URL('/home', request.url));
+            return NextResponse.redirect(new URL('/pages/home', request.url));
         }
     }
 

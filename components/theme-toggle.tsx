@@ -15,24 +15,24 @@ export function ThemeToggle() {
             className="flex items-center space-x-2 transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
         >
             <Sun
-                className={`h-[1.2rem] w-[1.2rem] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-                    theme === "dark"
-                        ? "text-[#A1A1AA] scale-75 rotate-12"
-                        : "text-foreground scale-100 rotate-0"
-                }`}
+            className={`h-[1.2rem] w-[1.2rem] transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+            theme === "dark"
+            ? "text-[#A1A1AA] scale-75 rotate-12 opacity-50 delay-10"
+            : "text-foreground scale-100 rotate-0 opacity-100 delay-0"
+            }`}
             />
             <Switch
-                checked={theme === "dark"}
-                onCheckedChange={toggleTheme}
-                aria-label="Toggle theme"
-                className="transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110"
+            checked={theme === "dark"}
+            onCheckedChange={toggleTheme}
+            aria-label="Toggle theme"
+            className="transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-110"
             />
             <Moon
-                className={`h-[1.2rem] w-[1.2rem] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-                    theme === "light"
-                        ? "text-[#A1A1AA] scale-75 rotate-12"
-                        : "text-foreground scale-100 rotate-0"
-                }`}
+            className={`h-[1.2rem] w-[1.2rem] transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+            theme === "light" || theme === undefined
+            ? "text-[#A1A1AA] scale-75 rotate-12 opacity-50 delay-10"
+            : "text-foreground scale-100 rotate-0 opacity-100 delay-0"
+            }`}
             />
         </div>
     )

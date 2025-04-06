@@ -101,7 +101,7 @@ export default function BackgroundPaths({
             <Link href='/pages/home'>
               <Button
                 variant="ghost"
-                className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
+                className="cursor-pointer rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
                               bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
                               text-black dark:text-white transition-all duration-300 
                               group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
