@@ -98,7 +98,7 @@ export default function BackgroundPaths({
                         dark:from-white/10 dark:to-black/10 p-px rounded-2xl backdrop-blur-lg 
                         overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
-            <Link href='/home'>
+            <Link href='/pages/home'>
               <Button
                 variant="ghost"
                 className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
