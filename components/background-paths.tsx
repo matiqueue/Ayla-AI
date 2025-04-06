@@ -48,7 +48,7 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 export default function BackgroundPaths({
-  title = "Welcome on ALYA AI",
+  title = "Welcome on AYLA AI",
 }: {
   title?: string
 }) {
