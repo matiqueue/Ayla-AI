@@ -16,42 +16,42 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
     {
-        icon:      <Home className="h-5 w-5" />,
+        icon:      <Home className="h-5 w-5 group-hover:text-green-500 transition-colors duration-300" />,
         label:     "Home",
         href:      "/pages/home",
         gradient:  "radial-gradient(circle, rgba(34,197,94,0.15) 0%, rgba(22,163,74,0.06) 50%, rgba(21,128,61,0) 100%)",
         iconColor: "text-green-500",
     },
     {
-        icon:      <Cpu className="h-5 w-5" />,
+        icon:      <Cpu className="h-5 w-5 group-hover:text-red-500 transition-colors duration-300" />,
         label:     "Models",
         href:      "/pages/models",
         gradient:  "radial-gradient(circle, rgba(239,68,68,0.15) 0%, rgba(220,38,38,0.06) 50%, rgba(185,28,28,0) 100%)",
         iconColor: "text-red-500",
     },
     {
-        icon:      <MessageCircle className="h-5 w-5" />,
+        icon:      <MessageCircle className="h-5 w-5 group-hover:text-blue-500 transition-colors duration-300" />,
         label:     "Conversations",
         href:      "/pages/conversations",
         gradient:  "radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)",
         iconColor: "text-blue-500",
     },
     {
-        icon:      <Brain className="h-5 w-5" />,
+        icon:      <Brain className="h-5 w-5 group-hover:text-orange-500 transition-colors duration-300" />,
         label:     "AI Insights",
         href:      "/pages/ai-insights",
         gradient:  "radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%)",
         iconColor: "text-orange-500",
     },
     {
-        icon:      <Settings className="h-5 w-5" />,
+        icon:      <Settings className="h-5 w-5 group-hover:text-gray-400 transition-colors duration-300" />,
         label:     "Settings",
         href:      "/pages/settings",
         gradient:  "radial-gradient(circle, rgba(192,192,192,0.2) 0%, rgba(169,169,169,0.08) 50%, rgba(128,128,128,0) 100%)",
         iconColor: "text-gray-400",
     },
     {
-        icon:      <User className="h-5 w-5" />,
+        icon:      <User className="h-5 w-5 group-hover:text-purple-500 transition-colors duration-300" />,
         label:     "Profile",
         href:      "/pages/profile",
         gradient:  "radial-gradient(circle, rgba(168,85,247,0.2) 0%, rgba(139,92,246,0.08) 50%, rgba(124,58,237,0) 100%)",
@@ -143,9 +143,7 @@ export function MenuBar() {
                                 style={{ transformStyle: "preserve-3d", transformOrigin: "center bottom" }}
                             >
                                 <Link href={item.href} className="flex items-center gap-2">
-                                    <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}>
-                                        {item.icon}
-                                    </span>
+                                    {item.icon}
                                     <span>{item.label}</span>
                                 </Link>
                             </motion.div>
@@ -156,9 +154,7 @@ export function MenuBar() {
                                 style={{ transformStyle: "preserve-3d", transformOrigin: "center top", rotateX: 90 }}
                             >
                                 <Link href={item.href} className="flex items-center gap-2">
-                                    <span className={`transition-colors duration-300 group-hover:${item.iconColor} text-foreground`}>
-                                        {item.icon}
-                                    </span>
+                                    {item.icon}
                                     <span>{item.label}</span>
                                 </Link>
                             </motion.div>
