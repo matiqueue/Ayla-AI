@@ -2,8 +2,6 @@ import { Header } from '@/components/home/header'
 import type React from 'react'
 import { ClientLayout } from '@/providers/client-layout'
 
-import '@/styles/home.css'
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClientLayout>
