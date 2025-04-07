@@ -1,6 +1,19 @@
 import { prisma } from "@/lib/prisma";
 
-async function main() {}
+function generujLicencje(): string {
+  const number = Math.floor(Math.random() * 1000000000);
+  return number.toString().padStart(9, "0");
+  //return number.toString();
+}
+
+async function main() {
+  for (let i = 0; i < 20; i++) {
+    const licencja = generujLicencje();
+    console.log("licencja: ", licencja);
+  }
+  //const licencja = generujLicencje();
+  //console.log("licencja: ", licencja);
+}
 
 main()
   .catch((e) => {
