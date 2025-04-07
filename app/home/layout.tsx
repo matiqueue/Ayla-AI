@@ -1,14 +1,20 @@
-import { Navbar, Footer, Sidebar } from '@/components/home/container/container'
+import { Header } from '@/components/home/header'
+import type React from 'react'
+import { ClientLayout } from '@/providers/client-layout'
 
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
+import '@/styles/home.css'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main>
-      <Navbar />
-      <div className="flex flex-row">
-        <Sidebar />
-        <div className="flex-1">{children}</div>
-      </div>
-      <Footer />
-    </main>
+    <ClientLayout>
+      <Header />
+      <main className="min-h-screen">{children}</main>
+    </ClientLayout>
   )
+}
+
+{
+  /*
+  okej, tylko usunales wiekszosc kontentu z sekcji z platnosciami, dodaj tam te cardy z opcjami itd +_ dodaj wiecej kontentu do sekcji "Why Choose AylaAI?" i "Ready to Get Started?" + dodaj pomiedzy sekcjami jakies fajne rzeczy w backgroundzie + dodaj jakis efekt rozmycia pomiedzy backgroundami danych sekcji
+  */
 }
