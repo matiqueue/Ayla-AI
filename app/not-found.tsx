@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
-import { ArrowRight, Moon, Sun } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function NotFound() {
   const [mounted, setMounted] = useState(false)
@@ -30,9 +30,6 @@ export default function NotFound() {
   }, [theme, mounted])
 
   // Toggle theme function
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
 
   // Animation for floating particles
   useEffect(() => {
@@ -167,13 +164,6 @@ export default function NotFound() {
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
 
       {/* Theme toggle button */}
-      <button
-        onClick={toggleTheme}
-        className={`absolute top-4 right-4 p-2 rounded-md transition-colors duration-300 z-20 ${themeClasses.toggleButton}`}
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-      >
-        {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-      </button>
 
       {/* Font import for custom typography */}
       <style jsx global>{`
