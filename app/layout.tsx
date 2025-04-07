@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import '@/styles/globals.css'
 import { Providers } from '@/providers/providers'
+
+import '@/styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
