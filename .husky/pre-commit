@@ -1,4 +1,16 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+# Run type checking
+echo "Running TypeScript type checking..."
+yarn tsc --noEmit || {
+  echo "TypeScript check failed, commit aborted!"
+  exit 1
+}
+
+# Run lint-staged
+echo "Running lint-staged..."
+yarn lint-staged || {
+  echo "Linting failed, commit aborted!"
+  exit 1
+}

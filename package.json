@@ -3,31 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "dev:next": "next dev --turbopack",
     "build:next": "next build",
     "start:next": "next start",
     "lint:next": "next lint",
-    "1": "1",
     "dev:bot": "npx tsx bot/main.ts",
     "build:bot": "tsup bot/main.ts --format cjs --out-dir bot/out",
     "start:bot": "node bot/out/main.js",
     "lint:bot": "eslint bot/**/*.ts",
-    "2": "2",
-    "prepare": "husky",
     "prettier": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "3": "3",
     "prisma:start": "npx tsx database/main.ts",
     "prisma:seed": "npx tsx database/seed/seed.ts",
     "prisma:generate": "npx prisma generate",
-    "4": "4",
     "development": "concurrently --names \"Next,Prisma,Bot\" --prefix-colors \"blue,green,yellow\" \"npm run dev:next\" \"npm run prisma\" \"npm run bot\""
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write",
-      "eslint --fix"
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css,scss}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -53,6 +52,7 @@
     "crypto": "^1.0.1",
     "discord.js": "^14.18.0",
     "dotenv": "^16.4.7",
+    "hwid": "^0.5.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.487.0",
     "motion": "^12.6.3",
@@ -69,6 +69,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
