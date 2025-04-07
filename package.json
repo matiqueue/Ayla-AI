@@ -7,12 +7,21 @@
     "build:next": "next build",
     "start:next": "next start",
     "lint:next": "next lint",
+    "1": "1",
     "dev:bot": "npx tsx bot/main.ts",
-    "build:bot": "npx tsc --project bot/tsconfig.json",
-    "start:bot": "node bot/dist/main.js",
+    "build:bot": "tsup bot/main.ts --format cjs --out-dir bot/out",
+    "start:bot": "node bot/out/main.js",
+    "lint:bot": "eslint bot/**/*.ts",
+    "2": "2",
     "prepare": "husky",
-    "prisma": "npx tsx database/main.ts",
+    "prettier": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "3": "3",
+    "prisma:start": "npx tsx database/main.ts",
     "prisma:seed": "npx tsx database/seed/seed.ts",
+    "prisma:generate": "npx prisma generate",
+    "4": "4",
     "development": "concurrently --names \"Next,Prisma,Bot\" --prefix-colors \"blue,green,yellow\" \"npm run dev:next\" \"npm run prisma\" \"npm run bot\""
   },
   "lint-staged": {
@@ -72,6 +81,7 @@
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "tailwindcss": "^4",
+    "tsup": "^8.4.0",
     "typescript": "^5"
   }
 }
