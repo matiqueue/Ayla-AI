@@ -1,7 +1,12 @@
-"use client";
+'use client'
 
-import * as React from "react";
+import * as React from 'react'
+import { ThemeProvider } from '@/providers/theme-provider'
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <h1>elo</h1>;
+  return (
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      {children}
+    </ThemeProvider>
+  )
 }
