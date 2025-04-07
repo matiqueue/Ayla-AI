@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
+import Link from 'next/link'
 
 interface CyberBackgroundProps {
   title?: string
@@ -230,7 +231,7 @@ export default function ParticlesBackground({
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
           >
             <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-              {subtitle}
+              <Link href={'/home'}>{subtitle}</Link>
             </span>
             <span
               className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
