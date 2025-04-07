@@ -1,8 +1,9 @@
 import { Client, TextChannel } from 'discord.js'
 import { createEmbed } from '@/bot/layout/embed'
+
 import { log } from '@/bot/utils/log'
 
-export async function logEmbedForever(client: Client): Promise<void> {
+export const logEmbedForever = async (client: Client): Promise<void> => {
   const targetChannelId = '1357848876706693160' // ID kanału, nie usuwania logow (#all-logs)
   const targetChannel = await client.channels.fetch(targetChannelId)
 

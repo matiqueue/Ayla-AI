@@ -12,7 +12,7 @@ export const clearCommand = {
     .setDescription('🧹 Clearing messages from the channel')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
-  async execute(interaction: ChatInputCommandInteraction) {
+  execute: async (interaction: ChatInputCommandInteraction) => {
     const channel = interaction.channel as TextChannel
 
     if (

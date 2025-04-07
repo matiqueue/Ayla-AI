@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 import path from 'path'
 import fs from 'fs'
+
 import { log } from '@/bot/utils/log'
 
 const envPath = path.resolve(process.cwd(), '.env')
@@ -24,25 +25,14 @@ const TOKEN = process.env.DISCORD_TOKEN
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID
 const GUILD_ID = process.env.DISCORD_GUILD_ID
 
-const validateTokenFormat = (token: string | undefined): boolean => {
-  if (!token) return false
+const validateTokenFormat = (token: string | undefined): boolean =>
+  !!token && token.split('.').length === 3
 
-  const parts = token.split('.')
-  return parts.length === 3
-}
+const validateTokenPattern = (token: string | undefined): boolean =>
+  !!token && /^[A-Za-z0-9_.-]+$/.test(token)
 
-const validateTokenPattern = (token: string | undefined): boolean => {
-  if (!token) return false
-
-  const validPattern = /^[A-Za-z0-9_.-]+$/
-  return validPattern.test(token)
-}
-
-const validateTokenLength = (token: string | undefined): boolean => {
-  if (!token) return false
-
-  return token.length >= 50 && token.length <= 85
-}
+const validateTokenLength = (token: string | undefined): boolean =>
+  !!token && token.length >= 50 && token.length <= 85
 
 const missingVars = []
 if (!TOKEN) missingVars.push('DISCORD_TOKEN')

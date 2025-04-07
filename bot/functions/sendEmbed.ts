@@ -2,9 +2,10 @@ import { Client, TextChannel } from 'discord.js'
 import { createEmbed } from '@/bot/layout/embed'
 import { deleteLastBotEmbed } from './delete_latest'
 import { logEmbedForever } from './log-4ever'
+
 import { log } from '@/bot/utils/log'
 
-export async function sendEmbedToLogs(client: Client) {
+export const sendEmbedToLogs = async (client: Client) => {
   const mainChannelId = '1357349552952311929'
   const mainChannel = await client.channels.fetch(mainChannelId)
 

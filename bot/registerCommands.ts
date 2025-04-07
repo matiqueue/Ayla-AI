@@ -1,6 +1,7 @@
 import { REST, Routes } from 'discord.js'
-import Config from '@/bot/config/config'
 import { clearCommand } from '@/bot/commands/clear'
+
+import Config from '@/bot/config/config'
 
 const commands = [clearCommand.data.toJSON()]
 
