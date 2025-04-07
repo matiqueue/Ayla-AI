@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
 
 interface CyberBackgroundProps {
   title?: string
@@ -111,8 +112,8 @@ interface Particle {
 }
 
 export default function ParticlesBackground({
-  title = 'Particles Background',
-  subtitle = 'Make your website stand out',
+  title = 'Welcome in Ayla!',
+  subtitle = 'Start new session',
   particleCount = 2000,
   noiseIntensity = 0.003,
   particleSize = { min: 0.5, max: 2 },
@@ -220,9 +221,24 @@ export default function ParticlesBackground({
           <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 drop-shadow-sm">
             {title}
           </h1>
-          <p className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-black/90 to-black/50 dark:from-white/90 dark:to-white/50">
-            {subtitle}
-          </p>
+          <Button
+            variant="ghost"
+            className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
+                            bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
+                            text-black dark:text-white transition-all duration-300 
+                            group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
+                            hover:shadow-md dark:hover:shadow-neutral-800/50"
+          >
+            <span className="opacity-90 group-hover:opacity-100 transition-opacity">
+              {subtitle}
+            </span>
+            <span
+              className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
+                                transition-all duration-300"
+            >
+              →
+            </span>
+          </Button>
         </motion.div>
       </div>
     </div>
