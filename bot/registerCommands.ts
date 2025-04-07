@@ -1,36 +1,17 @@
-import { SlashCommandBuilder, REST, Routes } from "discord.js";
-import Config from "./config/config";  
-import { log } from "@/bot/utils/log";
+import { REST, Routes } from "discord.js";
+import Config from "@/bot/config/config";
+import { clearCommand } from "@/bot/slash_functions/clear";
 
+const commands = [clearCommand.data.toJSON()];
 
-
-if (!Config.TOKEN || !Config.CLIENT_ID || !Config.GUILD_ID) {
-  console.error("Brak wymaganych danych w pliku konfiguracyjnym.");
-  process.exit(1); 
-}
-
-const clientId = Config.CLIENT_ID as string;
-const guildId = Config.GUILD_ID as string;
-
-const commands = [
-  new SlashCommandBuilder()
-    .setName('clear')
-    .setDescription('🧹 Usuwa wszystkie wiadomości z bieżącego kanału'),
-]
-  .map(command => command.toJSON());
-
-const rest = new REST({ version: '10' }).setToken(Config.TOKEN);
+const rest = new REST({ version: "10" }).setToken(Config.TOKEN!);
 
 (async () => {
   try {
-    log('Zaczynam rejestrację komend...');
-
-    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-      body: commands,
-    });
-
-    log('Komendy zostały zarejestrowane!');
-  } catch (error) {
-    console.error('Błąd rejestracji komend:', error);
+    console.log("Rejestruję globalne komendy slash...");
+    await rest.put(Routes.applicationCommands(Config.CLIENT_ID!), { body: commands });
+    console.log("Zarejestrowano globalnie komendy slash!");
+  } catch (err) {
+    console.error("Błąd podczas rejestrowania komend:", err);
   }
 })();

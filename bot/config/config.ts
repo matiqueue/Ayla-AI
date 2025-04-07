@@ -107,8 +107,8 @@ if (missingVars.length > 0) {
 }
 
 export default {
-  TOKEN,
-  CLIENT_ID,
+  TOKEN: process.env.DISCORD_TOKEN,
+  CLIENT_ID: process.env.DISCORD_CLIENT_ID,
   GUILD_ID,
   tokenValid: TOKEN && tokenFormatValid && tokenPatternValid && tokenLengthValid
 };

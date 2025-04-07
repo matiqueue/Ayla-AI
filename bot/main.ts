@@ -1,9 +1,13 @@
 import { Client, GatewayIntentBits, Interaction, ChatInputCommandInteraction } from "discord.js";
+
 import { createEmbed } from "@/bot/layout/embed";
-import Config from "@/bot/config/config";
 import { sendEmbedToLogs } from "@/bot/functions/sendEmbed";
 import { clearCommand } from '@/bot/slash_functions/clear';
+import { setBotPresence } from '@/bot/rpc';
+
+import Config from "@/bot/config/config";
 import { log } from "@/bot/utils/log";
+
 
 export const client = new Client({
   intents: [
@@ -28,16 +32,16 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {
-  if (interaction.isChatInputCommand()) {
-    const commandInteraction = interaction as ChatInputCommandInteraction;
-    const { commandName } = commandInteraction;
+  if (!interaction.isChatInputCommand()) return;
 
-    if (commandName === "clear") {
-      await clearCommand.execute(commandInteraction);
-    }
+  if (interaction.commandName === "clear") {
+    await clearCommand.execute(interaction);
   }
 });
 
 client.login(Config.TOKEN).catch((error) => {
   console.error("Błąd logowania:", error);
 });
+
+setBotPresence(client);
+client.login(Config.TOKEN);
