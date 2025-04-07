@@ -20,7 +20,7 @@ const menuItems: MenuItem[] = [
   {
     icon: <Home className="h-5 w-5" />,
     label: 'Home',
-    href: '/',
+    href: '/home',
     gradient:
       'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(37,99,235,0.06) 50%, rgba(29,78,216,0) 100%)',
     iconColor: 'text-blue-500',
@@ -29,7 +29,7 @@ const menuItems: MenuItem[] = [
   {
     icon: <Sparkles className="h-5 w-5" />,
     label: 'Features',
-    href: '/#features',
+    href: '/home#features',
     gradient:
       'radial-gradient(circle, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.06) 50%, rgba(194,65,12,0) 100%)',
     iconColor: 'text-orange-500',
@@ -38,7 +38,7 @@ const menuItems: MenuItem[] = [
   {
     icon: <MessageSquare className="h-5 w-5" />,
     label: 'Testimonials',
-    href: '/#testimonials',
+    href: '/home#testimonials',
     gradient:
       'radial-gradient(circle, rgba(168,85,247,0.15) 0%, rgba(147,51,234,0.06) 50%, rgba(126,34,206,0) 100%)',
     iconColor: 'text-purple-500',
