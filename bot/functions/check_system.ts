@@ -1,23 +1,23 @@
-import os from "os";
+import os from 'os'
 
 export const getSystemInfo = (): string => {
-  const platform = os.platform(); 
-  const arch = os.arch();
-  let systemName: string;
+  const platform = os.platform()
+  const arch = os.arch()
+  let systemName: string
 
   switch (platform) {
-    case "win32":
-      systemName = "Windows";
-      break;
-    case "linux":
-      systemName = "Linux";
-      break;
-    case "darwin":
-      systemName = "macOS";
-      break;
+    case 'win32':
+      systemName = 'Windows'
+      break
+    case 'linux':
+      systemName = 'Linux'
+      break
+    case 'darwin':
+      systemName = 'macOS'
+      break
     default:
-      systemName = "Unknown";
+      systemName = 'Unknown'
   }
 
-  return `${systemName} (${arch})`;
-};
+  return `${systemName} (${arch})`
+}

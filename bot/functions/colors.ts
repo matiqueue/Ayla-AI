@@ -1,5 +1,5 @@
-import { ColorResolvable } from "discord.js";
+import { ColorResolvable } from 'discord.js'
 
 export const getRandomColor = (): ColorResolvable => {
-  return Math.floor(Math.random() * 16777215);
-};
+  return Math.floor(Math.random() * 16777215)
+}
