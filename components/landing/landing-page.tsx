@@ -112,7 +112,7 @@ interface Particle {
   maxLife: number
 }
 
-export default function ParticlesBackground({
+export default function LandingPage({
   title = 'Welcome in Ayla!',
   subtitle = 'Start new session',
   particleCount = 2000,
