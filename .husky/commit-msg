@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Run commitlint to validate commit message
 echo "Validating commit message format..."
 npx --no -- commitlint --edit "${1}" || {
