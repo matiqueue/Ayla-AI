@@ -7,10 +7,12 @@
     "build:next": "next build",
     "start:next": "next start",
     "lint:next": "next lint",
+    "dev:bot": "npx tsx bot/main.ts",
+    "build:bot": "npx tsc --project bot/tsconfig.json",
+    "start:bot": "node bot/dist/main.js",
     "prepare": "husky",
     "prisma": "npx tsx database/main.ts",
     "prisma:seed": "npx tsx database/seed/seed.ts",
-    "bot": "npx tsx bot/main.ts",
     "development": "concurrently --names \"Next,Prisma,Bot\" --prefix-colors \"blue,green,yellow\" \"npm run dev:next\" \"npm run prisma\" \"npm run bot\""
   },
   "lint-staged": {
