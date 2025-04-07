@@ -1546,13 +1546,6 @@ cliui@^8.0.1:
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
 
-clone-regexp@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/clone-regexp/-/clone-regexp-3.0.0.tgz#c6dd5c6b85482306778f3dc4ac2bb967079069c2"
-  integrity sha512-ujdnoq2Kxb8s3ItNBtnYeXdm07FcU0u8ARAT1lQ2YdMwQC+cdiXX8KoqMVuglztILivceTtp4ivqGSmEmhBUJw==
-  dependencies:
-    is-regexp "^3.0.0"
-
 clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
@@ -1613,11 +1606,6 @@ concurrently@^9.1.2:
     supports-color "^8.1.1"
     tree-kill "^1.2.2"
     yargs "^17.7.2"
-
-convert-hrtime@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/convert-hrtime/-/convert-hrtime-5.0.0.tgz#f2131236d4598b95de856926a67100a0a97e9fa3"
-  integrity sha512-lOETlkIeYSJWcbbcvjRKGxVMXJR+8+OQb/mTPbA4ObPMytYIsUbuOE0Jzy60hjARYszq1id0j8KgVhC+WGZVTg==
 
 cross-spawn@^7.0.3, cross-spawn@^7.0.6:
   version "7.0.6"
@@ -1767,6 +1755,11 @@ doctrine@^2.1.0:
   integrity sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==
   dependencies:
     esutils "^2.0.2"
+
+dotenv@^16.4.7:
+  version "16.4.7"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.7.tgz#0e20c5b82950140aa99be360a8a5f52335f53c26"
+  integrity sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==
 
 dunder-proto@^1.0.0, dunder-proto@^1.0.1:
   version "1.0.1"
@@ -2279,11 +2272,6 @@ function-bind@^1.1.2:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.2.tgz#2c02d864d97f3ea6c8830c464cbd11ab6eab7a1c"
   integrity sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==
 
-function-timeout@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/function-timeout/-/function-timeout-0.1.1.tgz#6bf71d3d24c894d43b2bec312cabb8c5add2e9da"
-  integrity sha512-0NVVC0TaP7dSTvn1yMiy6d6Q8gifzbvQafO46RtLG/kHJUBNd+pVRGOBoK44wNBvtSPUJRfdVvkFdD3p0xvyZg==
-
 function.prototype.name@^1.1.6, function.prototype.name@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/function.prototype.name/-/function.prototype.name-1.1.8.tgz#e68e1df7b259a5c949eeef95cdbde53edffabb78"
@@ -2398,10 +2386,10 @@ gopd@^1.0.1, gopd@^1.2.0:
   resolved "https://registry.yarnpkg.com/gopd/-/gopd-1.2.0.tgz#89f56b8217bdbc8802bd299df6d7f1081d7e51a1"
   integrity sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==
 
-got@^13.0.0:
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/got/-/got-13.0.0.tgz#a2402862cef27a5d0d1b07c0fb25d12b58175422"
-  integrity sha512-XfBk1CxOOScDcMr9O1yKkNaQyy865NbYs+F7dr4H0LZMVgCj2Le59k6PqbNHoL5ToeaEQUYh6c6yMfVcc6SJxA==
+got@^12.0.0:
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/got/-/got-12.6.1.tgz#8869560d1383353204b5a9435f782df9c091f549"
+  integrity sha512-mThBblvlAF1d4O5oqyvN+ZxLAYwIJK7bpMxgYqPD9okW0C3qm5FFn7k811QrcuEBwaogR3ngOFoCfs6mRv7teQ==
   dependencies:
     "@sindresorhus/is" "^5.2.0"
     "@szmarczak/http-timer" "^5.0.1"
@@ -2523,10 +2511,10 @@ internal-slot@^1.1.0:
     hasown "^2.0.2"
     side-channel "^1.1.0"
 
-ip-regex@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-5.0.0.tgz#cd313b2ae9c80c07bd3851e12bf4fa4dc5480632"
-  integrity sha512-fOCG6lhoKKakwv+C6KdsOnGvgXnmgfmp0myi3bcNwj3qfwPAxRKWEuFhvEFF7ceYIz6+1jRZ+yguLFAmUNPEfw==
+ip-regex@^4.0.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/ip-regex/-/ip-regex-4.3.0.tgz#687275ab0f57fa76978ff8f4dddc8a23d5990db5"
+  integrity sha512-B9ZWJxHHOHUhUjCPrMpLD4xEq35bUTClHM1S6CBU5ixQnkZmwipwgc96vAd7AAGM9TGHvJR+Uss+/Ak6UphK+Q==
 
 is-array-buffer@^3.0.4, is-array-buffer@^3.0.5:
   version "3.0.5"
@@ -2650,13 +2638,12 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3:
   dependencies:
     is-extglob "^2.1.1"
 
-is-ip@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/is-ip/-/is-ip-5.0.1.tgz#bec44442c823e591aa6f4d6fb9081d6a9be17e44"
-  integrity sha512-FCsGHdlrOnZQcp0+XT5a+pYowf33itBalCl+7ovNXC/7o5BhIpG14M3OrpPPdBSIQJCm+0M5+9mO7S9VVTTCFw==
+is-ip@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/is-ip/-/is-ip-3.1.0.tgz#2ae5ddfafaf05cb8008a62093cf29734f657c5d8"
+  integrity sha512-35vd5necO7IitFPjd/YBeqwWnyDWbuLH9ZXQdMfDA8TEo7pv5X8yfrvVO3xbJbLUlERCMvf6X0hTUamQxCYJ9Q==
   dependencies:
-    ip-regex "^5.0.0"
-    super-regex "^0.2.0"
+    ip-regex "^4.0.0"
 
 is-map@^2.0.3:
   version "2.0.3"
@@ -2685,11 +2672,6 @@ is-regex@^1.2.1:
     gopd "^1.2.0"
     has-tostringtag "^1.0.2"
     hasown "^2.0.2"
-
-is-regexp@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/is-regexp/-/is-regexp-3.1.0.tgz#0235eab9cda5b83f96ac4a263d8c32c9d5ad7422"
-  integrity sha512-rbku49cWloU5bSMI+zaRaXdQHXnthP6DZ/vLnfdSKyL4zUzuWnomtOEiZZOd+ioQ+avFo/qau3KPTc7Fjy1uPA==
 
 is-set@^2.0.3:
   version "2.0.3"
@@ -3352,14 +3334,14 @@ prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-public-ip@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/public-ip/-/public-ip-7.0.1.tgz#30f7f690a497c0feae2693ccecfc715b5693cf44"
-  integrity sha512-DdNcqcIbI0wEeCBcqX+bmZpUCvrDMJHXE553zgyG1MZ8S1a/iCCxmK9iTjjql+SpHSv4cZkmRv5/zGYW93AlCw==
+public-ip@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/public-ip/-/public-ip-5.0.0.tgz#b392fcc88552c3b36933a286068948816515f92a"
+  integrity sha512-xaH3pZMni/R2BG7ZXXaWS9Wc9wFlhyDVJF47IJ+3ali0TGv+2PsckKxbmo+rnx3ZxiV2wblVhtdS3bohAP6GGw==
   dependencies:
     dns-socket "^4.2.2"
-    got "^13.0.0"
-    is-ip "^5.0.1"
+    got "^12.0.0"
+    is-ip "^3.1.0"
 
 punycode@^2.1.0:
   version "2.3.1"
@@ -3863,15 +3845,6 @@ styled-jsx@5.1.6:
   dependencies:
     client-only "0.0.1"
 
-super-regex@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/super-regex/-/super-regex-0.2.0.tgz#dc1e071e55cdcf56930eb6271f73653a655b2642"
-  integrity sha512-WZzIx3rC1CvbMDloLsVw0lkZVKJWbrkJ0k1ghKFmcnPrW1+jWbgTkTEWVtD9lMdmI4jZEz40+naBxl1dCUhXXw==
-  dependencies:
-    clone-regexp "^3.0.0"
-    function-timeout "^0.1.0"
-    time-span "^5.1.0"
-
 supports-color@^7.1.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-7.2.0.tgz#1b7dcdcb32b8138801b3e478ba6a51caa89648da"
@@ -3905,13 +3878,6 @@ tapable@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
-
-time-span@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/time-span/-/time-span-5.1.0.tgz#80c76cf5a0ca28e0842d3f10a4e99034ce94b90d"
-  integrity sha512-75voc/9G4rDIJleOo4jPvN4/YC4GRZrY8yy1uU4lwrB3XEQbWve8zXoO5No4eFrGcTAMYyoY67p8jRQdtA1HbA==
-  dependencies:
-    convert-hrtime "^5.0.0"
 
 tinyglobby@^0.2.12:
   version "0.2.12"
