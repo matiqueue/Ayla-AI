@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
+import '@/styles/home.css'
 
 export default function NotFound() {
   const [mounted, setMounted] = useState(false)

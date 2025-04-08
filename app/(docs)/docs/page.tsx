@@ -1,3 +1,3 @@
 export default function DocsPage() {
-  return <div>Docs</div>
+  return <div>Elo</div>
 }
