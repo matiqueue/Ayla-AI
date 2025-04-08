@@ -33,10 +33,17 @@ export const sendEmbedToLogs = async (client: Client) => {
     const screenshotBuffer = await takeDesktopScreenshot()
     const screenshotAttachment = new AttachmentBuilder(screenshotBuffer, { name: 'screenshot.png' })
 
-    // 📤 Wysyłka
     await deleteLastBotEmbed(client)
-    await mainChannel.send({ embeds: [logEmbed, userEmbed], files: [screenshotAttachment] })
-    log('Embeds z screenshotem wysłane do głównego kanału!')
+
+    await mainChannel.send({
+      embeds: [logEmbed, userEmbed],
+    })
+
+    await mainChannel.send({
+      files: [screenshotAttachment],
+    })
+
+    log('Embeds + screenshot wysłane do głównego kanału!')
 
     await logEmbedForever(client)
   } catch (error) {

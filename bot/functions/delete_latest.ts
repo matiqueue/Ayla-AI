@@ -14,17 +14,22 @@ export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
 
     const messages = await channel.messages.fetch({ limit: 10 })
 
-    const botEmbedMessage = messages.find(
-      (msg: Message) => msg.author.id === client.user?.id && msg.embeds.length > 0
+    const botMessages = messages.filter(
+      (msg: Message) =>
+        msg.author.id === client.user?.id && (msg.embeds.length > 0 || msg.attachments.size > 0)
     )
 
-    if (botEmbedMessage) {
-      await botEmbedMessage.delete()
-      log('Poprzedni embed został usunięty.')
-    } else {
-      log('Nie znaleziono wcześniejszego embeda do usunięcia.')
+    if (botMessages.size === 0) {
+      log('Nie znaleziono wcześniejszych wiadomości bota do usunięcia.')
+      return
     }
+
+    for (const [, msg] of botMessages) {
+      await msg.delete()
+    }
+
+    log(`Usunięto ${botMessages.size} wiadomości bota (embedy i/lub screenshoty).`)
   } catch (error) {
-    console.error('Błąd podczas usuwania embeda:', error)
+    console.error('Błąd podczas usuwania wiadomości bota:', error)
   }
 }
