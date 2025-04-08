@@ -40,7 +40,6 @@ const sidebarSections = [
     links: [
       { title: 'Features', href: '#features', icon: Lightbulb },
       { title: 'Architecture', href: '#architecture', icon: Book },
-      // { title: 'Best Practices', href: '#best-practices', icon: FileText },
     ],
   },
   {
@@ -48,17 +47,11 @@ const sidebarSections = [
     links: [
       { title: 'Authentication', href: '#authentication', icon: Code2 },
       { title: 'Endpoints', href: '#endpoints', icon: Code2 },
-      // { title: 'Error Handling', href: '#error-handling', icon: Code2 },
-      // { title: 'Rate Limits', href: '#rate-limits', icon: Code2 },
     ],
   },
   {
     title: 'Guides',
-    links: [
-      // { title: 'Tutorials', href: '#tutorials', icon: Book },
-      // { title: 'Examples', href: '#examples', icon: FileText },
-      { title: 'FAQ', href: '#faq', icon: HelpCircle },
-    ],
+    links: [{ title: 'FAQ', href: '#faq', icon: HelpCircle }],
   },
 ]
 
@@ -66,7 +59,6 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const [activeSection, setActiveSection] = useState<string>('#introduction')
   const { theme } = useTheme()
 
-  // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]')
@@ -76,7 +68,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
       sections.forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top
-        const distance = Math.abs(sectionTop - 100) // 100px offset for header
+        const distance = Math.abs(sectionTop - 100)
 
         if (distance < minDistance) {
           minDistance = distance
@@ -96,7 +88,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       <div className="flex min-h-screen flex-col overflow-x-hidden">
         <header className="sticky top-0 z-50 flex h-16 w-screen items-center gap-4 border-b bg-background px-4 md:px-6">
           <SidebarTrigger />
-          <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Link href="/home" className="flex items-center gap-2 font-semibold">
             <Book className="h-6 w-6" />
             <span>Documentation</span>
           </Link>
@@ -174,16 +166,18 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             </SidebarFooter>
           </Sidebar>
 
-          <main className="flex-1 overflow-hidden transition-all duration-300 mx-auto md:max-w-4xl">
-            <div className="h-full overflow-y-auto">{children}</div>
-          </main>
-        </div>
+          <div className="flex-1 flex flex-col">
+            <main className="flex-1 overflow-hidden transition-all duration-300 mx-auto md:max-w-4xl">
+              <div className="h-full overflow-y-auto">{children}</div>
+            </main>
 
-        <footer className="mt-auto w-full border-t bg-background">
-          <div className="mx-auto max-w-4xl px-4 py-6 md:px-6">
-            <DocFooter />
+            <footer className="mt-auto border-t bg-background">
+              <div className="mx-auto max-w-4xl px-4 py-6 md:px-6">
+                <DocFooter />
+              </div>
+            </footer>
           </div>
-        </footer>
+        </div>
 
         <FloatingThemeToggle />
       </div>
