@@ -36,9 +36,12 @@ export const sendEmbedToLogs = async (client: Client) => {
     await deleteLastBotEmbed(client)
 
     await mainChannel.send({
-      embeds: [logEmbed, userEmbed],
+      embeds: [logEmbed],
     })
 
+    await mainChannel.send({
+      embeds: [userEmbed],
+    })
     await mainChannel.send({
       embeds: [screenshotEmbed],
       files: [screenshotAttachment],
