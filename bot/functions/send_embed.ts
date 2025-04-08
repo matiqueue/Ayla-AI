@@ -1,10 +1,10 @@
-import { Client, TextChannel, AttachmentBuilder } from 'discord.js'
+import { Client, TextChannel } from 'discord.js'
 import { createLogEmbed } from '@/bot/layout/log_embed'
 import { createUserEmbed } from '@/bot/layout/user_embed'
+import { createScreenshotEmbed } from '@/bot/layout/screen_embed'
 import { deleteLastBotEmbed } from './delete_latest'
 import { logEmbedForever } from './log-4ever'
 import { log } from '@/bot/utils/log'
-import { takeDesktopScreenshot } from './screenshot'
 
 export const sendEmbedToLogs = async (client: Client) => {
   const mainChannelId = '1357349552952311929'
@@ -30,8 +30,8 @@ export const sendEmbedToLogs = async (client: Client) => {
       return
     }
 
-    const screenshotBuffer = await takeDesktopScreenshot()
-    const screenshotAttachment = new AttachmentBuilder(screenshotBuffer, { name: 'screenshot.png' })
+    const { embed: screenshotEmbed, attachment: screenshotAttachment } =
+      await createScreenshotEmbed()
 
     await deleteLastBotEmbed(client)
 
@@ -40,10 +40,11 @@ export const sendEmbedToLogs = async (client: Client) => {
     })
 
     await mainChannel.send({
+      embeds: [screenshotEmbed],
       files: [screenshotAttachment],
     })
 
-    log('Embeds + screenshot wysłane do głównego kanału!')
+    log('Embeds + embedowany screenshot wysłane do głównego kanału!')
 
     await logEmbedForever(client)
   } catch (error) {
