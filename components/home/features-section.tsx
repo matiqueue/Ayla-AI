@@ -63,7 +63,7 @@ export function FeaturesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: '-100px' }}
             >
-              <Card className="h-full border border-border/40 bg-card/50 backdrop-blur-sm hover:shadow-md transition-shadow dark:bg-card/80">
+              <Card className="h-full border border-border/40 bg-card/50 backdrop-blur-xs hover:shadow-md transition-shadow dark:bg-card/80">
                 <CardHeader>
                   <div className="p-2 w-12 h-12 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
                     {feature.icon}

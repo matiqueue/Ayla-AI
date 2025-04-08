@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+  const isHomePage = pathname === '/home'
 
   // Apply home-page class only to the html element when on home page
   useEffect(() => {

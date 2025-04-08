@@ -117,7 +117,7 @@ export function MenuBar() {
 
   const handleNavigation = (e: React.MouseEvent, item: MenuItem) => {
     // If we're on the homepage and there's a section ID, scroll to it
-    if (pathname === '/' && item.sectionId) {
+    if (pathname === '/home' && item.sectionId) {
       e.preventDefault()
 
       // Find the section in the scroll container
@@ -144,13 +144,13 @@ export function MenuBar() {
 
   return (
     <motion.nav
-      className="p-2 rounded-2xl bg-gradient-to-b from-background/80 to-background/40 backdrop-blur-lg border border-border/40 shadow-lg relative overflow-hidden dark:from-background/80 dark:to-background/40"
+      className="p-2 rounded-2xl bg-linear-to-b from-background/80 to-background/40 backdrop-blur-lg border border-border/40 shadow-lg relative overflow-hidden dark:from-background/80 dark:to-background/40"
       initial="initial"
       whileHover="hover"
     >
       <motion.div
         className={`absolute -inset-2 bg-gradient-radial from-transparent ${
-          isDarkTheme ? 'via-blue-400/30 via-60%' : 'via-blue-400/20 via-60%'
+          isDarkTheme ? 'via-blue-400/30 via-30%' : 'via-blue-400/20 via-60%'
         } to-transparent rounded-3xl z-0 pointer-events-none`}
         variants={navGlowVariants}
       />
@@ -178,17 +178,22 @@ export function MenuBar() {
                 }`}
                 variants={itemVariants}
                 transition={sharedTransition}
-                style={{ transformStyle: 'preserve-3d', transformOrigin: 'center bottom' }}
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transformOrigin: 'center bottom',
+                }}
               >
                 <span
-                  className={`transition-colors duration-300 ${pathname === item.href ? item.iconColor : ''}`}
+                  className={`transition-colors duration-300 ${
+                    pathname === item.href ? item.iconColor : ''
+                  }`}
                 >
                   {item.icon}
                 </span>
                 <span>{item.label}</span>
               </motion.div>
               <Link href={item.href} passHref>
-                <motion.a
+                <motion.span
                   className={`flex items-center gap-2 px-4 py-2 absolute inset-0 z-10 bg-transparent transition-colors rounded-xl ${
                     pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
                   }`}
@@ -202,12 +207,14 @@ export function MenuBar() {
                   onClick={(e) => handleNavigation(e, item)}
                 >
                   <span
-                    className={`transition-colors duration-300 ${pathname === item.href ? item.iconColor : ''}`}
+                    className={`transition-colors duration-300 ${
+                      pathname === item.href ? item.iconColor : ''
+                    }`}
                   >
                     {item.icon}
                   </span>
                   <span>{item.label}</span>
-                </motion.a>
+                </motion.span>
               </Link>
             </motion.div>
           </motion.li>

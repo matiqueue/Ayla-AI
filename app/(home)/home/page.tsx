@@ -1,21 +1,20 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-
-import { ChevronDown, ChevronUp } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { HeroSection } from '@/components/home/hero-section'
 import { FeaturesSection } from '@/components/home/features-section'
 import { TestimonialsSection } from '@/components/home/testimonials-section'
 import { CTASection } from '@/components/home/cta-section'
 import { SectionNavigator } from '@/components/home/section-navigator'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function HomePage() {
   const [currentSection, setCurrentSection] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const [isScrolling, setIsScrolling] = useState(false)
-  const sections = ['Home', 'Features', 'Testimonials', 'Get Started']
+  const sections = ['Home', 'Features', 'Testimonials', 'Pricing', 'Why Choose Us', 'Footer']
 
   // Enable smooth scrolling for the home page
   useEffect(() => {
@@ -110,23 +109,31 @@ export default function HomePage() {
       <div
         id="scroll-container"
         ref={scrollContainerRef}
-        className="snap-container h-screen overflow-y-auto"
+        className="h-screen overflow-y-auto"
         style={{ scrollSnapType: 'y mandatory' }}
       >
-        <section className="snap-section">
+        <section className="snap-section h-screen">
           <HeroSection />
         </section>
 
-        <section className="snap-section">
+        <section className="snap-section h-screen">
           <FeaturesSection />
         </section>
 
-        <section className="snap-section">
+        <section className="snap-section h-screen">
           <TestimonialsSection />
         </section>
 
-        <section className="snap-section">
-          <CTASection />
+        <section className="snap-section h-screen" id="pricing-section">
+          <CTASection showSection="pricing" />
+        </section>
+
+        <section className="snap-section h-screen" id="why-choose-section">
+          <CTASection showSection="why-choose" />
+        </section>
+
+        <section className="snap-section h-screen" id="home-footer-section">
+          <CTASection showSection="footer" />
         </section>
       </div>
 
@@ -136,7 +143,7 @@ export default function HomePage() {
       <div className="fixed left-1/2 transform -translate-x-1/2 z-40 flex flex-col gap-4">
         {currentSection > 0 && (
           <motion.button
-            className="p-2 rounded-full bg-background/50 dark:bg-background/50 backdrop-blur-sm hover:bg-background/80 dark:hover:bg-background/80 transition-colors"
+            className="p-2 rounded-full bg-background/50 dark:bg-background/50 backdrop-blur-xs hover:bg-background/80 dark:hover:bg-background/80 transition-colors"
             onClick={() => navigateSection('up')}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,7 +158,7 @@ export default function HomePage() {
 
         {currentSection < sections.length - 1 && (
           <motion.button
-            className="p-2 rounded-full bg-background/50 dark:bg-background/50 backdrop-blur-sm hover:bg-background/80 dark:hover:bg-background/80 transition-colors"
+            className="p-2 rounded-full bg-background/50 dark:bg-background/50 backdrop-blur-xs hover:bg-background/80 dark:hover:bg-background/80 transition-colors"
             onClick={() => navigateSection('down')}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}

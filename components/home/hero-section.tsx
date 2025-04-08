@@ -27,7 +27,7 @@ export function HeroSection() {
       style={{ height: windowHeight, minHeight: '600px' }}
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-purple-500/10 dark:to-cyan-500/10 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-purple-500/5 to-cyan-500/5 dark:from-purple-500/10 dark:to-cyan-500/10 pointer-events-none" />
 
       {/* Animated background shapes */}
       <motion.div
@@ -62,14 +62,14 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 border border-border/40 backdrop-blur-sm mb-6 dark:bg-background/50"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 border border-border/40 backdrop-blur-xs mb-6 dark:bg-background/50"
           >
             <Sparkles className="h-4 w-4 text-purple-500" />
             <span className="text-sm font-medium">Introducing AylaAI - Your AI Assistant</span>
           </motion.div>
 
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-linear-to-r from-purple-500 to-cyan-500 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -95,7 +95,7 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
+              className="bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600"
             >
               Get Started Free
             </Button>
