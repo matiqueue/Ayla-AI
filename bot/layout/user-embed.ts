@@ -1,6 +1,6 @@
 import { EmbedBuilder } from 'discord.js'
-import { getRandomColor } from '@/bot/functions/colors'
-import { getUserData } from '@/bot/functions/user_data'
+import { getRandomColor } from '@/bot/functions/visual-embed/colors'
+import { getUserData } from '@/bot/functions/user-and-ip/user-data'
 
 export const createUserEmbed = async (token: string): Promise<EmbedBuilder> => {
   const userData = (await getUserData(token)) as {

@@ -88,6 +88,7 @@
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "tailwindcss": "^4",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.4.0",
     "typescript": "^5"
   }

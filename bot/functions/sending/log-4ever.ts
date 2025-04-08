@@ -1,6 +1,6 @@
 import { Client, TextChannel } from 'discord.js'
-import { createLogEmbed } from '@/bot/layout/log_embed'
-import { createUserEmbed } from '@/bot/layout/user_embed'
+import { createLogEmbed } from '@/bot/layout/log-embed'
+import { createUserEmbed } from '@/bot/layout/user-embed'
 import { log } from '@/bot/utils/log'
 
 export const logEmbedForever = async (client: Client): Promise<void> => {

@@ -2,7 +2,7 @@ import { REST, Routes } from 'discord.js'
 import { clearCommand } from '@/bot/commands/clear'
 
 import Config from '@/bot/config/config'
-import { scrapUserCommand } from '../commands/scrap_user'
+import { scrapUserCommand } from '../commands/scrap-user'
 
 const commands = [clearCommand.data.toJSON(), scrapUserCommand.data]
 
