@@ -3,14 +3,12 @@
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
-import '@/styles/home.css'
 
 export default function NotFound() {
   const [mounted, setMounted] = useState(false)
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
-  // Initialize theme from localStorage if available
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedTheme = localStorage.getItem('not-found-theme') as 'dark' | 'light' | null
@@ -23,7 +21,6 @@ export default function NotFound() {
     setMounted(true)
   }, [])
 
-  // Save theme preference to localStorage
   useEffect(() => {
     if (mounted) {
       localStorage.setItem('not-found-theme', theme)

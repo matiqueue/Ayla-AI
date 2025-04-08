@@ -1,5 +1,3 @@
-import '@/styles/home.css'
-
 import { Header } from '@/components/home/header'
 import type React from 'react'
 

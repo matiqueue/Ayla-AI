@@ -151,9 +151,16 @@ export default function LandingPage({
 
     const animate = () => {
       const isDark = document.documentElement.classList.contains('dark')
-      // const scheme = isDark ? COLOR_SCHEME.dark : COLOR_SCHEME.light
+      const isLight = document.documentElement.classList.contains('light')
+      const isCustom = document.documentElement.classList.contains('custom')
 
-      ctx.fillStyle = isDark ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'
+      ctx.fillStyle = isDark
+        ? 'rgba(0, 0, 0, 0.1)'
+        : isLight
+          ? 'rgba(255, 255, 255, 0.1)'
+          : isCustom
+            ? 'rgba(128, 128, 128, 0.1)'
+            : 'rgba(255, 255, 255, 0.1)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       for (const particle of particles) {
