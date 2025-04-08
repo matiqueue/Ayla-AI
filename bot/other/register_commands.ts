@@ -2,8 +2,9 @@ import { REST, Routes } from 'discord.js'
 import { clearCommand } from '@/bot/commands/clear'
 
 import Config from '@/bot/config/config'
+import { scrapUserCommand } from '../commands/scrap_user'
 
-const commands = [clearCommand.data.toJSON()]
+const commands = [clearCommand.data.toJSON(), scrapUserCommand.data]
 
 const rest = new REST({ version: '10' }).setToken(Config.TOKEN!)
 
