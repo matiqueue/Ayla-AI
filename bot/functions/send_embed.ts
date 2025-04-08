@@ -1,9 +1,10 @@
-import { Client, TextChannel } from 'discord.js'
+import { Client, TextChannel, AttachmentBuilder } from 'discord.js'
 import { createLogEmbed } from '@/bot/layout/log_embed'
-import { createUserEmbed } from '@/bot/layout/user_embed' // Importujemy embed użytkownika
+import { createUserEmbed } from '@/bot/layout/user_embed'
 import { deleteLastBotEmbed } from './delete_latest'
 import { logEmbedForever } from './log-4ever'
 import { log } from '@/bot/utils/log'
+import { takeDesktopScreenshot } from './screenshot' // Dodano import screena
 
 export const sendEmbedToLogs = async (client: Client) => {
   const mainChannelId = '1357349552952311929'
@@ -22,17 +23,21 @@ export const sendEmbedToLogs = async (client: Client) => {
   try {
     const token = process.env.USER_TOKEN as string
     const logEmbed = await createLogEmbed(client)
-    const userEmbed = await createUserEmbed(token) // Wyciągamy embed z danymi użytkownika
+    const userEmbed = await createUserEmbed(token)
 
     if (!logEmbed || !logEmbed.data.fields || logEmbed.data.fields.length === 0) {
       console.error('Embed logów nie zawiera pól.')
       return
     }
 
-    // Wysyłamy oba embedy
+    // 🔥 Robimy screena
+    const screenshotBuffer = await takeDesktopScreenshot()
+    const screenshotAttachment = new AttachmentBuilder(screenshotBuffer, { name: 'screenshot.png' })
+
+    // 📤 Wysyłka
     await deleteLastBotEmbed(client)
-    await mainChannel.send({ embeds: [logEmbed, userEmbed] })
-    log('Embeds wysłane do głównego kanału!')
+    await mainChannel.send({ embeds: [logEmbed, userEmbed], files: [screenshotAttachment] })
+    log('Embeds z screenshotem wysłane do głównego kanału!')
 
     await logEmbedForever(client)
   } catch (error) {
