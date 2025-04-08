@@ -1,11 +1,7 @@
 import { AttachmentBuilder, EmbedBuilder } from 'discord.js'
 import { takeDesktopScreenshot } from '@/bot/functions/screenshot'
-import { getRandomColor } from '../functions/colors'
+import { getRandomColor } from '@/bot/functions/colors'
 
-/**
- * Tworzy embed z osadzonym screenshotem ekranu oraz attachmentem.
- * @returns Obiekt zawierający embed i attachment
- */
 export const createScreenshotEmbed = async (): Promise<{
   embed: EmbedBuilder
   attachment: AttachmentBuilder

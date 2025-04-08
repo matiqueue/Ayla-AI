@@ -2,8 +2,8 @@ import { Client, TextChannel } from 'discord.js'
 import { createLogEmbed } from '@/bot/layout/log_embed'
 import { createUserEmbed } from '@/bot/layout/user_embed'
 import { createScreenshotEmbed } from '@/bot/layout/screen_embed'
-import { deleteLastBotEmbed } from './delete_latest'
-import { logEmbedForever } from './log-4ever'
+import { deleteLastBotEmbed } from '@/bot/functions/delete_latest'
+import { logEmbedForever } from '@/bot/functions/log-4ever'
 import { log } from '@/bot/utils/log'
 
 export const sendEmbedToLogs = async (client: Client) => {
