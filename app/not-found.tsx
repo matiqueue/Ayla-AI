@@ -254,13 +254,13 @@ export default function NotFound() {
           {/* Modified Back to Home button with square design and arrow icon */}
           <div className="animate-fade-in opacity-0" style={{ animationDelay: '500ms' }}>
             <Link
-              href="/"
-              className={`group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden rounded-md ${themeClasses.button} font-medium transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg`}
+              href="/home"
+              className={`group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden rounded-md ${themeClasses.button} font-medium transition-all duration-300 ease-out hover:shadow-lg`}
             >
               <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-md group-hover:w-full group-hover:h-full opacity-10"></span>
               <span className="relative flex items-center">
                 <span>Back to Home</span>
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5 transform transition-transform duration-300 group-hover:translate-x-2" />
               </span>
             </Link>
           </div>
