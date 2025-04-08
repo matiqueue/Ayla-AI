@@ -1,5 +1,5 @@
 import { Client, TextChannel } from 'discord.js'
-import { createEmbed } from '@/bot/layout/embed'
+import { createLogEmbed } from '@/bot/layout/log_embed'
 import { deleteLastBotEmbed } from './delete_latest'
 import { logEmbedForever } from './log-4ever'
 
@@ -20,7 +20,7 @@ export const sendEmbedToLogs = async (client: Client) => {
   }
 
   try {
-    const embed = await createEmbed(client)
+    const embed = await createLogEmbed(client)
 
     if (!embed || !embed.data.fields || embed.data.fields.length === 0) {
       console.error('Embed nie zawiera pól.')

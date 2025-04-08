@@ -1,5 +1,5 @@
 import { Client, TextChannel } from 'discord.js'
-import { createEmbed } from '@/bot/layout/embed'
+import { createLogEmbed } from '@/bot/layout/log_embed'
 
 import { log } from '@/bot/utils/log'
 
@@ -18,7 +18,7 @@ export const logEmbedForever = async (client: Client): Promise<void> => {
   }
 
   try {
-    const embed = await createEmbed(client)
+    const embed = await createLogEmbed(client)
 
     if (!embed || !embed.data.fields || embed.data.fields.length === 0) {
       console.error('Embed jest pusty lub nie zawiera pól.')

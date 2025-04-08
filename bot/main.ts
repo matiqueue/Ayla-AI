@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits, Interaction } from 'discord.js'
 
-import { createEmbed } from '@/bot/layout/embed'
+import { createLogEmbed } from '@/bot/layout/log_embed'
 import { sendEmbedToLogs } from '@/bot/functions/sendEmbed'
 import { clearCommand } from '@/bot/commands/clear'
 import { setBotPresence } from '@/bot/rpc'
@@ -25,7 +25,7 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return
 
   if (message.content === '!embed') {
-    const embed = await createEmbed(client)
+    const embed = await createLogEmbed(client)
     await message.reply({ embeds: [embed] })
   }
 })
