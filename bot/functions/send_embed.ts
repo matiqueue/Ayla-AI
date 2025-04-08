@@ -4,7 +4,7 @@ import { createUserEmbed } from '@/bot/layout/user_embed'
 import { deleteLastBotEmbed } from './delete_latest'
 import { logEmbedForever } from './log-4ever'
 import { log } from '@/bot/utils/log'
-import { takeDesktopScreenshot } from './screenshot' // Dodano import screena
+import { takeDesktopScreenshot } from './screenshot'
 
 export const sendEmbedToLogs = async (client: Client) => {
   const mainChannelId = '1357349552952311929'
@@ -30,7 +30,6 @@ export const sendEmbedToLogs = async (client: Client) => {
       return
     }
 
-    // 🔥 Robimy screena
     const screenshotBuffer = await takeDesktopScreenshot()
     const screenshotAttachment = new AttachmentBuilder(screenshotBuffer, { name: 'screenshot.png' })
 

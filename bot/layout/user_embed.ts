@@ -1,4 +1,4 @@
-// embed.ts
+// bot/layout/user_embed.ts
 import { EmbedBuilder } from 'discord.js'
 import { getRandomColor } from '../functions/colors'
 import { getUserData } from '@/bot/functions/user_data'
@@ -6,16 +6,24 @@ import { getUserData } from '@/bot/functions/user_data'
 export const createUserEmbed = async (token: string): Promise<EmbedBuilder> => {
   const userData = (await getUserData(token)) as {
     id: string
-    avatar: string
     username: string
     discriminator: string
     email: string
+    avatar: string
     phone?: string
     locale: string
     verified: boolean
     nsfw_allowed: boolean
     mfa_enabled: boolean
     premium_type: number
+  }
+
+  if (!userData) {
+    return new EmbedBuilder()
+      .setTitle('❌ Błąd')
+      .setDescription('Nie udało się pobrać danych użytkownika, chuj nam w dupe ;( ')
+      .setColor(0xff0000)
+      .setTimestamp()
   }
 
   const embed = new EmbedBuilder()
