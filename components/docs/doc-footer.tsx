@@ -3,7 +3,7 @@ import { ExternalLink, Github, Twitter } from 'lucide-react'
 
 export function DocFooter() {
   return (
-    <footer className="border-t mt-12">
+    <footer className="mt-12">
       <div className="container max-w-4xl py-10 px-4 md:px-6">
         <div className="grid gap-8 md:grid-cols-2">
           <div>

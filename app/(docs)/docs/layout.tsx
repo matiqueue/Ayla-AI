@@ -3,7 +3,7 @@
 import type React from 'react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Book, Code2, FileText, HelpCircle, Home, Lightbulb, Search, Settings } from 'lucide-react'
+import { Book, Code2, FileText, HelpCircle, Home, Lightbulb, Search } from 'lucide-react'
 import {
   SidebarProvider,
   Sidebar,
@@ -40,7 +40,7 @@ const sidebarSections = [
     links: [
       { title: 'Features', href: '#features', icon: Lightbulb },
       { title: 'Architecture', href: '#architecture', icon: Book },
-      { title: 'Best Practices', href: '#best-practices', icon: FileText },
+      // { title: 'Best Practices', href: '#best-practices', icon: FileText },
     ],
   },
   {
@@ -48,15 +48,15 @@ const sidebarSections = [
     links: [
       { title: 'Authentication', href: '#authentication', icon: Code2 },
       { title: 'Endpoints', href: '#endpoints', icon: Code2 },
-      { title: 'Error Handling', href: '#error-handling', icon: Code2 },
-      { title: 'Rate Limits', href: '#rate-limits', icon: Code2 },
+      // { title: 'Error Handling', href: '#error-handling', icon: Code2 },
+      // { title: 'Rate Limits', href: '#rate-limits', icon: Code2 },
     ],
   },
   {
     title: 'Guides',
     links: [
-      { title: 'Tutorials', href: '#tutorials', icon: Book },
-      { title: 'Examples', href: '#examples', icon: FileText },
+      // { title: 'Tutorials', href: '#tutorials', icon: Book },
+      // { title: 'Examples', href: '#examples', icon: FileText },
       { title: 'FAQ', href: '#faq', icon: HelpCircle },
     ],
   },
@@ -93,8 +93,8 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen flex-col">
-        <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <div className="flex min-h-screen flex-col overflow-x-hidden">
+        <header className="sticky top-0 z-50 flex h-16 w-screen items-center gap-4 border-b bg-background px-4 md:px-6">
           <SidebarTrigger />
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Book className="h-6 w-6" />
@@ -115,15 +115,11 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
               {theme === 'dark' ? 'Dark' : 'Light'}
             </span>
             <ModeToggle />
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <Settings className="h-4 w-4" />
-              <span className="sr-only">Theme preferences</span>
-            </Button>
           </div>
         </header>
 
         <div className="flex flex-1">
-          <Sidebar>
+          <Sidebar className="transition-transform duration-300">
             <SidebarHeader className="border-b">
               <div className="relative p-2">
                 <Search className="absolute left-4 top-3 h-4 w-4 text-muted-foreground" />
@@ -178,15 +174,19 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             </SidebarFooter>
           </Sidebar>
 
-          <main className="flex-1 overflow-hidden">
-            <div className="h-full overflow-y-auto">
-              {children}
-              <DocFooter />
-            </div>
+          <main className="flex-1 overflow-hidden transition-all duration-300 mx-auto md:max-w-4xl">
+            <div className="h-full overflow-y-auto">{children}</div>
           </main>
         </div>
+
+        <footer className="mt-auto w-full border-t bg-background">
+          <div className="mx-auto max-w-4xl px-4 py-6 md:px-6">
+            <DocFooter />
+          </div>
+        </footer>
+
+        <FloatingThemeToggle />
       </div>
-      <FloatingThemeToggle />
     </SidebarProvider>
   )
 }
