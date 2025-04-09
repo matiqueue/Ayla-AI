@@ -5,13 +5,13 @@ import { useEffect, useState, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
 
 export default function NotFound() {
+  const [theme, setTheme] = useState<'dark' | 'light' | 'custom'>('dark')
   const [mounted, setMounted] = useState(false)
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('not-found-theme') as 'dark' | 'light' | null
+      const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | 'custom' | null
       if (savedTheme) {
         setTheme(savedTheme)
       } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
@@ -22,33 +22,30 @@ export default function NotFound() {
   }, [])
 
   useEffect(() => {
-    if (mounted) {
-      localStorage.setItem('not-found-theme', theme)
+    const storageHandler = (e: StorageEvent) => {
+      if (e.key === 'theme' && e.newValue) {
+        setTheme(e.newValue as 'dark' | 'light' | 'custom')
+      }
     }
-  }, [theme, mounted])
+    window.addEventListener('storage', storageHandler)
+    return () => {
+      window.removeEventListener('storage', storageHandler)
+    }
+  }, [])
 
-  // Toggle theme function
-
-  // Animation for floating particles
   useEffect(() => {
     if (!mounted) return
-
     const canvas = canvasRef.current
     if (!canvas) return
-
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Set canvas dimensions
     const setCanvasDimensions = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
-
     setCanvasDimensions()
     window.addEventListener('resize', setCanvasDimensions)
-
-    // Particle configuration
     const particleCount = 70
     const particles: {
       x: number
@@ -60,12 +57,13 @@ export default function NotFound() {
       opacity: number
       fadeDirection: number
     }[] = []
-
-    // Create particles with pulsating effect
     for (let i = 0; i < particleCount; i++) {
-      // Different colors based on theme
-      const baseColor = theme === 'dark' ? 'rgba(62, 84, 172, 0.5)' : 'rgba(59, 130, 246, 0.3)'
-
+      const baseColor =
+        theme === 'dark'
+          ? 'rgba(120, 120, 120, 0.5)'
+          : theme === 'light'
+            ? 'rgba(59, 130, 246, 0.3)'
+            : 'rgba(59, 130, 246, 0.3)'
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -77,100 +75,80 @@ export default function NotFound() {
         fadeDirection: Math.random() > 0.5 ? 1 : -1,
       })
     }
-
-    // Animation loop with enhanced particle effects
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-
       particles.forEach((particle) => {
-        // Update opacity for pulsating effect
         particle.opacity += 0.005 * particle.fadeDirection
         if (particle.opacity >= 0.6) {
           particle.fadeDirection = -1
         } else if (particle.opacity <= 0.1) {
           particle.fadeDirection = 1
         }
-
-        // Draw particle with updated opacity and theme-appropriate color
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2)
-
-        // Different colors based on theme
         const particleColor =
           theme === 'dark'
-            ? `rgba(62, 84, 172, ${particle.opacity})`
-            : `rgba(59, 130, 246, ${particle.opacity})`
-
+            ? `rgba(120, 120, 120, ${particle.opacity})`
+            : theme === 'light'
+              ? `rgba(59, 130, 246, ${particle.opacity})`
+              : `rgba(59, 130, 246, ${particle.opacity})`
         ctx.fillStyle = particleColor
         ctx.fill()
-
-        // Update position
         particle.x += particle.speedX
         particle.y += particle.speedY
-
-        // Bounce off edges
         if (particle.x < 0 || particle.x > canvas.width) {
           particle.speedX = -particle.speedX
         }
-
         if (particle.y < 0 || particle.y > canvas.height) {
           particle.speedY = -particle.speedY
         }
       })
-
       requestAnimationFrame(animate)
     }
-
     animate()
-
     return () => {
       window.removeEventListener('resize', setCanvasDimensions)
     }
   }, [mounted, theme])
 
-  // Theme-specific classes
   const themeClasses = {
     background:
       theme === 'dark'
-        ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white'
-        : 'bg-gradient-to-b from-blue-50 via-white to-blue-50 text-slate-900',
+        ? 'bg-gradient-to-b from-black/5 to-black/5 text-white'
+        : theme === 'light'
+          ? 'bg-gradient-to-b from-blue-50 via-white to-blue-50 text-slate-900'
+          : 'bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white',
     title:
       theme === 'dark'
-        ? 'bg-gradient-to-r from-blue-400 to-purple-600'
-        : 'bg-gradient-to-r from-blue-600 to-purple-800',
-    subtitle: theme === 'dark' ? 'text-white' : 'text-slate-900',
-    text: theme === 'dark' ? 'text-slate-300' : 'text-slate-600',
+        ? 'bg-gradient-to-r from-gray-400 to-gray-200'
+        : theme === 'light'
+          ? 'bg-gradient-to-r from-blue-600 to-purple-800'
+          : 'bg-gradient-to-r from-blue-400 to-purple-600',
+    subtitle: theme === 'dark' ? 'text-white' : theme === 'light' ? 'text-slate-900' : 'text-white',
+    text:
+      theme === 'dark' ? 'text-gray-400' : theme === 'light' ? 'text-slate-600' : 'text-slate-300',
     button:
       theme === 'dark'
-        ? 'bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:shadow-blue-500/30'
-        : 'bg-gradient-to-br from-blue-600 to-purple-700 text-white hover:shadow-blue-600/20',
-    toggleButton:
-      theme === 'dark'
-        ? 'bg-slate-700 text-yellow-300 hover:bg-slate-600'
-        : 'bg-blue-100 text-blue-800 hover:bg-blue-200',
-    blob1: theme === 'dark' ? 'bg-blue-500' : 'bg-blue-300',
-    blob2: theme === 'dark' ? 'bg-purple-500' : 'bg-purple-300',
-    blob3: theme === 'dark' ? 'bg-pink-500' : 'bg-pink-300',
-    blob4: theme === 'dark' ? 'bg-cyan-500' : 'bg-cyan-300',
+        ? 'bg-gradient-to-r from-gray-800 to-gray-600 hover:from-gray-700 hover:to-gray-500 text-white'
+        : theme === 'light'
+          ? 'bg-gradient-to-br from-blue-600 to-purple-700 text-white hover:shadow-blue-600/20'
+          : 'bg-gradient-to-br from-blue-500 to-purple-600 text-white hover:shadow-blue-500/30',
+    blob1: theme === 'dark' ? 'bg-gray-600' : theme === 'light' ? 'bg-blue-300' : 'bg-blue-500',
+    blob2: theme === 'dark' ? 'bg-gray-500' : theme === 'light' ? 'bg-purple-300' : 'bg-purple-500',
+    blob3: theme === 'dark' ? 'bg-gray-400' : theme === 'light' ? 'bg-pink-300' : 'bg-pink-500',
+    blob4: theme === 'dark' ? 'bg-gray-300' : theme === 'light' ? 'bg-cyan-300' : 'bg-cyan-500',
   }
 
   return (
     <div
       className={`relative min-h-screen w-full flex flex-col items-center justify-center ${themeClasses.background} overflow-hidden transition-colors duration-300`}
     >
-      {/* Background animation canvas */}
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
-
-      {/* Theme toggle button */}
-
-      {/* Font import for custom typography */}
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
         .font-space {
           font-family: 'Space Grotesk', sans-serif;
         }
-
         @keyframes slideInFromBottom {
           0% {
             transform: translateY(50px);
@@ -181,7 +159,6 @@ export default function NotFound() {
             opacity: 1;
           }
         }
-
         @keyframes fadeIn {
           0% {
             opacity: 0;
@@ -190,15 +167,12 @@ export default function NotFound() {
             opacity: 1;
           }
         }
-
         .animate-slide-in {
           animation: slideInFromBottom 0.8s ease-out forwards;
         }
-
         .animate-fade-in {
           animation: fadeIn 1.2s ease-out forwards;
         }
-
         .delay-100 {
           animation-delay: 100ms;
         }
@@ -215,13 +189,10 @@ export default function NotFound() {
           animation-delay: 500ms;
         }
       `}</style>
-
       <div className="z-10 flex flex-col items-center justify-center px-4 text-center">
-        {/* Main content with enhanced animations */}
         <div
           className={`transition-all duration-1000 ease-in-out ${mounted ? 'opacity-100' : 'opacity-0'}`}
         >
-          {/* 404 Title with new font and enhanced animation */}
           <div className="overflow-hidden">
             <h1
               className="font-space text-8xl md:text-9xl font-bold mb-2 animate-slide-in opacity-0"
@@ -230,8 +201,6 @@ export default function NotFound() {
               <span className={`bg-clip-text text-transparent ${themeClasses.title}`}>404</span>
             </h1>
           </div>
-
-          {/* Subtitle with new font and animation */}
           <div className="overflow-hidden">
             <h2
               className={`font-space text-2xl md:text-4xl font-bold mb-6 animate-slide-in opacity-0 ${themeClasses.subtitle}`}
@@ -240,8 +209,6 @@ export default function NotFound() {
               Page Not Found
             </h2>
           </div>
-
-          {/* Message with animation */}
           <div className="overflow-hidden mb-10">
             <p
               className={`text-lg md:text-xl animate-slide-in opacity-0 ${themeClasses.text}`}
@@ -250,8 +217,6 @@ export default function NotFound() {
               Oops, the page you&apos;re looking for doesn&apos;t exist.
             </p>
           </div>
-
-          {/* Modified Back to Home button with square design and arrow icon */}
           <div className="animate-fade-in opacity-0" style={{ animationDelay: '500ms' }}>
             <Link
               href="/home"
@@ -266,8 +231,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-
-      {/* Enhanced animated shapes with theme-appropriate colors */}
       <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
         {mounted && (
           <>
@@ -286,8 +249,6 @@ export default function NotFound() {
           </>
         )}
       </div>
-
-      {/* Animation keyframes */}
       <style jsx>{`
         @keyframes blob {
           0% {
