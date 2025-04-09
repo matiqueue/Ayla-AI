@@ -26,11 +26,11 @@ export function HeroSection() {
       style={{ height: windowHeight, minHeight: '600px' }}
     >
       {/* Gradient tła */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black dark:to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black/5 dark:to-black/5 pointer-events-none" />
 
       {/* Animowane kształty w tle */}
       <motion.div
-        className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-purple-500/10 dark:bg-gray-600/30 blur-3xl"
+        className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-purple-500/10 dark:bg-gray-600/20 blur-3xl"
         animate={{
           x: [0, 30, 0],
           y: [0, -30, 0],
