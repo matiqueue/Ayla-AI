@@ -128,10 +128,10 @@ export function TestimonialsSection() {
       {/* Enhanced background with subtle gradient for better visibility */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-muted/30 to-background/50 pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container 4xl:max-w-[2000px] mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-12">
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
+            className="text-2xl md:text-3xl lg:text-4xl  2xl:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -139,7 +139,7 @@ export function TestimonialsSection() {
           >
             What Our Users Say
           </motion.h2>
-          <p className="text-base md:text-lg text-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg 2xl:text-2xl text-foreground max-w-2xl mx-auto">
             Discover how AylaAI is helping people transform their work and productivity.
           </p>
         </div>
@@ -151,7 +151,7 @@ export function TestimonialsSection() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="flex gap-4 py-4">
+          <div className="flex gap-4 py-4 3xl:py-8">
             {doubledTestimonials.map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.author}-${index}`}
@@ -161,18 +161,20 @@ export function TestimonialsSection() {
               >
                 <Card className="h-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 transition-all hover:translate-y-[-2px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)]">
                   <CardContent className="pt-6 px-4 pb-4">
-                    <Quote className="h-6 w-6 text-purple-400 dark:text-gray-400 mb-4" />
-                    <p className="text-sm mb-6 line-clamp-4">{testimonial.quote}</p>
-                    <div className="flex items-center gap-3 mt-auto">
-                      <Avatar className="h-10 w-10 border-2 border-purple-200 dark:border-gray-700">
+                    <Quote className="h-6 w-6 2xl:h-8 2xl:w-8 text-purple-400 dark:text-gray-400 mb-4" />
+                    <p className="text-sm mb-6 3xl:text-lg line-clamp-4">{testimonial.quote}</p>
+                    <div className="flex items-center gap-3 2xl:gap-5 mt-auto">
+                      <Avatar className="h-10 w-10 2xl:h-14 2xl:w-14 border-2 border-purple-200 dark:border-gray-700">
                         <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
                         <AvatarFallback className="bg-gradient-to-br from-purple-500 to-cyan-500 dark:from-gray-600 dark:to-gray-400 text-white text-xs">
                           {testimonial.author.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-semibold text-sm">{testimonial.author}</p>
-                        <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                        <p className="font-semibold text-sm 3xl:text-base">{testimonial.author}</p>
+                        <p className="text-xs text-muted-foreground 3xl:text-base">
+                          {testimonial.role}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -187,7 +189,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="text-center mt-8">
-          <p className="text-sm text-muted-foreground italic">
+          <p className="text-sm text-muted-foreground italic 3xl:text-lg">
             Hover over the testimonials to pause the animation
           </p>
         </div>

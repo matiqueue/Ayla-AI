@@ -48,7 +48,7 @@ export function Header() {
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between px-4">
+      <div className="container mx-auto flex items-center justify-between px-4 4xl:text-2xl">
         <Link href="/home" className="flex items-center gap-2">
           <motion.div
             initial={{ rotate: -10 }}
@@ -62,7 +62,7 @@ export function Header() {
           >
             <Sparkles className="h-6 w-6 text-purple-500 dark:text-gray-400" />
           </motion.div>
-          <span className="text-xl font-bold bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
+          <span className="text-xl 3xl:text-3xl font-bold bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
             AylaAI
           </span>
         </Link>
@@ -71,11 +71,11 @@ export function Header() {
           <MenuBar />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <ModeToggle />
           <Button
             size="sm"
-            className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+            className="bg-gradient-to-r 3xl:text-lg from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
           >
             Get Started
           </Button>
