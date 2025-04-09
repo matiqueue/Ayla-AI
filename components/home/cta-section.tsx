@@ -110,10 +110,10 @@ export function CTASection({ showSection }: CTAProps) {
     return (
       <section className="h-screen w-full relative py-8 md:py-12 flex items-center">
         {/* Dynamic background elements */}
-        <div className="absolute inset-0 bg-linear-to-r from-purple-500/15 to-cyan-500/15 dark:from-purple-500/25 dark:to-cyan-500/25 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/15 to-cyan-500/15 dark:from-gray-800/20 dark:to-gray-700/20 pointer-events-none" />
 
         <motion.div
-          className="absolute top-10 right-[20%] w-64 h-64 rounded-full bg-purple-500/15 dark:bg-purple-500/25 blur-3xl"
+          className="absolute top-10 right-[20%] w-64 h-64 rounded-full bg-purple-500/15 dark:bg-gray-700/20 blur-3xl"
           animate={{
             x: [0, 30, 0],
             y: [0, -30, 0],
@@ -126,7 +126,7 @@ export function CTASection({ showSection }: CTAProps) {
         />
 
         <motion.div
-          className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-cyan-500/20 blur-3xl"
+          className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-gray-600/20 blur-3xl"
           animate={{
             x: [0, -20, 0],
             y: [0, 20, 0],
@@ -141,7 +141,7 @@ export function CTASection({ showSection }: CTAProps) {
         <div className="container mx-auto px-4 relative z-10 overflow-y-auto max-h-screen pb-8">
           <div className="max-w-4xl mx-auto text-center mb-6 md:mb-8">
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400"
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -176,7 +176,7 @@ export function CTASection({ showSection }: CTAProps) {
                   <Card className="h-full w-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden flex flex-col">
                     {plan.badge && (
                       <div className="absolute top-0 right-0">
-                        <Badge className="m-2 bg-linear-to-r from-purple-500 to-cyan-500 text-white font-medium px-2 py-0.5 text-xs">
+                        <Badge className="m-2 bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-600 dark:to-gray-400 text-white font-medium px-2 py-0.5 text-xs">
                           {plan.badge}
                         </Badge>
                       </div>
@@ -196,7 +196,7 @@ export function CTASection({ showSection }: CTAProps) {
                         <ul className="space-y-2 mb-4 text-sm">
                           {plan.features.map((feature) => (
                             <li key={feature} className="flex items-start">
-                              <Check className="h-4 w-4 text-green-500 mr-2 shrink-0 mt-0.5" />
+                              <Check className="h-4 w-4 text-green-500 dark:text-gray-400 mr-2 shrink-0 mt-0.5" />
                               <span className="text-foreground">{feature}</span>
                             </li>
                           ))}
@@ -206,7 +206,7 @@ export function CTASection({ showSection }: CTAProps) {
                         <Button
                           className={`w-full text-sm py-2 ${
                             plan.name === 'Pro'
-                              ? 'bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white'
+                              ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white'
                               : ''
                           }`}
                           variant={plan.buttonVariant}
@@ -231,9 +231,9 @@ export function CTASection({ showSection }: CTAProps) {
     return (
       <section className="min-h-screen w-full relative py-8 md:py-12 flex items-center">
         {/* Background with controlled overflow */}
-        <div className="absolute inset-0 bg-linear-to-b from-background via-muted/30 to-background/80 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background/80 pointer-events-none overflow-hidden">
           <motion.div
-            className="absolute top-40 left-[15%] w-80 h-80 rounded-full bg-purple-500/10 dark:bg-purple-500/15 blur-3xl"
+            className="absolute top-40 left-[15%] w-80 h-80 rounded-full bg-purple-500/10 dark:bg-gray-700/20 blur-3xl"
             animate={{
               x: [0, 40, 0],
               y: [0, -20, 0],
@@ -245,7 +245,7 @@ export function CTASection({ showSection }: CTAProps) {
             }}
           />
           <motion.div
-            className="absolute bottom-40 right-[15%] w-96 h-96 rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl"
+            className="absolute bottom-40 right-[15%] w-96 h-96 rounded-full bg-cyan-500/10 dark:bg-gray-600/20 blur-3xl"
             animate={{
               x: [0, -30, 0],
               y: [0, 30, 0],
@@ -260,7 +260,7 @@ export function CTASection({ showSection }: CTAProps) {
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400"
+            className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -315,10 +315,10 @@ export function CTASection({ showSection }: CTAProps) {
     return (
       <section className="h-screen w-full relative py-8 md:py-12 flex items-center">
         {/* Dynamic background with blur effect */}
-        <div className="absolute inset-0 bg-linear-to-b from-muted/30 to-background/90 pointer-events-none backdrop-blur-xs" />
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background/90 pointer-events-none backdrop-blur-xs" />
 
         <motion.div
-          className="absolute top-20 right-[30%] w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/20 blur-3xl"
+          className="absolute top-20 right-[30%] w-72 h-72 rounded-full bg-purple-500/10 dark:bg-gray-700/20 blur-3xl"
           animate={{
             x: [0, -20, 0],
             y: [0, 20, 0],
@@ -333,7 +333,7 @@ export function CTASection({ showSection }: CTAProps) {
         <div className="container mx-auto px-4 relative z-10 flex flex-col justify-center h-full">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
-              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400"
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -362,7 +362,7 @@ export function CTASection({ showSection }: CTAProps) {
             >
               <Button
                 size="lg"
-                className="bg-linear-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 md:text-lg lg:text-xl md:py-6 lg:py-8 md:px-8 lg:px-10"
+                className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 md:text-lg lg:text-xl md:py-6 lg:py-8 md:px-8 lg:px-10 text-white"
               >
                 Get Started Free
               </Button>
@@ -387,7 +387,7 @@ export function CTASection({ showSection }: CTAProps) {
               viewport={{ once: true, margin: '-100px' }}
             >
               <div className="text-center">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-500 mb-1 md:mb-2">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-500 dark:text-gray-400 mb-1 md:mb-2">
                   10,000+
                 </h3>
                 <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
@@ -395,7 +395,7 @@ export function CTASection({ showSection }: CTAProps) {
                 </p>
               </div>
               <div className="text-center">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cyan-500 mb-1 md:mb-2">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-cyan-500 dark:text-gray-400 mb-1 md:mb-2">
                   5M+
                 </h3>
                 <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
@@ -403,7 +403,7 @@ export function CTASection({ showSection }: CTAProps) {
                 </p>
               </div>
               <div className="text-center">
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-500 mb-1 md:mb-2">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-green-500 dark:text-gray-400 mb-1 md:mb-2">
                   99.9%
                 </h3>
                 <p className="text-muted-foreground text-sm md:text-base lg:text-lg">Uptime</p>

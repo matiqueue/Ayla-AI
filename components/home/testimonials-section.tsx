@@ -126,12 +126,12 @@ export function TestimonialsSection() {
       className="h-screen flex items-center py-8 md:py-12 relative overflow-hidden"
     >
       {/* Enhanced background with subtle gradient for better visibility */}
-      <div className="absolute inset-0 bg-linear-to-b from-background/50 via-muted/30 to-background/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-muted/30 to-background/50 pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-12">
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-linear-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -161,12 +161,12 @@ export function TestimonialsSection() {
               >
                 <Card className="h-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 transition-all hover:translate-y-[-2px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)]">
                   <CardContent className="pt-6 px-4 pb-4">
-                    <Quote className="h-6 w-6 text-purple-400 mb-4" />
+                    <Quote className="h-6 w-6 text-purple-400 dark:text-gray-400 mb-4" />
                     <p className="text-sm mb-6 line-clamp-4">{testimonial.quote}</p>
                     <div className="flex items-center gap-3 mt-auto">
-                      <Avatar className="h-10 w-10 border-2 border-purple-200 dark:border-purple-900">
+                      <Avatar className="h-10 w-10 border-2 border-purple-200 dark:border-gray-700">
                         <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
-                        <AvatarFallback className="bg-linear-to-br from-purple-500 to-cyan-500 text-white text-xs">
+                        <AvatarFallback className="bg-gradient-to-br from-purple-500 to-cyan-500 dark:from-gray-600 dark:to-gray-400 text-white text-xs">
                           {testimonial.author.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
@@ -182,8 +182,8 @@ export function TestimonialsSection() {
           </div>
 
           {/* Gradient overlays to indicate scrolling */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         </div>
 
         <div className="text-center mt-8">
