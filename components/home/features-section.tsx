@@ -45,16 +45,18 @@ export function FeaturesSection() {
       id="features-section"
       className="min-h-screen flex items-center py-20 bg-muted/50 dark:bg-background/30"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-screen-xl 2xl:max-w-screen-2xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful AI Features</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold mb-4">
+            Powerful AI Features
+          </h2>
+          <p className="text-lg xl:text-2xl 2xl:w-3xl 3xl:text-4xl text-muted-foreground max-w-2xl mx-auto">
             Discover what makes AylaAI the perfect AI assistant for your personal and professional
             needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -63,15 +65,19 @@ export function FeaturesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: '-100px' }}
             >
-              <Card className="h-full border border-border/40 bg-card/50 backdrop-blur-xs hover:shadow-md transition-shadow dark:bg-card/80">
+              <Card className="h-full max-w-md mx-auto border border-border/40 bg-card/50 backdrop-blur-xs hover:shadow-md transition-shadow dark:bg-card/80">
                 <CardHeader>
-                  <div className="p-2 w-12 h-12 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
+                  <div className="p-2 w-12 h-12 2xl:h-16 2xl:w-16 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
                     {feature.icon}
                   </div>
-                  <CardTitle>{feature.title}</CardTitle>
+                  <CardTitle className="md:text-2xl 2xl:text-xl 3xl:text-2xl">
+                    {feature.title}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">{feature.description}</CardDescription>
+                  <CardDescription className="text-base md:text-xl 3xl:text-2xl">
+                    {feature.description}
+                  </CardDescription>
                 </CardContent>
               </Card>
             </motion.div>
