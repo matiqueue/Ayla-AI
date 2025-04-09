@@ -47,7 +47,7 @@ export function FeaturesSection() {
     >
       <div className="container mx-auto px-4 max-w-screen-xl 2xl:max-w-screen-2xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold mb-4">
+          <h2 className="text-3xl md:text-3xl 2xl:text-5xl 3xl:text-8xl font-bold mb-4">
             Powerful AI Features
           </h2>
           <p className="text-lg xl:text-2xl 2xl:w-3xl 3xl:text-4xl text-muted-foreground max-w-2xl mx-auto">

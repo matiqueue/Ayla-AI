@@ -285,6 +285,13 @@
   transition: all 0.3s ease;
 }
 
+@media (width > 120rem) {
+  .section-dot {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 .section-dot.active {
   background-color: var(--dot-active-background);
   transform: scale(1.3);

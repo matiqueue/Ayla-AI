@@ -96,14 +96,14 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="3xl:text-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+              className="2xl:text-xl bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
             >
               Get Started Free
             </Button>
-            <Button size="lg" variant="outline" asChild className="3xl:text-lg">
+            <Button size="lg" variant="outline" asChild className="2xl:text-xl">
               <Link href="/docs" className="group">
                 View Documentation
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-4 w-4 xl:h-6 xl:w-6 2xl:h-8 2xl:w-8 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </motion.div>

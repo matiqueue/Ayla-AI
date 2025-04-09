@@ -60,7 +60,7 @@ export function Header() {
               ease: 'easeInOut',
             }}
           >
-            <Sparkles className="h-6 w-6 text-purple-500 dark:text-gray-400" />
+            <Sparkles className="h-6 w-6 xl:h-8 xl:w-8 2xl:h-10 2xl:w-10 text-purple-500 dark:text-gray-400" />
           </motion.div>
           <span className="text-xl 3xl:text-3xl font-bold bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-300 dark:to-gray-100 bg-clip-text text-transparent">
             AylaAI
@@ -74,8 +74,8 @@ export function Header() {
         <div className="flex items-center gap-4 ">
           <ModeToggle />
           <Button
-            size="sm"
-            className="bg-gradient-to-r 3xl:text-lg from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+            size="lg"
+            className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
           >
             Get Started
           </Button>

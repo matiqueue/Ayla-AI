@@ -131,7 +131,7 @@ export function TestimonialsSection() {
       <div className="container 4xl:max-w-[2000px] mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-12">
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl  2xl:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
+            className="text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -155,7 +155,7 @@ export function TestimonialsSection() {
             {doubledTestimonials.map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.author}-${index}`}
-                className="shrink-0 w-[260px] md:w-[300px]"
+                className="shrink-0 w-[260px] md:w-[300px] 2xl:w-[350px] 3xl:w-[400px]"
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
@@ -189,7 +189,7 @@ export function TestimonialsSection() {
         </div>
 
         <div className="text-center mt-8">
-          <p className="text-sm text-muted-foreground italic 3xl:text-lg">
+          <p className="text-sm text-muted-foreground italic 3xl:text-2xl">
             Hover over the testimonials to pause the animation
           </p>
         </div>
