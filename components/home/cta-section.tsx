@@ -262,7 +262,7 @@ export function CTASection({ showSection }: CTAProps) {
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl 2xl:text-4xl 3xl:text-7xl font-bold text-center mb-4 xl:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
+            className="text-2xl md:text-2xl lg:text-3xl 2xl:text-4xl 3xl:text-7xl font-bold text-center mb-2 xl:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -272,7 +272,7 @@ export function CTASection({ showSection }: CTAProps) {
           </motion.h2>
 
           <motion.p
-            className="text-base md:text-lg lg:text-xl 3xl:text-2xl text-center text-foreground mb-8 3xl:mb-14 max-w-3xl mx-auto"
+            className="text-base md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl text-center text-foreground mb-6 xl:mb-8 3xl:mb-14 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -292,13 +292,13 @@ export function CTASection({ showSection }: CTAProps) {
                 viewport={{ once: true, margin: '-100px' }}
               >
                 <Card className="h-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 transition-all hover:translate-y-[-2px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-4 md:p-6 flex flex-col h-full">
+                  <CardContent className="p-4  flex flex-col h-full">
                     <div
                       className={`p-2 md:p-3 rounded-full ${reason.bgColor} mb-4 w-10 md:w-12 h-10 md:h-12 2xl:w-16 2xl:h-16 flex items-center justify-center`}
                     >
                       {React.cloneElement(reason.icon as React.ReactElement, {})}
                     </div>
-                    <h4 className="text-base md:text-lg 3xl:text-2xl font-semibold mb-2">
+                    <h4 className="text-sm md:text-base 3xl:text-2xl font-semibold mb-2">
                       {reason.title}
                     </h4>
                     <p className="text-foreground text-sm md:text-base 3xl:text-xl flex-grow">

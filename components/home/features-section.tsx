@@ -46,11 +46,11 @@ export function FeaturesSection() {
       className="min-h-screen flex items-center py-20 bg-muted/50 dark:bg-background/30"
     >
       <div className="container mx-auto px-4 max-w-screen-xl 2xl:max-w-screen-2xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-3xl 2xl:text-5xl 3xl:text-8xl font-bold mb-4">
+        <div className="text-center mb-12 2xl:mb-16">
+          <h2 className="text-3xl md:text-3xl xl:text-2xl 2xl:text-5xl 3xl:text-8xl font-bold mb-2 2xl:mb-4">
             Powerful AI Features
           </h2>
-          <p className="text-lg xl:text-2xl 2xl:w-3xl 3xl:text-4xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg xl:text-xl 2xl:w-2xl 3xl:text-4xl text-muted-foreground max-w-2xl mx-auto">
             Discover what makes AylaAI the perfect AI assistant for your personal and professional
             needs.
           </p>
@@ -67,15 +67,15 @@ export function FeaturesSection() {
             >
               <Card className="h-full max-w-md mx-auto border border-border/40 bg-card/50 backdrop-blur-xs hover:shadow-md transition-shadow dark:bg-card/80">
                 <CardHeader>
-                  <div className="p-2 w-12 h-12 2xl:h-16 2xl:w-16 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
+                  <div className="p-2 w-12 h-12 xl:h-14 xl:w-14 2xl:h-16 2xl:w-16 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
                     {feature.icon}
                   </div>
-                  <CardTitle className="md:text-2xl 2xl:text-xl 3xl:text-2xl">
+                  <CardTitle className="md:text-xl xl:text-xl 2xl:text-2xl 3xl:text-2xl">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base md:text-xl 3xl:text-2xl">
+                  <CardDescription className="text-base md:text-lg 3xl:text-2xl">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
