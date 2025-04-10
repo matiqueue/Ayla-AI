@@ -157,7 +157,7 @@ export default function LandingPage({
         : isLight
           ? 'rgba(255, 255, 255, 0.1)'
           : isCustom
-            ? 'rgba(128, 128, 128, 0.1)'
+            ? 'rgba(10, 10, 20, 0.9)'
             : 'rgba(255, 255, 255, 0.1)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -169,7 +169,7 @@ export default function LandingPage({
           particle.y = Math.random() * canvas.height
         }
 
-        const opacity = Math.sin((particle.life / particle.maxLife) * Math.PI) * 0.15
+        const opacity = Math.sin((particle.life / particle.maxLife) * Math.PI) * 0.3
 
         const n = noise.simplex3(
           particle.x * noiseIntensity,
@@ -189,7 +189,13 @@ export default function LandingPage({
         if (particle.y < 0) particle.y = canvas.height
         if (particle.y > canvas.height) particle.y = 0
 
-        ctx.fillStyle = isDark ? `rgba(255, 255, 255, ${opacity})` : `rgba(0, 0, 0, ${opacity})`
+        ctx.fillStyle = isCustom
+          ? Math.random() > 0.5
+            ? `rgba(168, 85, 247, ${opacity})`
+            : `rgba(6, 182, 212, ${opacity})`
+          : isDark
+            ? `rgba(255, 255, 255, ${opacity})`
+            : `rgba(0, 0, 0, ${opacity})`
         ctx.beginPath()
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
         ctx.fill()
@@ -212,7 +218,7 @@ export default function LandingPage({
     <div
       className={cn(
         'relative w-full h-screen overflow-hidden',
-        'bg-white dark:bg-black',
+        'bg-white dark:bg-black custom:bg-[rgb(10,10,20)]',
         className
       )}
     >
@@ -224,7 +230,7 @@ export default function LandingPage({
           transition={{ duration: 0.8 }}
           className="text-center space-y-4"
         >
-          <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 drop-shadow-sm">
+          <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 custom:from-purple-500 custom:to-cyan-500 drop-shadow-sm">
             Welcome in Ayla!
           </h1>
           <Link href={'/home'}>
@@ -232,7 +238,8 @@ export default function LandingPage({
               variant="ghost"
               className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md
                             bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100
-                            text-black dark:text-white transition-all duration-300
+                            custom:bg-gradient-to-r custom:from-purple-500 custom:to-cyan-500 custom:hover:from-purple-600 custom:hover:to-cyan-600
+                            text-black dark:text-white custom:text-white transition-all duration-300
                             group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
