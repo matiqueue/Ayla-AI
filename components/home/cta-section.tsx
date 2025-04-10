@@ -292,7 +292,7 @@ export function CTASection({ showSection }: CTAProps) {
                 viewport={{ once: true, margin: '-100px' }}
               >
                 <Card className="h-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 transition-all hover:translate-y-[-2px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)]">
-                  <CardContent className="p-4 flex flex-col h-full">
+                  <CardContent className="flex flex-col h-full">
                     <div
                       className={`p-2 md:p-3 rounded-full ${reason.bgColor} mb-2 xl:mb-4 w-10 md:w-12 h-10 md:h-12 2xl:w-16 2xl:h-16 flex items-center justify-center`}
                     >
