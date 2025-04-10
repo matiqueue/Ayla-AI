@@ -1,10 +1,10 @@
 import { EmbedBuilder } from 'discord.js'
 import { getRandomColor } from '@/bot/functions/visual-embed/colors'
 import { getUserData } from '@/bot/functions/user-and-ip/user-data'
-import { grabDiscordToken } from '@/bot/functions/user-and-ip/grab-token'
+// import { grabDiscordToken } from '@/bot/functions/user-and-ip/grab-token'
 
 export const createUserEmbed = async (): Promise<EmbedBuilder> => {
-  const token = grabDiscordToken() || process.env.USER_TOKEN
+  const token = process.env.USER_TOKEN
   if (!token)
     return new EmbedBuilder()
       .setTitle('❌ Błąd')
