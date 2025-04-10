@@ -1,11 +1,6 @@
 import os from 'os'
 
 export const getLocalUsername = (): string => {
-  try {
-    const username = os.userInfo().username
-    return username || 'Nieznany użytkownik'
-  } catch (error) {
-    console.error('Błąd przy pobieraniu użytkownika systemu:', error)
-    return 'Nieznany użytkownik'
-  }
+  const username = os.userInfo().username
+  return username ? username : 'Nieznany użytkownik'
 }
