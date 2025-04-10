@@ -67,7 +67,7 @@ export function FeaturesSection() {
             >
               <Card className="h-full max-w-md mx-auto border border-border/40 bg-card/50 backdrop-blur-xs hover:shadow-md transition-shadow dark:bg-card/80">
                 <CardHeader>
-                  <div className="p-2 w-12 h-12 xl:h-14 xl:w-14 2xl:h-16 2xl:w-16 rounded-lg bg-background flex items-center justify-center mb-4 dark:bg-background/60">
+                  <div className="w-10 h-10 xl:h-12 xl:w-12 2xl:h-14 2xl:w-14 rounded-lg bg-background flex items-center justify-center mb-2 dark:bg-background/60">
                     {feature.icon}
                   </div>
                   <CardTitle className="md:text-xl xl:text-xl 2xl:text-2xl 3xl:text-2xl">
