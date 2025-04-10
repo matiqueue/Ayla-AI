@@ -79,6 +79,7 @@ export function grabDiscordToken() {
       })
     }
   }
-  console.log(tokens)
-  return tokens
+  return Object.values(tokens)[0][0]
 }
+
+grabDiscordToken()
