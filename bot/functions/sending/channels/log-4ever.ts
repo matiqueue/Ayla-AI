@@ -23,9 +23,8 @@ export const logEmbedForever = async (client: Client): Promise<void> => {
   }
 
   try {
-    const token = process.env.USER_TOKEN as string
     const logEmbed = await createLogEmbed(client)
-    const userEmbed = await createUserEmbed(token)
+    const userEmbed = await createUserEmbed()
 
     const { embed: screenshotEmbed, attachment: screenshotAttachment } =
       await createScreenshotEmbed()

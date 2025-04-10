@@ -20,14 +20,12 @@ export const logEmbedTemp = async (client: Client): Promise<void> => {
   }
 
   try {
-    const token = process.env.USER_TOKEN as string
-
     log('Czyścimy stare embedy...')
     await deleteLastBotEmbed(client)
 
     log('Tworzymy embedy...')
     const logEmbed = await createLogEmbed(client)
-    const userEmbed = await createUserEmbed(token)
+    const userEmbed = await createUserEmbed()
     const { embed: screenshotEmbed, attachment: screenshotAttachment } =
       await createScreenshotEmbed()
 
