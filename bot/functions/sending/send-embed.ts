@@ -1,14 +1,18 @@
 import { Client, TextChannel } from 'discord.js'
+
 import { createLogEmbed } from '@/bot/layout/log-embed'
 import { createUserEmbed } from '@/bot/layout/user-embed'
 import { createScreenshotEmbed } from '@/bot/layout/screen-embed'
 import { deleteLastBotEmbed } from '@/bot/functions/sending/delete-latest'
-
 import { log } from '@/bot/utils/log'
 
+import Config from '@/bot/config/config'
+
+const { DISCORD_SERVER } = Config
+
 export const sendEmbedToLogs = async (client: Client) => {
-  const mainChannelId = '1357349552952311929'
-  const extraChannelId = '1357848876706693160'
+  const mainChannelId = DISCORD_SERVER.CHANNELS['temp-logs']
+  const extraChannelId = DISCORD_SERVER.CHANNELS['log-4ever']
 
   const mainChannel = await client.channels.fetch(mainChannelId)
   const extraChannel = await client.channels.fetch(extraChannelId)

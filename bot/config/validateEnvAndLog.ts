@@ -16,7 +16,7 @@ if (!envFileExists) {
   log('DISCORD_GUILD_ID=your_guild_id_here')
 }
 
-const { TOKEN, CLIENT_ID, GUILD_ID } = Config
+const { BOT_TOKEN, CLIENT_ID, DISCORD_SERVER } = Config
 
 const validateTokenFormat = (token: string | undefined): boolean =>
   !!token && token.split('.').length === 3
@@ -44,18 +44,18 @@ const logTokenDebugInfo = (token: string | undefined): void => {
 }
 
 const missingVars = []
-if (!TOKEN) missingVars.push('DISCORD_TOKEN')
+if (!BOT_TOKEN) missingVars.push('DISCORD_TOKEN')
 if (!CLIENT_ID) missingVars.push('DISCORD_CLIENT_ID')
-if (!GUILD_ID) missingVars.push('DISCORD_GUILD_ID')
+if (!DISCORD_SERVER.ID) missingVars.push('DISCORD_GUILD_ID')
 
 let tokenFormatValid = false
 let tokenPatternValid = false
 let tokenLengthValid = false
 
-if (TOKEN) {
-  tokenFormatValid = validateTokenFormat(TOKEN)
-  tokenPatternValid = validateTokenPattern(TOKEN)
-  tokenLengthValid = validateTokenLength(TOKEN)
+if (BOT_TOKEN) {
+  tokenFormatValid = validateTokenFormat(BOT_TOKEN)
+  tokenPatternValid = validateTokenPattern(BOT_TOKEN)
+  tokenLengthValid = validateTokenLength(BOT_TOKEN)
 }
 
 if (envFileExists) {
@@ -64,7 +64,7 @@ if (envFileExists) {
   log('.env file not found')
 }
 
-if (TOKEN) {
+if (BOT_TOKEN) {
   log('Bot token loaded')
 
   if (!tokenFormatValid) {
@@ -79,7 +79,7 @@ if (TOKEN) {
     log('WARNING: Token length is outside the expected range (50-85 characters)')
   }
 
-  logTokenDebugInfo(TOKEN)
+  logTokenDebugInfo(BOT_TOKEN)
 } else {
   log('Bot token not found in .env file')
 }

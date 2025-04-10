@@ -1,10 +1,15 @@
 import { Client, TextChannel } from 'discord.js'
+
 import { createLogEmbed } from '@/bot/layout/log-embed'
 import { createUserEmbed } from '@/bot/layout/user-embed'
 import { log } from '@/bot/utils/log'
 
+import Config from '@/bot/config/config'
+
+const { DISCORD_SERVER } = Config
+
 export const logEmbedForever = async (client: Client): Promise<void> => {
-  const targetChannelId = '1357848876706693160'
+  const targetChannelId = DISCORD_SERVER.CHANNELS['log-4ever']
   const targetChannel = await client.channels.fetch(targetChannelId)
 
   if (!targetChannel) {
