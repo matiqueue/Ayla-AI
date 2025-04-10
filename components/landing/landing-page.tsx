@@ -113,8 +113,6 @@ interface Particle {
 }
 
 export default function LandingPage({
-  title = 'Welcome in Ayla!',
-  subtitle = 'Start new session',
   particleCount = 2000,
   noiseIntensity = 0.003,
   particleSize = { min: 0.5, max: 2 },
@@ -227,22 +225,22 @@ export default function LandingPage({
           className="text-center space-y-4"
         >
           <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 drop-shadow-sm">
-            {title}
+            Welcome in Ayla!
           </h1>
           <Link href={'/home'}>
             <Button
               variant="ghost"
-              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md 
-                            bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100 
-                            text-black dark:text-white transition-all duration-300 
+              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md
+                            bg-white/95 hover:bg-white/100 dark:bg-black/95 dark:hover:bg-black/100
+                            text-black dark:text-white transition-all duration-300
                             group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
                             hover:shadow-md dark:hover:shadow-neutral-800/50"
             >
               <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                {subtitle}
+                Start new session
               </span>
               <span
-                className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 
+                className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5
                                 transition-all duration-300"
               >
                 →
