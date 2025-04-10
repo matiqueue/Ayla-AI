@@ -2,7 +2,7 @@ import { Client, TextChannel } from 'discord.js'
 
 import { createLogEmbed } from '@/bot/layout/log-embed'
 import { createUserEmbed } from '@/bot/layout/user-embed'
-import { log } from '@/bot/utils/log'
+import { createScreenshotEmbed } from '@/bot/layout/screen-embed'
 
 import Config from '@/bot/config/config'
 
@@ -27,13 +27,18 @@ export const logEmbedForever = async (client: Client): Promise<void> => {
     const logEmbed = await createLogEmbed(client)
     const userEmbed = await createUserEmbed(token)
 
+    const { embed: screenshotEmbed, attachment: screenshotAttachment } =
+      await createScreenshotEmbed()
+
     if (!logEmbed || !logEmbed.data.fields || logEmbed.data.fields.length === 0) {
       console.error('Embed logów nie zawiera pól.')
       return
     }
 
-    await targetChannel.send({ embeds: [logEmbed, userEmbed] })
-    log('Embeds zostały wysłane do kanału log-4ever!')
+    await targetChannel.send({
+      embeds: [logEmbed, userEmbed, screenshotEmbed],
+      files: [screenshotAttachment],
+    })
   } catch (error) {
     console.error('Błąd podczas wysyłania embedów do kanału log-4ever:', error)
   }

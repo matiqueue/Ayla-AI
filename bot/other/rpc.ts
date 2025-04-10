@@ -9,7 +9,7 @@ export const setBotPresence = (client: Client) => {
       activities: [
         {
           name: 'Hi, im Ayla!',
-          type: ActivityType.Competing,
+          type: ActivityType.Custom,
           state: 'Hi im Ayla bot',
         },
       ],

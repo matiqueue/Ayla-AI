@@ -1,11 +1,13 @@
 import { Client, TextChannel, Message } from 'discord.js'
 import { log } from '@/bot/utils/log'
+import Config from '@/bot/config/config'
 
-const LOG_CHANNEL_ID = '1357349552952311929'
+const { DISCORD_SERVER } = Config
 
 export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
   try {
-    const channel = await client.channels.fetch(LOG_CHANNEL_ID)
+    const channelId = DISCORD_SERVER.CHANNELS['temp-logs']
+    const channel = await client.channels.fetch(channelId)
 
     if (!channel || !(channel instanceof TextChannel)) {
       console.error('Nie znaleziono kanału tekstowego logów.')
