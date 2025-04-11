@@ -27,7 +27,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="hover:cursor-pointer">
           {/* Ikona Sun - widoczna w trybie light */}
           <Sun
             className={`h-[1.2rem] w-[1.2rem] transition-all ${
@@ -50,9 +50,15 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('custom')}>Custom</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('light')} className="hover:cursor-pointer">
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')} className="hover:cursor-pointer">
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('custom')} className="hover:cursor-pointer">
+          Custom
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

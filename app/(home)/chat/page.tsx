@@ -69,7 +69,7 @@ export default function ChatOptionsPage() {
 
           {/* Nagłówek strony */}
           <motion.h1
-            className="mt-[-10] text-3xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-6 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
+            className="mt-[-20] text-3xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-6 leading-[1.3] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}

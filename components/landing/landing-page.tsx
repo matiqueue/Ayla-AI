@@ -230,7 +230,7 @@ export default function LandingPage({
           transition={{ duration: 0.8 }}
           className="text-center space-y-4"
         >
-          <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 custom:from-purple-500 custom:to-cyan-500 drop-shadow-sm">
+          <h1 className="text-6xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-black to-black/70 dark:from-white dark:to-white/70 custom:from-purple-500 custom:to-cyan-500 drop-shadow-sm leading-normal">
             Welcome in Ayla!
           </h1>
           <Link href={'/home'}>
@@ -241,7 +241,7 @@ export default function LandingPage({
                             custom:bg-gradient-to-r custom:from-purple-500 custom:to-cyan-500 custom:hover:from-purple-600 custom:hover:to-cyan-600
                             text-black dark:text-white custom:text-white transition-all duration-300
                             group-hover:-translate-y-0.5 border border-black/10 dark:border-white/10
-                            hover:shadow-md dark:hover:shadow-neutral-800/50"
+                            hover:shadow-md dark:hover:shadow-neutral-800/50 hover:cursor-pointer"
             >
               <span className="opacity-90 group-hover:opacity-100 transition-opacity">
                 Start new session
