@@ -3,33 +3,160 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Download } from 'lucide-react'
+import { Download } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 export default function DesktopDownloadPage() {
-  const [windowHeight, setWindowHeight] = useState('100vh')
-  const [selectedModel, setSelectedModel] = useState('default')
+  const [selectedModel, setSelectedModel] = useState<'Win' | 'Mac' | 'Linux'>('Win') // Default to 'Win'
+  const [releases, setReleases] = useState<
+    {
+      version: string
+      date: string
+      downloadLinks: { Win?: string; Mac?: string; Linux?: string }
+      notes: string
+    }[]
+  >([]) // Updated to store platform-specific download links
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const models = [
-    { id: 'default', name: 'Basic Model' },
-    { id: 'advanced', name: 'Advanced Model' },
-    { id: 'ollama', name: 'Ollama Model' },
+    { id: 'Win', name: 'Windows' },
+    { id: 'Mac', name: 'Mac' },
+    { id: 'Linux', name: 'Linux' },
   ]
 
+  // Updated columns to use platform-specific download link based on selectedModel
+  const columns = [
+    {
+      accessorKey: 'version',
+      header: 'Version',
+      cell: ({ row }: { row: { getValue: (key: string) => string } }) => (
+        <div className="font-medium">{row.getValue('version')}</div>
+      ),
+    },
+    {
+      accessorKey: 'date',
+      header: 'Date',
+      cell: ({ row }: { row: { getValue: (key: string) => string } }) => (
+        <div>{row.getValue('date')}</div>
+      ),
+    },
+    {
+      accessorKey: 'notes',
+      header: 'Notes',
+      cell: ({ row }: { row: { getValue: (key: string) => string } }) => (
+        <div
+          className="text-sm text-muted-foreground overflow-hidden"
+          style={{
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {row.getValue('notes')}
+        </div>
+      ),
+    },
+    {
+      id: 'download',
+      header: 'Download',
+      cell: ({ row }: { row: { original: { downloadLinks: { [key: string]: string } } } }) => (
+        <Button
+          size="sm"
+          className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+          onClick={() => window.open(row.original.downloadLinks[selectedModel] || '#', '_blank')}
+          disabled={!row.original.downloadLinks[selectedModel]}
+        >
+          <Download className="h-4 w-4 mr-2" />
+          Download
+        </Button>
+      ),
+    },
+  ]
+
+  // Fetch releases from GitHub API
   useEffect(() => {
-    const setHeight = () => {
-      setWindowHeight(`${window.innerHeight}px`)
+    interface Release {
+      tag_name: string
+      published_at: string
+      assets?: { browser_download_url: string; name: string }[]
+      body?: string
     }
-    setHeight()
-    window.addEventListener('resize', setHeight)
-    return () => window.removeEventListener('resize', setHeight)
+
+    const fetchReleases = async () => {
+      try {
+        setIsLoading(true)
+        const response = await fetch('https://api.github.com/repos/revoltchat/desktop/releases')
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`)
+        }
+        const data: Release[] = await response.json()
+        // Process data to extract platform-specific download links
+        const formattedReleases = data
+          .map((release: Release) => {
+            const downloadLinks: { Win?: string; Mac?: string; Linux?: string } = {}
+            release.assets?.forEach((asset) => {
+              const assetName = asset.name.toLowerCase()
+              if (assetName.includes('win') || assetName.includes('.exe')) {
+                downloadLinks.Win = asset.browser_download_url
+              } else if (assetName.includes('mac') || assetName.includes('.dmg')) {
+                downloadLinks.Mac = asset.browser_download_url
+              } else if (
+                assetName.includes('linux') ||
+                assetName.includes('.deb') ||
+                assetName.includes('.rpm')
+              ) {
+                downloadLinks.Linux = asset.browser_download_url
+              }
+            })
+            return {
+              version: release.tag_name,
+              date: release.published_at.split('T')[0],
+              downloadLinks,
+              notes: release.body || 'No release notes available.',
+            }
+          })
+          .slice(0, 3) // Limit to 3 latest releases
+        setReleases(formattedReleases)
+      } catch (err) {
+        console.error(err)
+        setError('Failed to fetch releases. Please try again later.')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchReleases()
   }, [])
+
+  // Initialize DataTable
+  const table = useReactTable({
+    data: releases,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
+  // Get the download link for the selected model from the latest release
+  const getSelectedDownloadLink = () => {
+    if (releases.length > 0) {
+      return releases[0].downloadLinks[selectedModel as 'Win' | 'Mac' | 'Linux'] || '#'
+    }
+    return '#'
+  }
 
   return (
     <section
       id="desktop-download-section"
-      className="relative overflow-hidden flex items-center p-10"
-      style={{ height: windowHeight, minHeight: '600px' }}
+      className="relative flex items-center justify-center min-h-screen p-10"
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black/5 dark:to-black/5 pointer-events-none" />
@@ -46,13 +173,14 @@ export default function DesktopDownloadPage() {
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
       />
 
-      {/* Główna zawartość */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          {/* Lewa kolumna – Wprowadzenie */}
-          <div className="w-full md:w-1/2 text-center md:text-left">
+      {/* Main content */}
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+        {/* Upper part: Section 1 and Section 3 */}
+        <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8 w-full">
+          {/* Section 1: Introduction */}
+          <div className="w-full lg:w-1/2 text-center lg:text-left">
             <motion.h1
-              className="text-3xl md:text-5xl lg:text-6xl 2xl:text-7xl font-bold mb-6 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -61,7 +189,7 @@ export default function DesktopDownloadPage() {
             </motion.h1>
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl 3x:text-4xl text-muted-foreground mb-8 max-w-md mx-auto md:mx-0"
+              className="text-lg md:text-xl lg:text-xl xl:text-2xl text-muted-foreground mb-8 max-w-md mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -71,62 +199,115 @@ export default function DesktopDownloadPage() {
             </motion.p>
           </div>
 
-          {/* Prawa kolumna – Sekcja pobierania */}
-          <div className="w-full md:w-1/2">
-            {/* Sekcja wyboru modelu */}
+          {/* Section 3: Model selection */}
+          <div className="w-full lg:w-1/2">
             <motion.div
               className="flex flex-col items-center gap-4 mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <label className="block text-lg xl:text-2xl 2xl:text-3xl mb-2">Select a model:</label>
-              <select
-                value={selectedModel}
-                onChange={(e) => setSelectedModel(e.target.value)}
-                className="w-full max-w-xs xl:text-lg 2xl:text-2xl px-4 py-2 border border-border rounded-md bg-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >
-                {models.map((model) => (
-                  <option key={model.id} value={model.id}>
-                    {model.name}
-                  </option>
-                ))}
-              </select>
-            </motion.div>
-
-            <motion.div
-              className="flex justify-center mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <Button
-                size="lg"
-                className="xl:text-xl 2xl:text-2xl bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white flex items-center gap-2 hover:cursor-pointer"
-                onClick={() => {
-                  alert(`Downloading model: ${selectedModel}`)
-                }}
-              >
-                <Download className="h-5 w-5" />
-                Download
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <label className="block text-lg xl:text-2xl mb-2">Select a model:</label>
+              <div className="flex items-center gap-4 w-full max-w-xs">
+                <select
+                  value={selectedModel}
+                  onChange={(e) => setSelectedModel(e.target.value as 'Win' | 'Mac' | 'Linux')}
+                  className="w-full xl:text-lg px-4 py-2 border border-border rounded-md bg-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500"
+                >
+                  {models.map((model) => (
+                    <option key={model.id} value={model.id}>
+                      {model.name}
+                    </option>
+                  ))}
+                </select>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r xl:text-xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+                  onClick={() => window.open(getSelectedDownloadLink(), '_blank')}
+                  disabled={
+                    isLoading || !getSelectedDownloadLink() || getSelectedDownloadLink() === '#'
+                  }
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download
+                </Button>
+              </div>
             </motion.div>
 
             <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
             >
               <Link
                 href="/product"
-                className="text-sm xl:text-base 2xl:text-lg 3xl:text-xl text-muted-foreground hover:underline"
+                className="text-sm xl:text-base text-muted-foreground hover:underline"
               >
                 Back to option selection
               </Link>
             </motion.div>
           </div>
+        </div>
+
+        {/* Lower part: Releases table */}
+        <div className="w-full">
+          <motion.div
+            className="flex flex-col items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+          >
+            <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-semibold mb-4">
+              Available Releases
+            </h2>
+            <div className="w-full max-w-4xl">
+              {isLoading ? (
+                <p className="text-center text-muted-foreground">Loading releases...</p>
+              ) : error ? (
+                <p className="text-center text-red-500">{error}</p>
+              ) : releases.length === 0 ? (
+                <p className="text-center text-muted-foreground">No releases available.</p>
+              ) : (
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      {table.getHeaderGroups().map((headerGroup) => (
+                        <TableRow key={headerGroup.id}>
+                          {headerGroup.headers.map((header) => (
+                            <TableHead key={header.id}>
+                              {header.isPlaceholder
+                                ? null
+                                : flexRender(header.column.columnDef.header, header.getContext())}
+                            </TableHead>
+                          ))}
+                        </TableRow>
+                      ))}
+                    </TableHeader>
+                    <TableBody>
+                      {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map((row) => (
+                          <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                            {row.getVisibleCells().map((cell) => (
+                              <TableCell key={cell.id}>
+                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                              </TableCell>
+                            ))}
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <td colSpan={columns.length} className="h-24 text-center">
+                            No results.
+                          </td>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
