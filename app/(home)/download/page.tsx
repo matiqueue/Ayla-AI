@@ -174,13 +174,13 @@ export default function DesktopDownloadPage() {
       />
 
       {/* Main content */}
-      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+      <div className="container mx-auto px-10 relative z-10 flex flex-col items-center">
         {/* Upper part: Section 1 and Section 3 */}
-        <div className="flex flex-col lg:flex-row justify-between gap-8 mb-8 w-full">
+        <div className="flex flex-col lg:flex-row justify-between gap-8 mb-2 w-full">
           {/* Section 1: Introduction */}
           <div className="w-full lg:w-1/2 text-center lg:text-left">
             <motion.h1
-              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
+              className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -189,7 +189,7 @@ export default function DesktopDownloadPage() {
             </motion.h1>
 
             <motion.p
-              className="text-lg md:text-xl lg:text-xl xl:text-2xl text-muted-foreground mb-8 max-w-md mx-auto lg:mx-0"
+              className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground mb-3 max-w-md mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -207,7 +207,7 @@ export default function DesktopDownloadPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <label className="block text-lg xl:text-2xl mb-2">Select a model:</label>
+              <label className="block text-lg xl:text-2xl 2xl:text-3xl mb-2">Select a model:</label>
               <div className="flex items-center gap-4 w-full max-w-xs">
                 <select
                   value={selectedModel}
@@ -251,7 +251,7 @@ export default function DesktopDownloadPage() {
         </div>
 
         {/* Lower part: Releases table */}
-        <div className="w-full">
+        <div className="w-full  ">
           <motion.div
             className="flex flex-col items-center gap-4"
             initial={{ opacity: 0, y: 20 }}
