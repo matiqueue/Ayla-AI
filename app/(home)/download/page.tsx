@@ -61,7 +61,7 @@ export default function DesktopDownloadPage() {
             </motion.h1>
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl 3xl:text-3xl text-muted-foreground mb-8 max-w-md mx-auto md:mx-0"
+              className="text-lg md:text-xl lg:text-2xl 2xl:text-3xl 3x:text-4xl text-muted-foreground mb-8 max-w-md mx-auto md:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -80,11 +80,11 @@ export default function DesktopDownloadPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <label className="block text-lg mb-2">Select a model:</label>
+              <label className="block text-lg xl:text-2xl 2xl:text-3xl mb-2">Select a model:</label>
               <select
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
-                className="w-full max-w-xs px-4 py-2 border border-border rounded-md bg-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full max-w-xs xl:text-lg 2xl:text-2xl px-4 py-2 border border-border rounded-md bg-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 {models.map((model) => (
                   <option key={model.id} value={model.id}>
@@ -102,7 +102,7 @@ export default function DesktopDownloadPage() {
             >
               <Button
                 size="lg"
-                className="2xl:text-xl bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white flex items-center gap-2 hover:cursor-pointer"
+                className="xl:text-xl 2xl:text-2xl bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white flex items-center gap-2 hover:cursor-pointer"
                 onClick={() => {
                   alert(`Downloading model: ${selectedModel}`)
                 }}
@@ -119,7 +119,10 @@ export default function DesktopDownloadPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1 }}
             >
-              <Link href="/chat" className="text-sm text-muted-foreground hover:underline">
+              <Link
+                href="/product"
+                className="text-sm xl:text-base 2xl:text-lg 3xl:text-xl text-muted-foreground hover:underline"
+              >
                 Back to option selection
               </Link>
             </motion.div>

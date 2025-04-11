@@ -47,7 +47,7 @@ const menuItems: MenuItem[] = [
   {
     icon: <MessageSquare className="h-5 w-5" />,
     label: 'Chat',
-    href: '/chat',
+    href: '/product',
     gradient:
       'radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(5,150,105,0.06) 50%, rgba(4,120,87,0) 100%)',
     iconColor: 'text-emerald-500',
