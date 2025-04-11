@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/table'
 
 export default function DesktopDownloadPage() {
-  const [selectedModel, setSelectedModel] = useState<'Win' | 'Mac' | 'Linux'>('Win') // Default to 'Win'
+  const [selectedModel, setSelectedModel] = useState<'Win' | 'Mac' | 'Linux'>('Win')
   const [releases, setReleases] = useState<
     {
       version: string
@@ -24,7 +24,7 @@ export default function DesktopDownloadPage() {
       downloadLinks: { Win?: string; Mac?: string; Linux?: string }
       notes: string
     }[]
-  >([]) // Updated to store platform-specific download links
+  >([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -34,13 +34,12 @@ export default function DesktopDownloadPage() {
     { id: 'Linux', name: 'Linux' },
   ]
 
-  // Updated columns to use platform-specific download link based on selectedModel
   const columns = [
     {
       accessorKey: 'version',
       header: 'Version',
-      cell: ({ row }: { row: { getValue: (key: string) => string } }) => (
-        <div className="font-medium">{row.getValue('version')}</div>
+      cell: ({ row }: { row: { getValue: (key: string) => string; index: number } }) => (
+        <div className={`font-medium `}>{row.getValue('version')}</div>
       ),
     },
     {
@@ -83,7 +82,6 @@ export default function DesktopDownloadPage() {
     },
   ]
 
-  // Fetch releases from GitHub API
   useEffect(() => {
     interface Release {
       tag_name: string
@@ -100,7 +98,6 @@ export default function DesktopDownloadPage() {
           throw new Error(`HTTP error: ${response.status}`)
         }
         const data: Release[] = await response.json()
-        // Process data to extract platform-specific download links
         const formattedReleases = data
           .map((release: Release) => {
             const downloadLinks: { Win?: string; Mac?: string; Linux?: string } = {}
@@ -125,7 +122,7 @@ export default function DesktopDownloadPage() {
               notes: release.body || 'No release notes available.',
             }
           })
-          .slice(0, 3) // Limit to 3 latest releases
+          .slice(0, 3)
         setReleases(formattedReleases)
       } catch (err) {
         console.error(err)
@@ -138,14 +135,12 @@ export default function DesktopDownloadPage() {
     fetchReleases()
   }, [])
 
-  // Initialize DataTable
   const table = useReactTable({
     data: releases,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
 
-  // Get the download link for the selected model from the latest release
   const getSelectedDownloadLink = () => {
     if (releases.length > 0) {
       return releases[0].downloadLinks[selectedModel as 'Win' | 'Mac' | 'Linux'] || '#'
@@ -158,10 +153,7 @@ export default function DesktopDownloadPage() {
       id="desktop-download-section"
       className="relative flex items-center justify-center min-h-screen p-10"
     >
-      {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black/5 dark:to-black/5 pointer-events-none" />
-
-      {/* Floating background shapes */}
       <motion.div
         className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-purple-500/10 dark:bg-gray-600/20 blur-3xl"
         animate={{ x: [0, 30, 0], y: [0, -30, 0] }}
@@ -173,11 +165,8 @@ export default function DesktopDownloadPage() {
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
       />
 
-      {/* Main content */}
       <div className="container mx-auto px-10 relative z-10 flex flex-col items-center">
-        {/* Upper part: Section 1 and Section 3 */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 mb-2 w-full">
-          {/* Section 1: Introduction */}
           <div className="w-full lg:w-1/2 text-center lg:text-left">
             <motion.h1
               className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 leading-[1.05] overflow-visible bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent"
@@ -187,9 +176,8 @@ export default function DesktopDownloadPage() {
             >
               Download the Desktop Version
             </motion.h1>
-
             <motion.p
-              className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground mb-3 max-w-md mx-auto lg:mx-0"
+              className="text-sm md:text-base xl:text-lg text-muted-foreground mb-3 max-w-md mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -198,8 +186,6 @@ export default function DesktopDownloadPage() {
               or a powerful AI engine, we’ve got you covered.
             </motion.p>
           </div>
-
-          {/* Section 3: Model selection */}
           <div className="w-full lg:w-1/2">
             <motion.div
               className="flex flex-col items-center gap-4 mb-8"
@@ -207,7 +193,9 @@ export default function DesktopDownloadPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <label className="block text-lg xl:text-2xl 2xl:text-3xl mb-2">Select a model:</label>
+              <label className="block text-xl xl:text-3xl 2xl:text-4xl font-bold mb-2">
+                Select a model:
+              </label>
               <div className="flex items-center gap-4 w-full max-w-xs">
                 <select
                   value={selectedModel}
@@ -233,7 +221,6 @@ export default function DesktopDownloadPage() {
                 </Button>
               </div>
             </motion.div>
-
             <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, y: 20 }}
@@ -249,19 +236,12 @@ export default function DesktopDownloadPage() {
             </motion.div>
           </div>
         </div>
-
-        {/* Lower part: Releases table */}
-        <div className="w-full  ">
-          <motion.div
-            className="flex flex-col items-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-          >
+        <div className="w-full">
+          <motion.div className="flex flex-col items-center gap-4">
             <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-semibold mb-4">
               Available Releases
             </h2>
-            <div className="w-full max-w-4xl">
+            <div className="w-full">
               {isLoading ? (
                 <p className="text-center text-muted-foreground">Loading releases...</p>
               ) : error ? (
@@ -275,7 +255,7 @@ export default function DesktopDownloadPage() {
                       {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                           {headerGroup.headers.map((header) => (
-                            <TableHead key={header.id}>
+                            <TableHead key={header.id} className="font-bold">
                               {header.isPlaceholder
                                 ? null
                                 : flexRender(header.column.columnDef.header, header.getContext())}
