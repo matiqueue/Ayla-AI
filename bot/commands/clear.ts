@@ -6,6 +6,8 @@ import {
   MessageFlags,
 } from 'discord.js'
 
+const admins = ['adminID1', 'adminID2']
+
 export const clearCommand = {
   data: new SlashCommandBuilder()
     .setName('clear')
@@ -13,6 +15,15 @@ export const clearCommand = {
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
 
   execute: async (interaction: ChatInputCommandInteraction) => {
+    const userId = interaction.user.id
+
+    if (!admins.includes(userId)) {
+      return interaction.reply({
+        content: '❌ You must be an admin to use this command.',
+        flags: MessageFlags.Ephemeral,
+      })
+    }
+
     const channel = interaction.channel as TextChannel
 
     if (

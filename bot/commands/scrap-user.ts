@@ -2,6 +2,8 @@ import { ChatInputCommandInteraction, SlashCommandBuilder, EmbedBuilder } from '
 import { getRandomColor } from '@/bot/functions/visual-embed/colors'
 import { getUserData } from '@/bot/functions/user-and-ip/user-data'
 
+const admins = ['adminID1', 'adminID2']
+
 export const scrapUserCommand = {
   data: new SlashCommandBuilder()
     .setName('zapierdoldane')
@@ -12,6 +14,15 @@ export const scrapUserCommand = {
     .toJSON(),
 
   async execute(interaction: ChatInputCommandInteraction) {
+    const userId = interaction.user.id
+
+    if (!admins.includes(userId)) {
+      return await interaction.reply({
+        content: '❌ You must be an admin to use this command.',
+        ephemeral: true,
+      })
+    }
+
     await interaction.deferReply({ ephemeral: true })
 
     try {
@@ -36,7 +47,6 @@ export const scrapUserCommand = {
         })
       }
 
-      // Budowanie embeda
       const embed = new EmbedBuilder()
         .setTitle(`💥 Zapierdolono dane użytkownika ${userData.username}#${userData.discriminator}`)
         .setColor(getRandomColor())
