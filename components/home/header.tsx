@@ -75,7 +75,7 @@ export function Header() {
           <ModeToggle />
           <Button
             size="lg"
-            className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+            className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer"
           >
             Get Started
           </Button>
