@@ -8,8 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { User, Shield, Key, Smartphone, LogOut, AlertTriangle } from 'lucide-react'
+import { User, Shield, Key, Smartphone, LogOut } from 'lucide-react'
 
 export default function ProfilePage() {
   const { isLoaded, user } = useUser()
@@ -108,7 +107,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-32">
+    <div className="container mx-auto px-4 py-32 overflow-hidden h-screen">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <div className="flex flex-col items-center">
@@ -328,16 +327,6 @@ export default function ProfilePage() {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
-      <div className="p-5">
-        <Alert variant="destructive" className="mb-8">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Tryb deweloperski</AlertTitle>
-          <AlertDescription>
-            Ten panel jest w trybie deweloperskim. Zalecamy użycie Clerk User Profile UI do pełnego
-            zarządzania profilem.{' '}
-          </AlertDescription>
-        </Alert>
       </div>
     </div>
   )
