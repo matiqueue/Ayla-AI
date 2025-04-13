@@ -1,3 +1,6 @@
+'use client'
+
+import { useUser, useClerk } from '@clerk/nextjs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -5,31 +8,35 @@ import { Button } from '@/components/ui/button'
 import { User, Settings, Clock, Shield } from 'lucide-react'
 
 export default function ProfilePage() {
+  const { isLoaded, user } = useUser()
+  const { openUserProfile } = useClerk()
+
+  if (!isLoaded || !user) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="container mx-auto px-4 py-32">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <div className="flex flex-col items-center">
             <Avatar className="h-24 w-24 mb-4">
-              <AvatarImage src="/placeholder.svg?height=96&width=96" />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarImage src={user.imageUrl} />
+              <AvatarFallback>
+                {user.firstName?.[0]}
+                {user.lastName?.[0]}
+              </AvatarFallback>
             </Avatar>
-            <Button variant="outline" size="sm">
-              Change Avatar
-            </Button>
           </div>
 
           <div className="flex-1">
-            <h1 className="text-3xl font-bold mb-2">John Doe</h1>
-            <p className="text-muted-foreground mb-4">john.doe@example.com</p>
-            <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm">
-                Edit Profile
-              </Button>
-              <Button variant="outline" size="sm">
-                Change Password
-              </Button>
-            </div>
+            <h1 className="text-3xl font-bold mb-2">
+              {user.firstName} {user.lastName}
+            </h1>
+            <p className="text-muted-foreground mb-4">{user.emailAddresses[0].emailAddress}</p>
+            <Button variant="outline" size="sm" onClick={() => openUserProfile()}>
+              Edit Profile
+            </Button>
           </div>
         </div>
 
@@ -54,11 +61,13 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   <div>
                     <h3 className="font-medium mb-1">Full Name</h3>
-                    <p className="text-muted-foreground">John Doe</p>
+                    <p className="text-muted-foreground">
+                      {user.firstName} {user.lastName}
+                    </p>
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Email</h3>
-                    <p className="text-muted-foreground">john.doe@example.com</p>
+                    <p className="text-muted-foreground">{user.emailAddresses[0].emailAddress}</p>
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Account Type</h3>
@@ -66,7 +75,9 @@ export default function ProfilePage() {
                   </div>
                   <div>
                     <h3 className="font-medium mb-1">Member Since</h3>
-                    <p className="text-muted-foreground">January 15, 2023</p>
+                    <p className="text-muted-foreground">
+                      {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
+                    </p>
                   </div>
                 </div>
               </CardContent>

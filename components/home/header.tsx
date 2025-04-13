@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { ModeToggle } from '../mode-toggle'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -73,12 +74,26 @@ export function Header() {
 
         <div className="flex items-center gap-4 ">
           <ModeToggle />
-          <Button
-            size="lg"
-            className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer"
-          >
-            Get Started
-          </Button>
+          <SignedOut>
+            <Link href="/sign-in">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer"
+              >
+                Login
+              </Button>
+            </Link>
+          </SignedOut>
+          <SignedIn>
+            <Link href="/buy-license">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r 2xl:text-2xl from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-900 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer"
+              >
+                Buy License
+              </Button>
+            </Link>
+          </SignedIn>
         </div>
       </div>
     </header>
