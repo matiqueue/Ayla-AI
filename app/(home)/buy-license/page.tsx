@@ -172,15 +172,15 @@ export default function BuyLicensePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <Badge className="mb-4 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-700 dark:text-cyan-300 border-none px-3 py-1 text-sm">
+                  <Badge className="mb-4 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-700 dark:text-cyan-300 border-none px-3 py-1 text-sm cursor-text">
                     Unlock the Power of AI
                   </Badge>
 
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200 cursor-text">
                     Choose Your Perfect License
                   </h1>
 
-                  <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto">
+                  <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto cursor-text">
                     Get access to cutting-edge AI technology with a license plan that fits your
                     needs. Scale as you grow with flexible options for individuals and enterprises.
                   </p>
@@ -188,11 +188,17 @@ export default function BuyLicensePage() {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white cursor-pointer"
+                      onClick={() => {
+                        const pricingSection = document.querySelector(
+                          '.snap-section:nth-of-type(2)'
+                        )
+                        pricingSection?.scrollIntoView({ behavior: 'smooth' })
+                      }}
                     >
                       View Pricing Plans
                     </Button>
-                    <Button size="lg" variant="outline">
+                    <Button size="lg" variant="outline" className="cursor-pointer">
                       Book a Demo
                     </Button>
                   </div>
@@ -300,8 +306,8 @@ export default function BuyLicensePage() {
                             <Button
                               className={`w-full ${
                                 plan.name === 'Pro'
-                                  ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white'
-                                  : ''
+                                  ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer'
+                                  : 'hover:cursor-pointer'
                               }`}
                               variant={plan.buttonVariant as never}
                               size="lg"
@@ -326,7 +332,7 @@ export default function BuyLicensePage() {
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center mb-12">
                 <motion.h2
-                  className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
+                  className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200 hover:cursor-text"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
@@ -336,7 +342,7 @@ export default function BuyLicensePage() {
                 </motion.h2>
 
                 <motion.p
-                  className="text-lg text-foreground/80 mb-6 max-w-2xl mx-auto"
+                  className="text-lg text-foreground/80 mb-6 max-w-2xl mx-auto hover:cursor-text"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
@@ -401,8 +407,10 @@ export default function BuyLicensePage() {
                     className="bg-card/80 backdrop-blur-sm border border-border/40 rounded-lg p-6 shadow-lg dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:shadow-xl dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)] transition-shadow"
                   >
                     <div className="mb-4">{feature.icon}</div>
-                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-xl font-semibold mb-2 hover:cursor-text">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground hover:cursor-text">{feature.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -411,14 +419,12 @@ export default function BuyLicensePage() {
         </section>
 
         {/* FAQ Section */}
-        {/* <section className="snap-section h-screen">
-        <div className="min-h-screen flex items-center py-10 md:py-0 relative"> */}
         <section className="snap-section h-screen relative">
           <div className="min-h-screen flex items-center py-10 md:py-0 relative bg-gradient-to-b from-background via-muted/30 to-background/80">
             <div className="container mx-auto px-4 relative z-10 flex items-center justify-center h-full">
               <div className="max-w-3xl mx-auto w-full">
                 <motion.h2
-                  className="text-3xl md:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
+                  className="text-3xl md:text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200 hover:cursor-text"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
@@ -455,12 +461,12 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-muted-foreground mb-4 hover:cursor-text">
                     Still have questions? We&apos;re here to help.
                   </p>
                   <Button
                     variant="outline"
-                    className="border-purple-500/50 text-purple-600 dark:text-purple-400 hover:bg-purple-500/10"
+                    className="border-purple-500/50 text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 cursor-pointer"
                   >
                     Contact Support
                   </Button>
@@ -492,7 +498,7 @@ export default function BuyLicensePage() {
               <div className="max-w-4xl mx-auto bg-card/80 backdrop-blur-sm border border-border/40 rounded-xl p-8 md:p-12 shadow-xl">
                 <div className="text-center">
                   <motion.h2
-                    className="text-2xl md:text-3xl font-bold mb-4"
+                    className="text-2xl md:text-3xl font-bold mb-4 hover:cursor-text"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -502,7 +508,7 @@ export default function BuyLicensePage() {
                   </motion.h2>
 
                   <motion.p
-                    className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
+                    className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto hover:cursor-text"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
@@ -521,11 +527,17 @@ export default function BuyLicensePage() {
                   >
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
+                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white cursor-pointer"
+                      onClick={() => {
+                        const pricingSection = document.querySelector(
+                          '.snap-section:nth-of-type(2)'
+                        )
+                        pricingSection?.scrollIntoView({ behavior: 'smooth' })
+                      }}
                     >
                       Buy License Now
                     </Button>
-                    <Button size="lg" variant="outline">
+                    <Button size="lg" variant="outline" className="cursor-pointer">
                       Schedule a Demo
                     </Button>
                   </motion.div>
