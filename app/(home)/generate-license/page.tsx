@@ -9,13 +9,8 @@ export default function GenerateLicensePage() {
   const period = searchParams.get('period')
   const { user, isLoaded } = useUser()
 
-  interface License {
-    id: string
-    expiresAt: string
-  }
-
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'exists'>('idle')
-  const [license, setLicense] = useState<License | null>(null)
+  const [license, setLicense] = useState<{ id: string; expiresAt: string } | null>(null)
 
   const handleGenerate = async () => {
     if (!isLoaded || !user || !period) return
