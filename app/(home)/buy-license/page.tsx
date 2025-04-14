@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useState, useEffect, useRef } from 'react'
 import { SectionNavigator } from '@/components/home/section-navigator'
+import Link from 'next/link'
 
 export default function BuyLicensePage() {
   const [, setCurrentSection] = useState(0)
@@ -48,81 +49,77 @@ export default function BuyLicensePage() {
 
   const pricingPlans = [
     {
-      name: 'Basic',
-      price: '$29',
-      period: '/month',
-      description: 'Perfect for individuals and small projects',
+      name: 'Tydzień',
+      price: '0 PLN',
+      period: '/tydzień',
+      description: 'Wypróbuj za darmo przez tydzień',
       features: [
-        'Access to core AI features',
-        'Up to 100 queries per day',
-        'Standard response time',
-        'Email support',
-        '1 project',
+        'Pełny dostęp do funkcji AI',
+        'Limit 50 zapytań dziennie',
+        'Podstawowe wsparcie email',
       ],
-      buttonText: 'Get Started',
+      buttonText: 'Zacznij za darmo',
       buttonVariant: 'outline',
+      periodValue: 'week',
     },
     {
-      name: 'Pro',
-      price: '$79',
-      period: '/month',
-      description: 'Ideal for professionals and growing teams',
+      name: 'Miesiąc',
+      price: '49 PLN',
+      period: '/miesiąc',
+      description: 'Idealny dla regularnych użytkowników',
       features: [
-        'All Basic features',
-        'Up to 1,000 queries per day',
-        'Priority response time',
-        '24/7 priority support',
-        '5 projects',
-        'Advanced analytics',
+        'Pełny dostęp do funkcji AI',
+        'Limit 500 zapytań dziennie',
+        'Priorytetowe wsparcie',
+        'Podstawowa analityka',
       ],
-      buttonText: 'Get Pro',
+      buttonText: 'Kup teraz',
       buttonVariant: 'default',
-      badge: 'Most Popular',
+      badge: 'Najpopularniejszy',
+      periodValue: 'month',
     },
     {
-      name: 'Enterprise',
-      price: '$199',
-      period: '/month',
-      description: 'For organizations with advanced needs',
+      name: 'Rok',
+      price: '499 PLN',
+      period: '/rok',
+      description: 'Najlepsza wartość dla zaawansowanych',
       features: [
-        'All Pro features',
-        'Unlimited queries',
-        'Fastest response time',
-        'Dedicated account manager',
-        'Unlimited projects',
-        'Custom integrations',
-        'SLA guarantee',
+        'Pełny dostęp do funkcji AI',
+        'Bez limitu zapytań',
+        'Dedykowane wsparcie 24/7',
+        'Zaawansowana analityka',
+        'Wczesny dostęp do nowych funkcji',
       ],
-      buttonText: 'Contact Sales',
+      buttonText: 'Kup teraz',
       buttonVariant: 'outline',
+      periodValue: 'year',
     },
   ]
 
   const faqs = [
     {
-      question: 'What types of licenses do you offer?',
+      question: 'Jakie rodzaje licencji oferujecie?',
       answer:
-        'We offer three main license tiers: Basic, Pro, and Enterprise. Each is designed to meet different needs and scales with your requirements. All licenses include core AI functionality with varying levels of usage limits and support.',
+        'Oferujemy trzy plany: darmowy na tydzień, miesięczny i roczny. Każdy plan jest dostosowany do różnych potrzeb użytkowników.',
     },
     {
-      question: 'Can I upgrade my license later?',
+      question: 'Czy mogę zmienić licencję później?',
       answer:
-        "Yes, you can upgrade your license at any time. When you upgrade, we'll prorate the remaining time on your current license and apply it to your new plan.",
+        'Tak, możesz zmienić licencję w dowolnym momencie. Skontaktuj się z nami, aby dostosować plan.',
     },
     {
-      question: 'Do you offer refunds?',
+      question: 'Czy oferujecie zwrot pieniędzy?',
       answer:
-        "We offer a 14-day money-back guarantee for all new purchases. If you're not satisfied with our product, contact our support team within 14 days of purchase for a full refund.",
+        'Tak, oferujemy 14-dniową gwarancję zwrotu pieniędzy dla planów miesięcznych i rocznych.',
     },
     {
-      question: 'Is there a free trial available?',
-      answer:
-        'Yes, we offer a 7-day free trial for our Basic and Pro plans. No credit card is required to start your trial.',
+      question: 'Czy darmowy plan wymaga karty płatniczej?',
+      answer: 'Nie, plan tygodniowy jest całkowicie darmowy i nie wymaga podania danych płatności.',
     },
     {
-      question: 'What payment methods do you accept?',
+      question: 'Jakie metody płatności są akceptowane?',
       answer:
-        'We accept all major credit cards, PayPal, and bank transfers for Enterprise customers. All payments are processed securely through our payment providers.',
+        'Akceptujemy karty kredytowe, debetowe oraz PayPal. Wszystkie płatności są bezpieczne.',
     },
   ]
 
@@ -173,16 +170,16 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.6 }}
                 >
                   <Badge className="mb-4 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-700 dark:text-cyan-300 border-none px-3 py-1 text-sm cursor-text">
-                    Unlock the Power of AI
+                    Odblokuj Moc AI
                   </Badge>
 
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200 cursor-text">
-                    Choose Your Perfect License
+                    Wybierz Swoją Licencję
                   </h1>
 
                   <p className="text-lg md:text-xl text-foreground/80 mb-8 max-w-2xl mx-auto cursor-text">
-                    Get access to cutting-edge AI technology with a license plan that fits your
-                    needs. Scale as you grow with flexible options for individuals and enterprises.
+                    Uzyskaj dostęp do nowoczesnej technologii AI z planem licencji dopasowanym do
+                    Twoich potrzeb.
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -196,10 +193,10 @@ export default function BuyLicensePage() {
                         pricingSection?.scrollIntoView({ behavior: 'smooth' })
                       }}
                     >
-                      View Pricing Plans
+                      Zobacz Plany
                     </Button>
                     <Button size="lg" variant="outline" className="cursor-pointer">
-                      Book a Demo
+                      Umów Demo
                     </Button>
                   </div>
                 </motion.div>
@@ -248,7 +245,7 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  Ready to Experience the Power of AI?
+                  Wybierz Swój Plan
                 </motion.h2>
 
                 <motion.p
@@ -258,7 +255,7 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  Choose the plan that&apos;s right for you and start your journey today.
+                  Znajdź plan idealny dla Ciebie i zacznij korzystać z AI już dziś.
                 </motion.p>
               </div>
 
@@ -286,11 +283,9 @@ export default function BuyLicensePage() {
                             <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
                             <div className="flex items-baseline mb-2">
                               <span className="text-3xl font-bold">{plan.price}</span>
-                              {plan.period && (
-                                <span className="text-muted-foreground ml-1 text-sm">
-                                  {plan.period}
-                                </span>
-                              )}
+                              <span className="text-muted-foreground ml-1 text-sm">
+                                {plan.period}
+                              </span>
                             </div>
                             <p className="text-muted-foreground mb-4 text-sm">{plan.description}</p>
                             <ul className="space-y-3 mb-6 text-sm">
@@ -303,17 +298,19 @@ export default function BuyLicensePage() {
                             </ul>
                           </div>
                           <div className="mt-auto pt-4">
-                            <Button
-                              className={`w-full ${
-                                plan.name === 'Pro'
-                                  ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer'
-                                  : 'hover:cursor-pointer'
-                              }`}
-                              variant={plan.buttonVariant as never}
-                              size="lg"
-                            >
-                              {plan.buttonText}
-                            </Button>
+                            <Link href={`/generate-license?period=${plan.periodValue}`}>
+                              <Button
+                                className={`w-full ${
+                                  plan.name === 'Miesiąc'
+                                    ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white'
+                                    : ''
+                                }`}
+                                variant={plan.buttonVariant as 'link'}
+                                size="lg"
+                              >
+                                {plan.buttonText}
+                              </Button>
+                            </Link>
                           </div>
                         </CardContent>
                       </Card>
@@ -327,7 +324,6 @@ export default function BuyLicensePage() {
 
         {/* Features Section */}
         <section className="min-h-screen w-full relative py-8 md:py-12 flex items-center snap-section h-screen">
-          {/* Background with controlled overflow */}
           <div className="py-20 relative h-screen w-screen inset-0 bg-gradient-to-b from-background via-muted/30 to-background/80 pointer-events-none overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center mb-12">
@@ -338,7 +334,7 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  Everything You Need in One License
+                  Wszystko w Jednej Licencji
                 </motion.h2>
 
                 <motion.p
@@ -348,8 +344,7 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  Our licenses include comprehensive features designed to maximize your AI
-                  experience
+                  Nasze licencje oferują kompleksowe funkcje dla maksymalnego doświadczenia z AI.
                 </motion.p>
               </div>
 
@@ -359,43 +354,39 @@ export default function BuyLicensePage() {
                     icon: (
                       <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
                     ),
-                    title: 'Flexible Usage',
+                    title: 'Elastyczność',
                     description:
-                      'Scale your usage up or down based on your needs with our flexible licensing options.',
+                      'Dostosuj użytkowanie do swoich potrzeb dzięki elastycznym planom.',
                   },
                   {
                     icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
-                    title: 'Regular Updates',
-                    description:
-                      'Get access to the latest features and improvements with regular updates included in your license.',
+                    title: 'Aktualizacje',
+                    description: 'Dostęp do nowych funkcji i ulepszeń w ramach każdej licencji.',
                   },
                   {
                     icon: (
                       <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
                     ),
-                    title: 'Premium Support',
-                    description:
-                      'Our dedicated support team is ready to help you with any questions or issues.',
+                    title: 'Wsparcie',
+                    description: 'Dedykowany zespół wsparcia dostępny dla wszystkich użytkowników.',
                   },
                   {
                     icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
-                    title: 'Advanced Security',
-                    description:
-                      'Enterprise-grade security features to keep your data safe and secure.',
+                    title: 'Bezpieczeństwo',
+                    description: 'Zaawansowane funkcje bezpieczeństwa chroniące Twoje dane.',
                   },
                   {
                     icon: (
                       <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
                     ),
-                    title: 'API Access',
-                    description:
-                      'Integrate our AI capabilities into your own applications with our comprehensive API.',
+                    title: 'API',
+                    description: 'Integracja z Twoimi aplikacjami dzięki naszemu API.',
                   },
                   {
                     icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
-                    title: 'Custom Solutions',
+                    title: 'Niestandardowe Rozwiązania',
                     description:
-                      'Need something specific? Our Enterprise license includes custom solution development.',
+                      'Roczne plany obejmują możliwość tworzenia dedykowanych rozwiązań.',
                   },
                 ].map((feature, index) => (
                   <motion.div
@@ -430,7 +421,7 @@ export default function BuyLicensePage() {
                   transition={{ duration: 0.5 }}
                   viewport={{ once: true, margin: '-100px' }}
                 >
-                  Frequently Asked Questions
+                  Najczęściej Zadawane Pytania
                 </motion.h2>
 
                 <Accordion type="single" collapsible className="w-full">
@@ -462,13 +453,13 @@ export default function BuyLicensePage() {
                   viewport={{ once: true, margin: '-100px' }}
                 >
                   <p className="text-muted-foreground mb-4 hover:cursor-text">
-                    Still have questions? We&apos;re here to help.
+                    Masz więcej pytań? Jesteśmy tu, by pomóc.
                   </p>
                   <Button
                     variant="outline"
                     className="border-purple-500/50 text-purple-600 dark:text-purple-400 hover:bg-purple-500/10 cursor-pointer"
                   >
-                    Contact Support
+                    Skontaktuj się z nami
                   </Button>
                 </motion.div>
               </div>
@@ -504,7 +495,7 @@ export default function BuyLicensePage() {
                     transition={{ duration: 0.5 }}
                     viewport={{ once: true, margin: '-100px' }}
                   >
-                    Ready to Get Started?
+                    Gotowy, by Zacząć?
                   </motion.h2>
 
                   <motion.p
@@ -514,8 +505,8 @@ export default function BuyLicensePage() {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     viewport={{ once: true, margin: '-100px' }}
                   >
-                    Join thousands of satisfied customers who have transformed their workflow with
-                    our AI solutions.
+                    Dołącz do tysięcy zadowolonych użytkowników, którzy zmienili swoje procesy
+                    dzięki naszym rozwiązaniom AI.
                   </motion.p>
 
                   <motion.div
@@ -535,10 +526,10 @@ export default function BuyLicensePage() {
                         pricingSection?.scrollIntoView({ behavior: 'smooth' })
                       }}
                     >
-                      Buy License Now
+                      Kup Licencję
                     </Button>
                     <Button size="lg" variant="outline" className="cursor-pointer">
-                      Schedule a Demo
+                      Umów Demo
                     </Button>
                   </motion.div>
                 </div>
