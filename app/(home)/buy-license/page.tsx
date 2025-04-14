@@ -12,13 +12,13 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useState, useEffect, useRef } from 'react'
-import { SectionNavigator } from '@/components/home/section-navigator' // Zakładam, że masz ten komponent
+import { SectionNavigator } from '@/components/home/section-navigator'
 
 export default function BuyLicensePage() {
   const [, setCurrentSection] = useState(0)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  const sections = ['Hero', 'Pricing', 'Features', 'FAQ', 'CTA', 'Footer']
+  const sections = ['Hero', 'Pricing', 'Features', 'FAQ', 'CTA']
 
   useEffect(() => {
     const handleScroll = () => {
@@ -176,7 +176,7 @@ export default function BuyLicensePage() {
                     Unlock the Power of AI
                   </Badge>
 
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200">
                     Choose Your Perfect License
                   </h1>
 
@@ -188,7 +188,7 @@ export default function BuyLicensePage() {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white"
+                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
                     >
                       View Pricing Plans
                     </Button>
@@ -267,7 +267,7 @@ export default function BuyLicensePage() {
                       viewport={{ once: true, margin: '-100px' }}
                       className="flex"
                     >
-                      <Card className="h-full w-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden flex flex-col">
+                      <Card className="h-full w-full border border-border/40 bg-card/90 backdrop-blur-xs dark:bg-card/80 shadow-lg dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:shadow-xl dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)] transition-shadow relative overflow-hidden flex flex-col">
                         {plan.badge && (
                           <div className="absolute top-0 right-0">
                             <Badge className="m-2 bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-600 dark:to-gray-400 text-white font-medium px-2 py-0.5 text-xs">
@@ -290,7 +290,7 @@ export default function BuyLicensePage() {
                             <ul className="space-y-3 mb-6 text-sm">
                               {plan.features.map((feature) => (
                                 <li key={feature} className="flex items-start">
-                                  <Check className="h-4 w-4 text-green-500 dark:text-green-400 mr-2 shrink-0 mt-0.5" />
+                                  <Check className="h-4 w-4 text-green-500 dark:text-gray-400 mr-2 shrink-0 mt-0.5" />
                                   <span className="text-foreground">{feature}</span>
                                 </li>
                               ))}
@@ -320,10 +320,9 @@ export default function BuyLicensePage() {
         </section>
 
         {/* Features Section */}
-        <section className="snap-section h-screen">
-          <div className="py-20 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-cyan-500/5 dark:from-gray-800/10 dark:to-gray-700/10 pointer-events-none" />
-
+        <section className="min-h-screen w-full relative py-8 md:py-12 flex items-center snap-section h-screen">
+          {/* Background with controlled overflow */}
+          <div className="py-20 relative h-screen w-screen inset-0 bg-gradient-to-b from-background via-muted/30 to-background/80 pointer-events-none overflow-hidden">
             <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center mb-12">
                 <motion.h2
@@ -351,37 +350,43 @@ export default function BuyLicensePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 {[
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-purple-500" />,
+                    icon: (
+                      <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
+                    ),
                     title: 'Flexible Usage',
                     description:
                       'Scale your usage up or down based on your needs with our flexible licensing options.',
                   },
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-cyan-500" />,
+                    icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
                     title: 'Regular Updates',
                     description:
                       'Get access to the latest features and improvements with regular updates included in your license.',
                   },
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-purple-500" />,
+                    icon: (
+                      <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
+                    ),
                     title: 'Premium Support',
                     description:
                       'Our dedicated support team is ready to help you with any questions or issues.',
                   },
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-cyan-500" />,
+                    icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
                     title: 'Advanced Security',
                     description:
                       'Enterprise-grade security features to keep your data safe and secure.',
                   },
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-purple-500" />,
+                    icon: (
+                      <CheckCircle className="h-10 w-10 text-purple-500 dark:text-purple-300" />
+                    ),
                     title: 'API Access',
                     description:
                       'Integrate our AI capabilities into your own applications with our comprehensive API.',
                   },
                   {
-                    icon: <CheckCircle className="h-10 w-10 text-cyan-500" />,
+                    icon: <CheckCircle className="h-10 w-10 text-cyan-500 dark:text-cyan-300" />,
                     title: 'Custom Solutions',
                     description:
                       'Need something specific? Our Enterprise license includes custom solution development.',
@@ -393,7 +398,7 @@ export default function BuyLicensePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    className="bg-card/80 backdrop-blur-sm border border-border/40 rounded-lg p-6 shadow-lg"
+                    className="bg-card/80 backdrop-blur-sm border border-border/40 rounded-lg p-6 shadow-lg dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:shadow-xl dark:hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)] transition-shadow"
                   >
                     <div className="mb-4">{feature.icon}</div>
                     <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -406,10 +411,10 @@ export default function BuyLicensePage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="snap-section h-screen">
-          <div className="min-h-screen flex items-center py-10 md:py-0 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 dark:from-gray-800/15 dark:to-gray-700/15 pointer-events-none" />
-
+        {/* <section className="snap-section h-screen">
+        <div className="min-h-screen flex items-center py-10 md:py-0 relative"> */}
+        <section className="snap-section h-screen relative">
+          <div className="min-h-screen flex items-center py-10 md:py-0 relative bg-gradient-to-b from-background via-muted/30 to-background/80">
             <div className="container mx-auto px-4 relative z-10 flex items-center justify-center h-full">
               <div className="max-w-3xl mx-auto w-full">
                 <motion.h2
@@ -468,7 +473,7 @@ export default function BuyLicensePage() {
         {/* CTA Section */}
         <section className="snap-section h-screen">
           <div className="min-h-screen flex items-center py-10 md:py-0 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-cyan-600/20 dark:from-gray-800/30 dark:to-gray-700/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 dark:from-gray-800/20 dark:to-gray-700/20 pointer-events-none" />
 
             <motion.div
               className="absolute top-10 right-[20%] w-64 h-64 rounded-full bg-purple-500/20 dark:bg-gray-700/30 blur-3xl"
@@ -516,7 +521,7 @@ export default function BuyLicensePage() {
                   >
                     <Button
                       size="lg"
-                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 text-white"
+                      className="bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white"
                     >
                       Buy License Now
                     </Button>
@@ -528,106 +533,6 @@ export default function BuyLicensePage() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Footer */}
-        <section className="snap-section h-screen">
-          <footer className="py-12 border-t border-border/40 relative">
-            <div className="container mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div className="md:col-span-2">
-                  <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-purple-400 dark:to-cyan-400">
-                    AI License Pro
-                  </h3>
-                  <p className="text-muted-foreground mb-4 max-w-md">
-                    Empowering businesses with cutting-edge AI technology through flexible and
-                    powerful licensing options.
-                  </p>
-                  <div className="flex space-x-4">{/* Social icons would go here */}</div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-4">Quick Links</h4>
-                  <ul className="space-y-2">
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Pricing
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Features
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        FAQ
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Support
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-4">Legal</h4>
-                  <ul className="space-y-2">
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Terms of Service
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Privacy Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        License Agreement
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Refund Policy
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-12 pt-6 border-t border-border/40 text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} AI License Pro. All rights reserved.</p>
-              </div>
-            </div>
-          </footer>
         </section>
       </div>
 
