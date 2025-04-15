@@ -140,10 +140,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isHomePage
-          ? 'bg-background/80 backdrop-blur-lg shadow-md py-2 dark:bg-gray-900/80'
-          : 'bg-transparent py-4'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent ${
+        isScrolled || isHomePage ? 'py-2' : 'py-4'
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4 4xl:text-2xl">
