@@ -206,37 +206,34 @@ export default function BuyLicensePage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="snap-section h-screen">
-          <div className="w-full relative py-20">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/15 to-cyan-500/15 dark:from-gray-800/20 dark:to-gray-700/20 pointer-events-none" />
-
-            <motion.div
-              className="absolute top-10 right-[20%] w-64 h-64 rounded-full bg-purple-500/15 dark:bg-gray-700/20 blur-3xl"
-              animate={{
-                x: [0, 30, 0],
-                y: [0, -30, 0],
-              }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 8,
-                ease: 'easeInOut',
-              }}
-            />
-
-            <motion.div
-              className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-gray-600/20 blur-3xl"
-              animate={{
-                x: [0, -20, 0],
-                y: [0, 20, 0],
-              }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                duration: 10,
-                ease: 'easeInOut',
-              }}
-            />
-
-            <div className="container mx-auto px-4 relative z-10">
+        <section className="snap-section h-screen relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/15 to-cyan-500/15 dark:from-gray-800/20 dark:to-gray-700/20 pointer-events-none" />
+          <motion.div
+            className="absolute top-10 right-[20%] w-64 h-64 rounded-full bg-purple-500/15 dark:bg-gray-700/20 blur-3xl"
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 8,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-gray-600/20 blur-3xl"
+            animate={{
+              x: [0, -20, 0],
+              y: [0, 20, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 10,
+              ease: 'easeInOut',
+            }}
+          />
+          <div className="min-h-screen w-full flex items-center justify-center relative z-10">
+            <div className="container mx-auto px-4">
               <div className="max-w-4xl mx-auto text-center mb-12">
                 <motion.h2
                   className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-cyan-600 dark:from-gray-400 dark:to-gray-200"
@@ -247,7 +244,6 @@ export default function BuyLicensePage() {
                 >
                   Wybierz Swój Plan
                 </motion.h2>
-
                 <motion.p
                   className="text-lg text-foreground mb-6 max-w-2xl mx-auto"
                   initial={{ opacity: 0, y: 20 }}
@@ -258,7 +254,6 @@ export default function BuyLicensePage() {
                   Znajdź plan idealny dla Ciebie i zacznij korzystać z AI już dziś.
                 </motion.p>
               </div>
-
               <div className="flex justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
                   {pricingPlans.map((plan, index) => (
@@ -302,8 +297,8 @@ export default function BuyLicensePage() {
                               <Button
                                 className={`w-full ${
                                   plan.name === 'Miesiąc'
-                                    ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white'
-                                    : ''
+                                    ? 'bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-600 hover:to-cyan-600 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500 text-white hover:cursor-pointer'
+                                    : 'hover:cursor-pointer'
                                 }`}
                                 variant={plan.buttonVariant as 'link'}
                                 size="lg"
