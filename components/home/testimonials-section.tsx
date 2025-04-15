@@ -123,10 +123,10 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials-section"
-      className="h-screen flex items-center py-8 md:py-12 relative overflow-hidden"
+      className="h-screen flex items-center py-8 md:py-12 relative overflow-hidden bg-background"
     >
       {/* Enhanced background with subtle gradient for better visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-muted/30 to-background/50 pointer-events-none" />
+      <div className="absolute inset-0 bg-background pointer-events-none" />
 
       <div className="container 4xl:max-w-[2000px] mx-auto px-4 relative z-10">
         <div className="text-center mb-8 md:mb-12">
@@ -183,7 +183,8 @@ export function TestimonialsSection() {
             ))}
           </div>
 
-          {/* Gradient overlays to indicate scrolling */}
+          {/* Gradient overlays do pozostawienia, jeśli chcesz je zachować na bokach.
+              Jeśli przeszkadzają, możesz usunąć je również. */}
           <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
         </div>
