@@ -5,7 +5,7 @@ export const setBotPresence = (client: Client) => {
     if (!client.user) return
 
     client.user.setPresence({
-      status: 'dnd', // 'online' | 'idle' | 'dnd' | 'invisible'
+      status: 'idle', // 'online' | 'idle' | 'dnd' | 'invisible'
       activities: [
         {
           name: 'Hi, im Ayla!',
