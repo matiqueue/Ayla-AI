@@ -3,7 +3,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const SERVER_PORT = process.env.SERVER_PORT || 4000
 
 // Middleware do logowania zapytań
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -32,6 +32,6 @@ app.use((err: Error, req: Request, res: Response) => {
   res.status(500).json({ error: 'Internal Server Error' })
 })
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running at http://localhost:${PORT}`)
+app.listen(SERVER_PORT, () => {
+  console.log(`🚀 Server is running at http://localhost:${SERVER_PORT}`)
 })
