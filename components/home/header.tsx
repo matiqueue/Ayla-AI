@@ -184,7 +184,7 @@ export function Header() {
               <Button size="lg" disabled>
                 Ładowanie...
               </Button>
-            ) : hasLicense ? (
+            ) : hasLicense || pathname === '/buy-license' ? (
               <Link href="/license-info">
                 <Button
                   size="lg"
