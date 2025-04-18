@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { User, Shield, Key, Smartphone, LogOut } from 'lucide-react'
+import { motion } from 'motion/react'
 
 export default function ProfilePage() {
   const { isLoaded, user } = useUser()
@@ -108,6 +109,31 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto px-4 py-32 overflow-hidden h-screen">
+      <motion.div
+        className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-purple-500/10 dark:bg-gray-600/20 blur-3xl"
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -30, 0],
+        }}
+        transition={{
+          repeat: Number.POSITIVE_INFINITY,
+          duration: 8,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-gray-500/10 blur-3xl"
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 20, 0],
+        }}
+        transition={{
+          repeat: Number.POSITIVE_INFINITY,
+          duration: 10,
+          ease: 'easeInOut',
+        }}
+      />
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <div className="flex flex-col items-center">
