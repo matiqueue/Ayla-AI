@@ -108,21 +108,26 @@ export default function LicenseInfoPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 p-4 rounded-xl space-y-2">
-                <p className="text-green-800 dark:text-green-200">✅ Masz już aktywną licencję.</p>
-                <p className="text-green-800 dark:text-green-200">
+              <div className="bg-green-100 dark:bg-green-900 custom:bg-green-900 border border-green-300 dark:border-green-700 custom:border-green-700 p-4 rounded-xl space-y-2">
+                <p className="text-green-800 dark:text-green-200 custom:text-green-200">
+                  ✅ Masz już aktywną licencję.
+                </p>
+                <p className="text-green-800 dark:text-green-200 custom:text-green-200">
                   <strong>Wygasa:</strong> {new Date(license.expiresAt).toLocaleString('pl-PL')}
                 </p>
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive" className="hover:cursor-pointer">
+                  <Button
+                    variant="destructive"
+                    className="hover:cursor-pointer dark:bg-red-800 dark:hover:bg-red-900"
+                  >
                     Anuluj licencję
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent>
+                <AlertDialogContent className="light:bg-white">
                   <AlertDialogTitle>Na pewno?</AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogDescription className="light:text-muted-foreground">
                     Tej operacji nie można cofnąć. Nie dostaniesz zwrotu pieniędzy ani przeprosin 😈
                   </AlertDialogDescription>
                   <div className="flex justify-end space-x-2 mt-4">
@@ -132,7 +137,7 @@ export default function LicenseInfoPage() {
                     <AlertDialogAction
                       onClick={deleteLicense}
                       disabled={deleting}
-                      className="bg-red-600 hover:bg-red-700 hover:cursor-pointer"
+                      className="bg-red-600 hover:bg-red-700 hover:cursor-pointer custom:text-white"
                     >
                       Usuń licencję
                     </AlertDialogAction>
