@@ -1,0 +1,15 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+# logs
+**/logs/*.log
+
+# clerk configuration (can include secrets)
+/.clerk/
+
+*storybook.log
+
+# prisma
+migrations
+database
