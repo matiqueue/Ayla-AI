@@ -8,17 +8,19 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
+    "lint-staged": "lint-staged",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.25.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
-    "add": "^2.0.6",
     "eslint": "^9.20.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",
     "pnpm": "^10.8.1",
     "prettier": "^3.5.1",
+    "tsup": "^8.4.0",
     "turbo": "^2.4.2",
     "typescript": "5.7.3"
   },
@@ -28,7 +30,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
       "prettier --write"
     ],
     "*.{json,md,yml,yaml,css,scss}": [

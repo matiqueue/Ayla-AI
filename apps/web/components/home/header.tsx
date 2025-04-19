@@ -93,7 +93,7 @@ import { Button } from '@workspace/ui/components/button'
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { ModeToggle } from '@/components/home/mode-toggle'
+import { ModeToggle } from '@workspace/ui/components/mode-toggle'
 import { SignedIn, SignedOut, useUser } from '@clerk/nextjs'
 
 export function Header() {

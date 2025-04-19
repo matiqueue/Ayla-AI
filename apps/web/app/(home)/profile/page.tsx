@@ -54,7 +54,7 @@ export default function ProfilePage() {
           : err instanceof Error
             ? err.message
             : 'Nie udało się zmienić hasła'
-      setPasswordError(errorMessage)
+      setPasswordError(errorMessage ?? 'Nie udało się zmienić hasła')
     }
   }
 
