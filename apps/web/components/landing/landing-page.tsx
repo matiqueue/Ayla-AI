@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react'
 import { motion } from 'motion/react'
-import { cn } from '@/lib/utils'
-import { Button } from '../ui/button'
+import { cn } from '@workspace/ui/lib/utils'
+import { Button } from '@workspace/ui/components/button'
 import Link from 'next/link'
 
 interface CyberBackgroundProps {

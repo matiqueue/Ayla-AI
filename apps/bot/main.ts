@@ -1,8 +1,8 @@
-import { startBot } from '@/bot/other/start-bot';
+import { startBot } from '@/bot/other/start-bot'
 
-import Config from '@/bot/config/config';
-import 'dotenv/config';
+import Config from '@/bot/config/config'
+import 'dotenv/config'
 
-const { BOT_TOKEN } = Config;
+const { BOT_TOKEN } = Config
 
-startBot(BOT_TOKEN);
+startBot(BOT_TOKEN)

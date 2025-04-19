@@ -1,6 +1,6 @@
-import os from 'os';
+import * as os from 'os'
 
 export const getLocalUsername = (): string => {
-  const username = os.userInfo().username;
-  return username ? username : 'Nieznany użytkownik';
-};
+  const username = os.userInfo().username
+  return username ? username : 'Nieznany użytkownik'
+}

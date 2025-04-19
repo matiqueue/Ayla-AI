@@ -26,9 +26,9 @@ export const deleteLastBotEmbed = async (client: Client): Promise<void> => {
       return
     }
 
-    for (const [, msg] of botMessages) {
-      await msg.delete()
-    }
+    botMessages.forEach(async (msg) => {
+      await msg.delete();
+    });
 
     log(`Usunięto ${botMessages.size} wiadomości bota (embedy i/lub screenshoty).`)
   } catch (error) {

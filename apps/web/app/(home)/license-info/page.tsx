@@ -11,8 +11,8 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
   AlertDialogCancel,
-} from '@/components/ui/alert-dialog'
-import { Button } from '@/components/ui/button'
+} from '@workspace/ui/components/alert-dialog'
+import { Button } from '@workspace/ui/components/button'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 

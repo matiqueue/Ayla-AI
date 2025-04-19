@@ -7,10 +7,10 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+} from '@workspace/ui/components/accordion'
+import { Badge } from '@workspace/ui/components/badge'
+import { Button } from '@workspace/ui/components/button'
+import { Card, CardContent } from '@workspace/ui/components/card'
 import { useState, useEffect, useRef } from 'react'
 import { SectionNavigator } from '@/components/home/section-navigator'
 import Link from 'next/link'

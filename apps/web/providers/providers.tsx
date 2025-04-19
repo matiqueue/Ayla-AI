@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { ThemeProvider } from '@/providers/theme-provider'
-import '@/styles/globals.css'
+import '@workspace/ui/styles/globals.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
 

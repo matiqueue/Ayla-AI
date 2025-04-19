@@ -3,7 +3,7 @@
 // import { useState, useEffect } from 'react'
 // import Link from 'next/link'
 // import { MenuBar } from '@/components/home/menu-bar'
-// import { Button } from '@/components/ui/button'
+// import { Button } from '@workspace/ui/components/button'
 // import { motion } from 'framer-motion'
 // import { Sparkles } from 'lucide-react'
 // import { usePathname } from 'next/navigation'
@@ -89,11 +89,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { MenuBar } from '@/components/home/menu-bar'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { usePathname } from 'next/navigation'
-import { ModeToggle } from '../mode-toggle'
+import { ModeToggle } from '@/components/home/mode-toggle'
 import { SignedIn, SignedOut, useUser } from '@clerk/nextjs'
 
 export function Header() {
@@ -119,7 +119,9 @@ export function Header() {
         const res = await fetch('/api/get-license', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: user.primaryEmailAddress?.emailAddress }),
+          body: JSON.stringify({
+            email: user.primaryEmailAddress?.emailAddress,
+          }),
         })
 
         const data = await res.json()

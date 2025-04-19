@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import { ArrowRight, MessageSquare, Monitor } from 'lucide-react'
 import { useEffect, useState } from 'react'
 

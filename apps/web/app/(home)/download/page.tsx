@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import { Download } from 'lucide-react'
 import { useEffect, useState, useRef } from 'react'
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
@@ -13,7 +13,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
+} from '@workspace/ui/components/table'
 import { SectionNavigator } from '@/components/home/section-navigator' // Załóżmy, że to poprawna ścieżka
 
 export default function DesktopDownloadPage() {
@@ -102,7 +102,11 @@ export default function DesktopDownloadPage() {
         const data: Release[] = await response.json()
         const formattedReleases = data
           .map((release: Release) => {
-            const downloadLinks: { Win?: string; Mac?: string; Linux?: string } = {}
+            const downloadLinks: {
+              Win?: string
+              Mac?: string
+              Linux?: string
+            } = {}
             release.assets?.forEach((asset) => {
               const assetName = asset.name.toLowerCase()
               if (assetName.includes('win') || assetName.includes('.exe')) {

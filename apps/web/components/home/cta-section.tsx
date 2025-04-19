@@ -1,10 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import { Check, Star, Zap, Shield, ArrowRight, Globe, Lock, Brain } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@workspace/ui/components/card'
+import { Badge } from '@workspace/ui/components/badge'
 import Link from 'next/link'
 import React from 'react'
 

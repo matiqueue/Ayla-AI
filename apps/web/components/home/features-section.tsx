@@ -1,7 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@workspace/ui/components/card'
 import { Brain, MessageSquare, FileText, Zap, Lock, Globe } from 'lucide-react'
 
 const features = [

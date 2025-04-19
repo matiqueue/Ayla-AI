@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
+import { Button } from '@workspace/ui/components/button'
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -14,7 +14,10 @@ export default function GenerateLicensePage() {
   const { user, isLoaded } = useUser()
 
   const [status, setStatus] = useState('idle')
-  const [license, setLicense] = useState<{ id: string; expiresAt: string } | null>(null)
+  const [license, setLicense] = useState<{
+    id: string
+    expiresAt: string
+  } | null>(null)
 
   // Map for title adjectives
   const periodAdjectiveMap = {
