@@ -1,0 +1,26 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tsx main.ts",
+    "build": "tsup main.ts --format cjs --out-dir out",
+    "start": "node out/main.js",
+    "config": "npx tsx other/setup-config.ts"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "discord.js": "^14.18.0",
+    "fs": "0.0.1-security",
+    "os": "^0.1.2",
+    "path": "^0.12.7",
+    "public-ip": "^7.0.1",
+    "screenshot-desktop": "^1.15.1",
+    "systeminformation": "^5.25.11",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.5.0"
+  }
+}

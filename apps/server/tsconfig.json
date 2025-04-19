@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/bot/*": ["./*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"]
+    }
+  }
+}
