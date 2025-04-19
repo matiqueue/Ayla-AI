@@ -9,12 +9,20 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:dev": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@clerk/elements": "^0.23.16",
+    "@clerk/nextjs": "^6.16.0",
     "@prisma/client": "^6.6.0",
     "@workspace/ui": "workspace:*",
+    "axios": "^1.8.4",
+    "crypto": "^1.0.1",
     "lucide-react": "^0.475.0",
+    "motion": "^12.7.4",
     "next": "^15.2.3",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
