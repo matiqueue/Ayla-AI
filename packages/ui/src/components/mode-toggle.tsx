@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Moon, Sun, Palette } from 'lucide-react' // Dodano Palette dla trybu "custom"
+import { Moon, Sun, Palette } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@workspace/ui/components/button'
@@ -27,34 +27,19 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon" className="hover:cursor-pointer">
-          {/* Ikona Sun - widoczna w trybie light */}
-          <Sun
-            className={`h-[1.2rem] w-[1.2rem] transition-all ${
-              theme === 'light' ? 'rotate-0 scale-100' : 'rotate-90 scale-0'
-            }`}
-          />
-          {/* Ikona Moon - widoczna w trybie dark */}
-          <Moon
-            className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
-              theme === 'dark' ? 'rotate-0 scale-100' : 'rotate-90 scale-0'
-            }`}
-          />
-          {/* Ikona Palette - widoczna w trybie custom */}
-          <Palette
-            className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
-              theme === 'custom' ? 'rotate-0 scale-100' : 'rotate-90 scale-0'
-            }`}
-          />
+        <Button variant="ghost" size="sm" className="hover:cursor-pointer">
+          {theme === 'light' && <Sun className="h-[1.2rem] w-[1.2rem]" />}
+          {theme === 'dark' && <Moon className="h-[1.2rem] w-[1.2rem]" />}
+          {theme === 'custom' && <Palette className="h-[1.2rem] w-[1.2rem]" />}
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="text-lg">
         {['light', 'dark', 'custom'].map((mode) => (
           <DropdownMenuItem
             key={mode}
             onClick={() => setTheme(mode)}
-            className="hover:cursor-pointer"
+            className="hover:cursor-pointer py-2 px-4"
           >
             {mode.charAt(0).toUpperCase() + mode.slice(1)}
           </DropdownMenuItem>
