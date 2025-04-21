@@ -24,29 +24,46 @@ export default function LicenseInfoPage() {
   const [license, setLicense] = useState<License | null>(null)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(false)
+  const [open, setOpen] = useState(false) // Kontrola stanu AlertDialog
 
   const fetchLicense = useCallback(async () => {
     setLoading(true)
-    const res = await fetch('/api/get-license', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user?.primaryEmailAddress?.emailAddress }),
-    })
-
-    const data = await res.json()
-    setLicense(data.license || null)
-    setLoading(false)
+    try {
+      const res = await fetch('/api/get-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user?.primaryEmailAddress?.emailAddress }),
+      })
+      if (!res.ok) {
+        throw new Error('Nie udało się pobrać licencji')
+      }
+      const data = await res.json()
+      setLicense(data.license || null)
+    } catch (error) {
+      console.error('Błąd podczas pobierania licencji:', error)
+    } finally {
+      setLoading(false)
+    }
   }, [user?.primaryEmailAddress?.emailAddress])
 
   const deleteLicense = async () => {
     setDeleting(true)
-    await fetch('/api/delete-license', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: user?.primaryEmailAddress?.emailAddress }),
-    })
-    setDeleting(false)
-    setLicense(null)
+    try {
+      const res = await fetch('/api/delete-license', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: user?.primaryEmailAddress?.emailAddress }),
+      })
+      if (!res.ok) {
+        throw new Error('Nie udało się usunąć licencji')
+      }
+      setLicense(null)
+      setOpen(false) // Zamknij dialog po sukcesie
+    } catch (error) {
+      console.error('Błąd podczas usuwania licencji:', error)
+    } finally {
+      setDeleting(false)
+    }
   }
 
   useEffect(() => {
@@ -116,22 +133,26 @@ export default function LicenseInfoPage() {
                   <strong>Wygasa:</strong> {new Date(license.expiresAt).toLocaleString('pl-PL')}
                 </p>
               </div>
-              <AlertDialog>
+              <AlertDialog open={open} onOpenChange={setOpen}>
                 <AlertDialogTrigger asChild>
                   <Button
                     variant="destructive"
-                    className="hover:cursor-pointer dark:bg-red-800 dark:hover:bg-red-900"
+                    className="hover:cursor-pointer bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900"
+                    onClick={() => setOpen(true)}
                   >
                     Anuluj licencję
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="light:bg-white">
+                <AlertDialogContent className="bg-white dark:bg-black p-6 rounded-lg shadow-lg z-50">
                   <AlertDialogTitle>Na pewno?</AlertDialogTitle>
-                  <AlertDialogDescription className="light:text-muted-foreground">
+                  <AlertDialogDescription className="text-muted-foreground dark:text-muted-foreground">
                     Tej operacji nie można cofnąć. Nie dostaniesz zwrotu pieniędzy ani przeprosin 😈
                   </AlertDialogDescription>
                   <div className="flex justify-end space-x-2 mt-4">
-                    <AlertDialogCancel className="hover:cursor-pointer">
+                    <AlertDialogCancel
+                      className="hover:cursor-pointer"
+                      onClick={() => setOpen(false)}
+                    >
                       Jednak nie
                     </AlertDialogCancel>
                     <AlertDialogAction
@@ -139,7 +160,7 @@ export default function LicenseInfoPage() {
                       disabled={deleting}
                       className="bg-red-600 hover:bg-red-700 hover:cursor-pointer custom:text-white"
                     >
-                      Usuń licencję
+                      {deleting ? 'Usuwanie...' : 'Usuń licencję'}
                     </AlertDialogAction>
                   </div>
                 </AlertDialogContent>
