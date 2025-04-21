@@ -31,7 +31,6 @@ export function ModeToggle() {
           {theme === 'light' && <Sun className="h-[1.2rem] w-[1.2rem]" />}
           {theme === 'dark' && <Moon className="h-[1.2rem] w-[1.2rem]" />}
           {theme === 'custom' && <Palette className="h-[1.2rem] w-[1.2rem]" />}
-          <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="text-lg">
