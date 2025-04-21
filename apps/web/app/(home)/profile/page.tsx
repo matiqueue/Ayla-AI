@@ -158,10 +158,20 @@ export default function ProfilePage() {
             </h1>
             <p className="text-muted-foreground mb-4">{user.primaryEmailAddress?.emailAddress}</p>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={() => openUserProfile()}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => openUserProfile()}
+                className="hover:cursor-pointer"
+              >
                 Edytuj profil (Clerk UI)
               </Button>
-              <Button variant="destructive" size="sm" onClick={handleSignOut}>
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={handleSignOut}
+                className="hover:cursor-pointer"
+              >
                 <LogOut className="h-4 w-4 mr-2" />
                 Wyloguj się
               </Button>
@@ -171,11 +181,17 @@ export default function ProfilePage() {
 
         <Tabs defaultValue="account">
           <TabsList className="grid grid-cols-5 mb-8">
-            <TabsTrigger value="account">Konto</TabsTrigger>
-            <TabsTrigger value="authentication">Uwierzytelnianie</TabsTrigger>
-            <TabsTrigger value="devices">Urządzenia</TabsTrigger>
-            <TabsTrigger value="security">Bezpieczeństwo</TabsTrigger>
-            <TabsTrigger value="privacy">Prywatność</TabsTrigger>
+            {[
+              { value: 'account', label: 'Konto' },
+              { value: 'authentication', label: 'Uwierzytelnianie' },
+              { value: 'devices', label: 'Urządzenia' },
+              { value: 'security', label: 'Bezpieczeństwo' },
+              { value: 'privacy', label: 'Prywatność' },
+            ].map(({ value, label }) => (
+              <TabsTrigger key={value} value={value} className="hover:cursor-pointer">
+                {label}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           <TabsContent value="account">
