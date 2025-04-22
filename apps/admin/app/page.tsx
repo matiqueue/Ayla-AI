@@ -1,3 +1,7 @@
+'use client'
+
+import { SetStateAction, useState } from 'react'
+import Link from 'next/link'
 import { Card } from '@workspace/ui/components/card'
 import {
   Table,
@@ -35,6 +39,63 @@ export default function AdminDashboard() {
     },
   ]
 
+  // States
+  const [sortColumn, setSortColumn] = useState('id')
+  const [sortDirection, setSortDirection] = useState('asc')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [selectedLicense, setSelectedLicense] = useState('all')
+  const [currentPage, setCurrentPage] = useState(1)
+  const usersPerPage = 10
+
+  // Compute license counts
+  const licenseCounts = users.reduce<Record<string, number>>((acc, user) => {
+    acc[user.license] = (acc[user.license] || 0) + 1
+    return acc
+  }, {})
+  const totalUsers = users.length
+  const licensePercentages: Record<string, string> = {}
+  for (const [license, count] of Object.entries(licenseCounts)) {
+    licensePercentages[license] = ((count / totalUsers) * 100).toFixed(2) + '%'
+  }
+  const licenses = ['Basic', 'Premium', 'Enterprise']
+  const maxCount = Math.max(...licenses.map((license) => licenseCounts[license] || 0))
+
+  // Sorted users
+  const sortedUsers = [...users].sort((a, b) => {
+    let comparison = 0
+    if (sortColumn === 'id') {
+      comparison = a.id.localeCompare(b.id)
+    } else if (sortColumn === 'email') {
+      comparison = a.email.localeCompare(b.email)
+    } else if (sortColumn === 'license') {
+      comparison = a.license.localeCompare(b.license)
+    }
+    return sortDirection === 'asc' ? comparison : -comparison
+  })
+
+  // Filtered users
+  const filteredUsers = sortedUsers.filter(
+    (user) =>
+      (selectedLicense === 'all' || user.license === selectedLicense) &&
+      (user.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()))
+  )
+
+  // Pagination
+  const indexOfLastUser = currentPage * usersPerPage
+  const indexOfFirstUser = indexOfLastUser - usersPerPage
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser)
+
+  // Handle sort
+  const handleSort = (column: SetStateAction<string>) => {
+    if (sortColumn === column) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortColumn(column)
+      setSortDirection('asc')
+    }
+  }
+
   return (
     <div className="container mx-auto p-6 space-y-8">
       {/* Header */}
@@ -45,6 +106,12 @@ export default function AdminDashboard() {
           <div className="bg-muted p-2 rounded-md text-sm">
             Last updated: {new Date().toLocaleDateString()}
           </div>
+          <button
+            onClick={() => alert('Odświeżanie danych...')}
+            className="p-2 bg-blue-500 text-white rounded"
+          >
+            Refresh
+          </button>
         </div>
       </header>
 
@@ -71,56 +138,96 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {/* Chart */}
         <Card className="col-span-1 lg:col-span-1 xl:col-span-1 p-6">
-          <h2 className="text-lg font-semibold mb-4">License Distribution</h2>
-          <div className="h-64 flex items-end justify-around gap-2">
-            {/* Simple inline SVG chart */}
-            <svg width="100%" height="100%" viewBox="0 0 300 200" className="mt-4">
-              <rect x="40" y="30" width="60" height="150" fill="#0ea5e9" />
-              <rect x="120" y="70" width="60" height="110" fill="#8b5cf6" />
-              <rect x="200" y="100" width="60" height="80" fill="#10b981" />
-
-              <text x="70" y="190" textAnchor="middle" className="text-xs">
-                Basic
-              </text>
-              <text x="150" y="190" textAnchor="middle" className="text-xs">
-                Premium
-              </text>
-              <text x="230" y="190" textAnchor="middle" className="text-xs">
-                Enterprise
-              </text>
-
-              <text x="70" y="20" textAnchor="middle" className="text-xs">
-                45%
-              </text>
-              <text x="150" y="60" textAnchor="middle" className="text-xs">
-                33%
-              </text>
-              <text x="230" y="90" textAnchor="middle" className="text-xs">
-                22%
-              </text>
-            </svg>
+          <h2 className="text-lg font-semibold mb-4">Dystrybucja licencji</h2>
+          <div className="flex justify-around gap-2">
+            {licenses.map((license, index) => {
+              const count = licenseCounts[license] || 0
+              const percentage = licensePercentages[license] || '0%'
+              const heightPercentage = maxCount > 0 ? (count / maxCount) * 100 : 0
+              return (
+                <div key={license} className="flex flex-col items-center">
+                  <div className="h-48 w-16 relative">
+                    <div
+                      className={`absolute bottom-0 w-full ${index === 0 ? 'bg-blue-500' : index === 1 ? 'bg-purple-500' : 'bg-green-500'}`}
+                      style={{ height: `${heightPercentage}%` }}
+                    ></div>
+                  </div>
+                  <span className="mt-1 text-xs">{license}</span>
+                  <span className="text-xs">
+                    {count} ({percentage})
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </Card>
 
         {/* Users Table */}
         <Card className="col-span-1 lg:col-span-2 xl:col-span-3 p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">Users</h2>
-            <div className="text-sm text-muted-foreground">Total: {users.length}</div>
+            <h2 className="text-lg font-semibold">Użytkownicy</h2>
+            <div className="text-sm text-muted-foreground">Łącznie: {filteredUsers.length}</div>
+          </div>
+          <div className="mb-4 flex flex-col sm:flex-row gap-4">
+            <input
+              type="text"
+              placeholder="Szukaj po emailu lub ID"
+              className="p-2 border rounded w-full sm:w-auto"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <select
+              className="p-2 border rounded w-full sm:w-auto"
+              value={selectedLicense}
+              onChange={(e) => setSelectedLicense(e.target.value)}
+            >
+              <option value="all">Wszystkie licencje</option>
+              <option value="Basic">Basic</option>
+              <option value="Premium">Premium</option>
+              <option value="Enterprise">Enterprise</option>
+            </select>
           </div>
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>License</TableHead>
+                  <TableHead onClick={() => handleSort('id')} className="cursor-pointer">
+                    <div className="flex items-center">
+                      ID
+                      {sortColumn === 'id' && (
+                        <span className="ml-1">{sortDirection === 'asc' ? '▲' : '▼'}</span>
+                      )}
+                    </div>
+                  </TableHead>
+                  <TableHead onClick={() => handleSort('email')} className="cursor-pointer">
+                    <div className="flex items-center">
+                      Email
+                      {sortColumn === 'email' && (
+                        <span className="ml-1">{sortDirection === 'asc' ? '▲' : '▼'}</span>
+                      )}
+                    </div>
+                  </TableHead>
+                  <TableHead onClick={() => handleSort('license')} className="cursor-pointer">
+                    <div className="flex items-center">
+                      Licencja
+                      {sortColumn === 'license' && (
+                        <span className="ml-1">{sortDirection === 'asc' ? '▲' : '▼'}</span>
+                      )}
+                    </div>
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {users.map((user) => (
+                {currentUsers.map((user) => (
                   <TableRow key={user.id}>
-                    <TableCell className="font-medium">{user.id}</TableCell>
+                    <TableCell>
+                      <Link
+                        href={`/admin/users/${user.id}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        {user.id}
+                      </Link>
+                    </TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <span
@@ -140,12 +247,37 @@ export default function AdminDashboard() {
               </TableBody>
             </Table>
           </div>
+          <div className="flex flex-col sm:flex-row justify-between mt-4 gap-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              className={`px-4 py-2 rounded ${
+                currentPage === 1
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600'
+              }`}
+            >
+              Poprzednia
+            </button>
+            <span>
+              Strona {currentPage} z {Math.ceil(filteredUsers.length / usersPerPage)}
+            </span>
+            <button
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              className={`px-4 py-2 rounded ${
+                indexOfLastUser >= filteredUsers.length
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600'
+              }`}
+            >
+              Następna
+            </button>
+          </div>
         </Card>
       </div>
 
       {/* Recent Activities */}
       <Card className="p-6">
-        <h2 className="text-lg font-semibold mb-4">Recent Activities</h2>
+        <h2 className="text-lg font-semibold mb-4">Ostatnie aktywności</h2>
         <div className="space-y-4">
           {activities.map((activity) => (
             <div
