@@ -1,6 +1,6 @@
 'use client'
 
-import { SetStateAction, useState } from 'react'
+import { useState, useEffect, SetStateAction } from 'react'
 import Link from 'next/link'
 import { Card } from '@workspace/ui/components/card'
 import {
@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@workspace/ui/components/table'
-import { ModeToggle } from '@workspace/ui/components/mode-toggle'
+import { motion } from 'framer-motion'
 
 export default function AdminDashboard() {
   // Hardcoded user data
@@ -45,10 +45,22 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedLicense, setSelectedLicense] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
+  const [theme, setTheme] = useState('light')
   const usersPerPage = 10
 
+  // Theme switching logic
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.remove('dark', 'custom')
+    if (theme === 'dark') {
+      root.classList.add('dark')
+    } else if (theme === 'custom') {
+      root.classList.add('custom')
+    }
+  }, [theme])
+
   // Compute license counts
-  const licenseCounts = users.reduce<Record<string, number>>((acc, user) => {
+  const licenseCounts = users.reduce((acc: Record<string, number>, user) => {
     acc[user.license] = (acc[user.license] || 0) + 1
     return acc
   }, {})
@@ -63,13 +75,9 @@ export default function AdminDashboard() {
   // Sorted users
   const sortedUsers = [...users].sort((a, b) => {
     let comparison = 0
-    if (sortColumn === 'id') {
-      comparison = a.id.localeCompare(b.id)
-    } else if (sortColumn === 'email') {
-      comparison = a.email.localeCompare(b.email)
-    } else if (sortColumn === 'license') {
-      comparison = a.license.localeCompare(b.license)
-    }
+    if (sortColumn === 'id') comparison = a.id.localeCompare(b.id)
+    else if (sortColumn === 'email') comparison = a.email.localeCompare(b.email)
+    else if (sortColumn === 'license') comparison = a.license.localeCompare(b.license)
     return sortDirection === 'asc' ? comparison : -comparison
   })
 
@@ -97,18 +105,40 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-8">
+    <div className="container mx-auto p-6 space-y-8 relative overflow-hidden bg-white dark:bg-black custom:bg-gradient-to-br custom:bg-purple-500/10 custom:to-cyan-500/10">
+      {/* Animated background shapes */}
+      <motion.div
+        className="absolute top-20 right-[10%] w-64 h-64 rounded-full blur-3xl bg-purple-300/30 dark:bg-gray-400/30 custom:bg-purple-500/30"
+        animate={{ x: [0, 30, 0], y: [0, -30, 0] }}
+        transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full blur-3xl bg-cyan-300/30 dark:bg-gray-300/30 custom:bg-cyan-500/30"
+        animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
+        transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+      />
+
       {/* Header */}
-      <header className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+      <header className="flex justify-between items-center relative z-10">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white custom:text-white">
+          Admin Dashboard
+        </h1>
         <div className="flex items-center gap-4">
-          <ModeToggle />
-          <div className="bg-muted p-2 rounded-md text-sm">
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            className="p-2 border rounded bg-gray-100 dark:bg-gray-800 custom:bg-gray-800 text-gray-900 dark:text-white custom:text-white"
+          >
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="custom">Custom</option>
+          </select>
+          <div className="bg-gray-100 dark:bg-gray-800 custom:bg-gray-800 p-2 rounded-md text-sm text-gray-900 dark:text-white custom:text-white">
             Last updated: {new Date().toLocaleDateString()}
           </div>
           <button
             onClick={() => alert('Odświeżanie danych...')}
-            className="p-2 bg-blue-500 text-white rounded"
+            className="p-2 rounded text-white bg-blue-500 hover:bg-blue-600 dark:bg-gray-700 dark:hover:bg-gray-600 custom:bg-purple-500 custom:hover:bg-purple-600"
           >
             Refresh
           </button>
@@ -116,29 +146,47 @@ export default function AdminDashboard() {
       </header>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Total Users</h3>
-          <p className="text-3xl font-bold">1,234</p>
-          <div className="mt-2 text-xs text-green-500">↑ 12% from last month</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+        <Card className="p-6 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 custom:text-purple-300">
+            Total Users
+          </h3>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white custom:text-white">
+            1,234
+          </p>
+          <div className="mt-2 text-xs text-green-600 dark:text-green-400 custom:text-green-400">
+            ↑ 12% from last month
+          </div>
         </Card>
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Active Licenses</h3>
-          <p className="text-3xl font-bold">987</p>
-          <div className="mt-2 text-xs text-green-500">↑ 8% from last month</div>
+        <Card className="p-6 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 custom:text-purple-300">
+            Active Licenses
+          </h3>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white custom:text-white">987</p>
+          <div className="mt-2 text-xs text-green-600 dark:text-green-400 custom:text-green-400">
+            ↑ 8% from last month
+          </div>
         </Card>
-        <Card className="p-6">
-          <h3 className="text-sm font-medium text-muted-foreground">Revenue</h3>
-          <p className="text-3xl font-bold">$12,345</p>
-          <div className="mt-2 text-xs text-green-500">↑ 15% from last month</div>
+        <Card className="p-6 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 custom:text-purple-300">
+            Revenue
+          </h3>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white custom:text-white">
+            $12,345
+          </p>
+          <div className="mt-2 text-xs text-green-600 dark:text-green-400 custom:text-green-400">
+            ↑ 15% from last month
+          </div>
         </Card>
       </div>
 
       {/* Chart and Users Table */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative z-10">
         {/* Chart */}
-        <Card className="col-span-1 lg:col-span-1 xl:col-span-1 p-6">
-          <h2 className="text-lg font-semibold mb-4">Dystrybucja licencji</h2>
+        <Card className="col-span-1 lg:col-span-1 xl:col-span-1 p-6 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
+          <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white custom:text-white">
+            Dystrybucja licencji
+          </h2>
           <div className="flex justify-around gap-2">
             {licenses.map((license, index) => {
               const count = licenseCounts[license] || 0
@@ -148,12 +196,16 @@ export default function AdminDashboard() {
                 <div key={license} className="flex flex-col items-center">
                   <div className="h-48 w-16 relative">
                     <div
-                      className={`absolute bottom-0 w-full ${index === 0 ? 'bg-blue-500' : index === 1 ? 'bg-purple-500' : 'bg-green-500'}`}
+                      className={`absolute bottom-0 w-full ${
+                        index === 0 ? 'bg-purple-500' : index === 1 ? 'bg-cyan-500' : 'bg-green-500'
+                      }`}
                       style={{ height: `${heightPercentage}%` }}
                     ></div>
                   </div>
-                  <span className="mt-1 text-xs">{license}</span>
-                  <span className="text-xs">
+                  <span className="mt-1 text-xs text-gray-900 dark:text-white custom:text-white">
+                    {license}
+                  </span>
+                  <span className="text-xs text-gray-900 dark:text-white custom:text-white">
                     {count} ({percentage})
                   </span>
                 </div>
@@ -163,21 +215,25 @@ export default function AdminDashboard() {
         </Card>
 
         {/* Users Table */}
-        <Card className="col-span-1 lg:col-span-2 xl:col-span-3 p-6">
+        <Card className="col-span-1 lg:col-span-2 xl:col-span-3 p-6 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-semibold">Użytkownicy</h2>
-            <div className="text-sm text-muted-foreground">Łącznie: {filteredUsers.length}</div>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white custom:text-white">
+              Użytkownicy
+            </h2>
+            <div className="text-sm text-gray-600 dark:text-gray-400 custom:text-purple-300">
+              Łącznie: {filteredUsers.length}
+            </div>
           </div>
           <div className="mb-4 flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               placeholder="Szukaj po emailu lub ID"
-              className="p-2 border rounded w-full sm:w-auto"
+              className="p-2 border rounded w-full sm:w-auto bg-white dark:bg-gray-800 custom:bg-gray-800 text-gray-900 dark:text-white custom:text-white"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <select
-              className="p-2 border rounded w-full sm:w-auto"
+              className="p-2 border rounded w-full sm:w-auto bg-white dark:bg-gray-800 custom:bg-gray-800 text-gray-900 dark:text-white custom:text-white"
               value={selectedLicense}
               onChange={(e) => setSelectedLicense(e.target.value)}
             >
@@ -191,7 +247,10 @@ export default function AdminDashboard() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead onClick={() => handleSort('id')} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort('id')}
+                    className="cursor-pointer text-gray-900 dark:text-white custom:text-white"
+                  >
                     <div className="flex items-center">
                       ID
                       {sortColumn === 'id' && (
@@ -199,7 +258,10 @@ export default function AdminDashboard() {
                       )}
                     </div>
                   </TableHead>
-                  <TableHead onClick={() => handleSort('email')} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort('email')}
+                    className="cursor-pointer text-gray-900 dark:text-white custom:text-white"
+                  >
                     <div className="flex items-center">
                       Email
                       {sortColumn === 'email' && (
@@ -207,7 +269,10 @@ export default function AdminDashboard() {
                       )}
                     </div>
                   </TableHead>
-                  <TableHead onClick={() => handleSort('license')} className="cursor-pointer">
+                  <TableHead
+                    onClick={() => handleSort('license')}
+                    className="cursor-pointer text-gray-900 dark:text-white custom:text-white"
+                  >
                     <div className="flex items-center">
                       Licencja
                       {sortColumn === 'license' && (
@@ -223,21 +288,23 @@ export default function AdminDashboard() {
                     <TableCell>
                       <Link
                         href={`/admin/users/${user.id}`}
-                        className="text-blue-600 hover:underline"
+                        className="text-blue-500 hover:underline dark:text-gray-400 custom:text-purple-300"
                       >
                         {user.id}
                       </Link>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell className="text-gray-900 dark:text-white custom:text-white">
+                      {user.email}
+                    </TableCell>
                     <TableCell>
                       <span
                         className={`px-2 py-1 rounded-full text-xs ${
                           user.license === 'Premium'
-                            ? 'bg-purple-100 text-purple-800'
+                            ? 'bg-purple-500 text-white'
                             : user.license === 'Enterprise'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-blue-100 text-blue-800'
-                        }`}
+                              ? 'bg-green-500 text-white'
+                              : 'bg-blue-500 text-white'
+                        } dark:bg-gray-800 dark:text-gray-400 custom:bg-purple-600 custom:text-white`}
                       >
                         {user.license}
                       </span>
@@ -252,21 +319,21 @@ export default function AdminDashboard() {
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               className={`px-4 py-2 rounded ${
                 currentPage === 1
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600'
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500 custom:bg-gray-800 custom:text-purple-500'
+                  : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-700 dark:hover:bg-gray-600 custom:bg-purple-500 custom:hover:bg-purple-600'
               }`}
             >
               Poprzednia
             </button>
-            <span>
+            <span className="text-gray-900 dark:text-white custom:text-white">
               Strona {currentPage} z {Math.ceil(filteredUsers.length / usersPerPage)}
             </span>
             <button
               onClick={() => setCurrentPage((prev) => prev + 1)}
               className={`px-4 py-2 rounded ${
                 indexOfLastUser >= filteredUsers.length
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600'
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-500 custom:bg-gray-800 custom:text-purple-500'
+                  : 'bg-blue-500 text-white hover:bg-blue-600 dark:bg-gray-700 dark:hover:bg-gray-600 custom:bg-purple-500 custom:hover:bg-purple-600'
               }`}
             >
               Następna
@@ -276,22 +343,30 @@ export default function AdminDashboard() {
       </div>
 
       {/* Recent Activities */}
-      <Card className="p-6">
-        <h2 className="text-lg font-semibold mb-4">Ostatnie aktywności</h2>
+      <Card className="p-6 relative z-10 bg-gray-50 dark:bg-gray-900 custom:bg-gray-900">
+        <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white custom:text-white">
+          Ostatnie aktywności
+        </h2>
         <div className="space-y-4">
           {activities.map((activity) => (
             <div
               key={activity.id}
-              className="flex items-start gap-4 p-3 rounded-lg hover:bg-muted/50"
+              className="flex items-start gap-4 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 custom:hover:bg-purple-900/20"
             >
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+              <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500 dark:bg-gray-800 dark:text-gray-400 custom:bg-gray-800 custom:text-purple-300">
                 {activity.user.charAt(0)}
               </div>
               <div className="flex-1">
-                <p className="font-medium">{activity.user}</p>
-                <p className="text-sm text-muted-foreground">{activity.action}</p>
+                <p className="font-medium text-gray-900 dark:text-white custom:text-white">
+                  {activity.user}
+                </p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 custom:text-purple-300">
+                  {activity.action}
+                </p>
               </div>
-              <div className="text-xs text-muted-foreground">{activity.timestamp}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 custom:text-purple-300">
+                {activity.timestamp}
+              </div>
             </div>
           ))}
         </div>
