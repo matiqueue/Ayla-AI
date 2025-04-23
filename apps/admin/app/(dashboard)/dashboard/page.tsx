@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
+import { data } from '@/data/data'
 
 import { Button } from '@workspace/ui/components/button'
 import {
@@ -99,8 +100,10 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
-                    <p className="text-xs text-muted-foreground">+20.1% from last month</p>
+                    <div className="text-2xl font-bold">{data.totalRevenue.value}</div>
+                    <p className="text-xs text-muted-foreground">
+                      {data.totalRevenue.percentage} from last month
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>

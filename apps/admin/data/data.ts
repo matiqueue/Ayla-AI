@@ -1,0 +1,77 @@
+export const data = {
+  totalRevenue: {
+    value: '$45,231.89',
+    percentage: '+20.1%',
+  },
+  subscriptions: {
+    value: '+2350',
+    percentage: '+180.1%',
+  },
+  sales: {
+    value: '+12,234',
+    percentage: '+19%',
+    daily: 423,
+    weekly: 2876,
+    monthly: 12234,
+  },
+  activeNow: {
+    value: '+573',
+    percentage: '+201 since last hour',
+    desktop: 342,
+    mobile: 231,
+    tablet: 89,
+  },
+  'recent-sales': {
+    monthSales: 265,
+    users: [
+      {
+        name: 'John Doe',
+        email: 'john.doe@company.com',
+        cash: '+$1,999.00',
+        status: 'active',
+        address: '123 Main St, New York, USA',
+        phone: '+1-234-567-890',
+      },
+      {
+        name: 'Jane Smith',
+        email: 'jane.smith@company.com',
+        cash: '+$2,500.00',
+        status: 'active',
+        address: '456 Oak Ave, Los Angeles, USA',
+        phone: '+1-345-678-901',
+      },
+      {
+        name: 'Bob Johnson',
+        email: 'bob.johnson@company.com',
+        cash: '+$3,000.00',
+        status: 'active',
+        address: '789 Pine Rd, Chicago, USA',
+        phone: '+1-456-789-012',
+      },
+      {
+        name: 'Sarah Williams',
+        email: 'sarah.w@company.com',
+        cash: '+$4,250.00',
+        status: 'active',
+        address: '321 Elm St, Boston, USA',
+        phone: '+1-567-890-123',
+      },
+      {
+        name: 'Michael Brown',
+        email: 'michael.b@company.com',
+        cash: '+$1,750.00',
+        status: 'pending',
+        address: '654 Maple Dr, Seattle, USA',
+        phone: '+1-678-901-234',
+      },
+      {
+        name: 'Emily Davis',
+        email: 'emily.d@company.com',
+        cash: '+$3,500.00',
+        status: 'active',
+        address: '987 Cedar Ln, Miami, USA',
+        phone: '+1-789-012-345',
+      },
+    ],
+  },
+}
