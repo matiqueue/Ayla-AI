@@ -125,8 +125,10 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+2350</div>
-                    <p className="text-xs text-muted-foreground">+180.1% from last month</p>
+                    <div className="text-2xl font-bold">{data.subscriptions.value}</div>
+                    <p className="text-xs text-muted-foreground">
+                      {data.subscriptions.percentage} from last month
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
@@ -147,8 +149,10 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+12,234</div>
-                    <p className="text-xs text-muted-foreground">+19% from last month</p>
+                    <div className="text-2xl font-bold">{data.sales.value}</div>
+                    <p className="text-xs text-muted-foreground">
+                      {data.sales.percentage} from last month
+                    </p>
                   </CardContent>
                 </Card>
                 <Card>
@@ -168,8 +172,10 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+573</div>
-                    <p className="text-xs text-muted-foreground">+201 since last hour</p>
+                    <div className="text-2xl font-bold">{data.activeNow.value}</div>
+                    <p className="text-xs text-muted-foreground">
+                      {data.activeNow.percentage} since last hour
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -211,7 +217,7 @@ export default function DashboardPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>You made 265 sales this month.</CardDescription>
+                  <CardDescription>You made {data.sales.monthly} sales this month.</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <RecentSales />

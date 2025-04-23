@@ -16,50 +16,14 @@ import { MainNav } from '@/components/dashboard/main-nav'
 import { Search } from '@/components/dashboard/search'
 import TeamSwitcher from '@/components/dashboard/team-switcher'
 import { UserNav } from '@/components/dashboard/user-nav'
+import { data } from '@/data/data'
 
 export const metadata: Metadata = {
   title: 'Customers',
   description: 'Manage your customer information.',
 }
 
-// Sample customer data
-const customers = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '(123) 456-7890',
-    address: '123 Main St, Anytown, CA 94321',
-  },
-  {
-    id: '2',
-    name: 'Jane Smith',
-    email: 'jane.smith@example.com',
-    phone: '(456) 789-0123',
-    address: '456 Oak Ave, Somewhere, NY 10001',
-  },
-  {
-    id: '3',
-    name: 'Robert Johnson',
-    email: 'robert.johnson@example.com',
-    phone: '(789) 012-3456',
-    address: '789 Pine Rd, Nowhere, TX 75001',
-  },
-  {
-    id: '4',
-    name: 'Emily Davis',
-    email: 'emily.davis@example.com',
-    phone: '(012) 345-6789',
-    address: '101 Cedar Ln, Elsewhere, FL 33101',
-  },
-  {
-    id: '5',
-    name: 'Michael Wilson',
-    email: 'michael.wilson@example.com',
-    phone: '(345) 678-9012',
-    address: '202 Maple Dr, Anywhere, WA 98101',
-  },
-]
+const customers = data['recent-sales'].users
 
 export default function CustomersPage() {
   return (
@@ -80,7 +44,7 @@ export default function CustomersPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="hidden flex-col md:flex">
+      <div className="hidden flex-col md:flex h-screen overflow-hidden">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
@@ -106,39 +70,41 @@ export default function CustomersPage() {
               <CardTitle>Customer List</CardTitle>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Phone</TableHead>
-                    <TableHead>Address</TableHead>
-                    <TableHead className="w-[100px]">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {customers.map((customer) => (
-                    <TableRow key={customer.id}>
-                      <TableCell className="font-medium">{customer.name}</TableCell>
-                      <TableCell>{customer.email}</TableCell>
-                      <TableCell>{customer.phone}</TableCell>
-                      <TableCell className="max-w-[300px] truncate">{customer.address}</TableCell>
-                      <TableCell>
-                        <div className="flex space-x-2">
-                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
-                            <PencilIcon className="h-4 w-4" />
-                            <span className="sr-only">Edit</span>
-                          </Button>
-                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
-                            <TrashIcon className="h-4 w-4" />
-                            <span className="sr-only">Delete</span>
-                          </Button>
-                        </div>
-                      </TableCell>
+              <div className="max-h-[70vh] overflow-y-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="sticky top-0">Name</TableHead>
+                      <TableHead className="sticky top-0">Email</TableHead>
+                      <TableHead className="sticky top-0">Phone</TableHead>
+                      <TableHead className="sticky top-0">Address</TableHead>
+                      <TableHead className="sticky top-0 w-[100px]">Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {customers.map((customer) => (
+                      <TableRow key={customer.id}>
+                        <TableCell className="font-medium">{customer.name}</TableCell>
+                        <TableCell>{customer.email}</TableCell>
+                        <TableCell>{customer.phone}</TableCell>
+                        <TableCell className="max-w-[300px] truncate">{customer.address}</TableCell>
+                        <TableCell>
+                          <div className="flex space-x-2">
+                            <Button variant="ghost" size="icon" className="hover:cursor-pointer">
+                              <PencilIcon className="h-4 w-4" />
+                              <span className="sr-only">Edit</span>
+                            </Button>
+                            <Button variant="ghost" size="icon" className="hover:cursor-pointer">
+                              <TrashIcon className="h-4 w-4" />
+                              <span className="sr-only">Delete</span>
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </CardContent>
           </Card>
         </div>
