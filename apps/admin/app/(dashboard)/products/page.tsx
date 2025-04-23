@@ -102,7 +102,7 @@ export default function ProductsPage() {
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Products</h2>
             <div className="flex items-center space-x-2">
-              <Button>
+              <Button className="hover:cursor-pointer">
                 <PlusIcon className="mr-2 h-4 w-4" />
                 Add Product
               </Button>
@@ -140,11 +140,11 @@ export default function ProductsPage() {
                       </TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
                             <PencilIcon className="h-4 w-4" />
                             <span className="sr-only">Edit</span>
                           </Button>
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
                             <TrashIcon className="h-4 w-4" />
                             <span className="sr-only">Delete</span>
                           </Button>

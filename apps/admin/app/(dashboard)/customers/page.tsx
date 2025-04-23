@@ -95,7 +95,7 @@ export default function CustomersPage() {
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Customers</h2>
             <div className="flex items-center space-x-2">
-              <Button>
+              <Button className="hover:cursor-pointer">
                 <UserPlusIcon className="mr-2 h-4 w-4" />
                 Add Customer
               </Button>
@@ -125,11 +125,11 @@ export default function CustomersPage() {
                       <TableCell className="max-w-[300px] truncate">{customer.address}</TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
                             <PencilIcon className="h-4 w-4" />
                             <span className="sr-only">Edit</span>
                           </Button>
-                          <Button variant="ghost" size="icon">
+                          <Button variant="ghost" size="icon" className="hover:cursor-pointer">
                             <TrashIcon className="h-4 w-4" />
                             <span className="sr-only">Delete</span>
                           </Button>

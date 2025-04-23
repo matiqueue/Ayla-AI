@@ -19,7 +19,7 @@ export function CalendarDateRangePicker({ className }: React.HTMLAttributes<HTML
   return (
     <div className={cn('grid gap-2', className)}>
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild className="hover:cursor-pointer">
           <Button
             id="date"
             variant={'outline'}

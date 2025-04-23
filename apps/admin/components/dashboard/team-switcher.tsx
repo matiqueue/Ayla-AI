@@ -74,7 +74,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
   return (
     <Dialog open={showNewTeamDialog} onOpenChange={setShowNewTeamDialog}>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild className="hover:cursor-pointer">
           <Button
             variant="outline"
             role="combobox"
@@ -108,7 +108,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                         setSelectedTeam(team)
                         setOpen(false)
                       }}
-                      className="text-sm"
+                      className="text-sm hover:cursor-pointer"
                     >
                       <Avatar className="mr-2 h-5 w-5">
                         <AvatarImage
@@ -139,6 +139,7 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
                       setOpen(false)
                       setShowNewTeamDialog(true)
                     }}
+                    className="hover:cursor-pointer"
                   >
                     <PlusCircle className="h-5 w-5" />
                     Create Team
@@ -163,15 +164,15 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
             <div className="space-y-2">
               <Label htmlFor="plan">Subscription plan</Label>
               <Select>
-                <SelectTrigger>
+                <SelectTrigger className="hover:cursor-pointer">
                   <SelectValue placeholder="Select a plan" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="free">
+                  <SelectItem value="free" className="hover:cursor-pointer">
                     <span className="font-medium">Free</span> -{' '}
                     <span className="text-muted-foreground">Trial for two weeks</span>
                   </SelectItem>
-                  <SelectItem value="pro">
+                  <SelectItem value="pro" className="hover:cursor-pointer">
                     <span className="font-medium">Pro</span> -{' '}
                     <span className="text-muted-foreground">$9/month per user</span>
                   </SelectItem>
@@ -181,10 +182,16 @@ export default function TeamSwitcher({ className }: TeamSwitcherProps) {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => setShowNewTeamDialog(false)}>
+          <Button
+            variant="outline"
+            className="hover:cursor-pointer"
+            onClick={() => setShowNewTeamDialog(false)}
+          >
             Cancel
           </Button>
-          <Button type="submit">Continue</Button>
+          <Button type="submit" className="hover:cursor-pointer">
+            Continue
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

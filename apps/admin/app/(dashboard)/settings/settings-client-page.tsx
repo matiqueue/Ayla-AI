@@ -152,7 +152,7 @@ export default function SettingsClientPage() {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
-                <Button type="submit" disabled={isLoading}>
+                <Button type="submit" disabled={isLoading} className="hover:cursor-pointer">
                   {isLoading ? (
                     <span className="flex items-center">
                       <svg className="mr-2 h-4 w-4 animate-spin" viewBox="0 0 24 24">
