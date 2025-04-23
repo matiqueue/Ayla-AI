@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js'
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 import { Request, Response } from 'express'
+
 dotenv.config()
 
 let isBotReady = false
