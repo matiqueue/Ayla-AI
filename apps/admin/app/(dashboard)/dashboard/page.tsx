@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
 
 import { Button } from '@workspace/ui/components/button'
 import {
@@ -25,26 +24,10 @@ export const metadata: Metadata = {
 
 export default function DashboardPage() {
   return (
-    <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/dashboard-light.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/dashboard-dark.png"
-          width={1280}
-          height={866}
-          alt="Dashboard"
-          className="hidden dark:block"
-        />
-      </div>
-      <div className="hidden flex-col md:flex">
+    <div>
+      <div className="flex flex-col h-screen overflow-hidden">
         <div className="border-b">
-          <div className="flex h-16 items-center px-4">
+          <div className="flex flex-wrap items-center px-4 py-2">
             <TeamSwitcher />
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
@@ -53,33 +36,35 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            <div className="flex items-center space-x-2">
-              <CalendarDateRangePicker />
-              <Button className="hover:cursor-pointer">Download</Button>
-            </div>
-          </div>
+        <div className="flex-1 space-y-4 p-8 pt-5">
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="overview" className="cursor-pointer">
-                Overview
-              </TabsTrigger>
-              <TabsTrigger value="analytics" className="cursor-pointer">
-                Analytics
-              </TabsTrigger>
-              <TabsTrigger value="reports" className="cursor-pointer">
-                Reports
-              </TabsTrigger>
-              <TabsTrigger value="notifications" className="cursor-pointer">
-                Notifications
-              </TabsTrigger>
-            </TabsList>
+            <div className="flex flex-wrap items-center justify-between space-y-2">
+              <div className="flex flex-wrap items-center space-x-4">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h2>
+                <TabsList>
+                  <TabsTrigger value="overview" className="cursor-pointer">
+                    Overview
+                  </TabsTrigger>
+                  <TabsTrigger value="analytics" className="cursor-pointer">
+                    Analytics
+                  </TabsTrigger>
+                  <TabsTrigger value="reports" className="cursor-pointer">
+                    Reports
+                  </TabsTrigger>
+                  <TabsTrigger value="notifications" className="cursor-pointer">
+                    Notifications
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+              <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                <CalendarDateRangePicker />
+                <Button className="hover:cursor-pointer">Download</Button>
+              </div>
+            </div>
 
             {/* Overview - bez zmian, pokazuje wszystkie elementy */}
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <TabsContent value="overview" className="space-y-1">
+              <div className="grid gap-1 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
@@ -309,6 +294,6 @@ export default function DashboardPage() {
           </Tabs>
         </div>
       </div>
-    </>
+    </div>
   )
 }
