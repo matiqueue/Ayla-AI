@@ -1,9 +1,9 @@
-import dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
 import { log } from '../utils/log'
+import { loadEnv } from '@workspace/config/index'
 
-dotenv.config()
+loadEnv()
 
 const configPath = path.resolve(__dirname, './json/config.json')
 

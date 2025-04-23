@@ -3,7 +3,9 @@
     "baseUrl": ".",
     "paths": {
       "@/bot/*": ["./*"],
-      "@workspace/ui/*": ["../../packages/ui/src/*"]
-    }
+      "@workspace/ui/*": ["../../packages/ui/src/*"],
+      "@workspace/config/*": ["../../packages/config/*"]
+    },
+    "esModuleInterop": true
   }
 }

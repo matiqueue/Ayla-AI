@@ -1,8 +1,8 @@
 import { Client, GatewayIntentBits } from 'discord.js'
-import * as dotenv from 'dotenv'
 import { Request, Response } from 'express'
+import { loadEnv } from '@workspace/config/index'
 
-dotenv.config()
+loadEnv()
 
 let isBotReady = false
 let botLoginError: string | null = null
