@@ -16,6 +16,7 @@
     "@radix-ui/react-popover": "^1.1.11",
     "@radix-ui/react-select": "^2.2.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@vscode/sqlite3": "5.1.8-vscode",
     "@workspace/ui": "workspace:*",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
@@ -26,7 +27,8 @@
     "react": "^19.0.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
-    "recharts": "^2.15.3"
+    "recharts": "^2.15.3",
+    "sqlite": "^5.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",
