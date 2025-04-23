@@ -19,7 +19,7 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
         Overview
       </Link>
       <Link
-        href="/customers"
+        href="/dashboard/customers"
         className={cn(
           'text-sm font-medium transition-colors hover:text-primary',
           pathname === '/customers' ? 'text-primary' : 'text-muted-foreground'
@@ -28,7 +28,7 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
         Customers
       </Link>
       <Link
-        href="/products"
+        href="/dashboard/products"
         className={cn(
           'text-sm font-medium transition-colors hover:text-primary',
           pathname === '/products' ? 'text-primary' : 'text-muted-foreground'
