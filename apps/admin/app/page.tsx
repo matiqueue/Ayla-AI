@@ -1,22 +1,33 @@
 'use client'
+
 import { useRouter } from 'next/navigation'
 
 export default function HomePage() {
   const router = useRouter()
 
-  const handleAuth = () => {
-    const getCookie = (name: string) => {
-      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
-      if (match) return match[2]
-      return null
-    }
+  const checkAuth = async () => {
+    const login = sessionStorage.getItem('login')
+    const password = sessionStorage.getItem('password')
+    const isAdmin = sessionStorage.getItem('admin-auth')
 
-    const isAdmin = getCookie('admin-auth')
+    if (login && password && isAdmin === 'true') {
+      const res = await fetch('/api/verification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ login, password }),
+      })
 
-    console.log('isAdmin', isAdmin)
-    if (isAdmin === 'true') {
-      router.push('/dashboard')
+      const data = await res.json()
+
+      if (data.valid) {
+        router.push('/dashboard')
+      } else {
+        sessionStorage.clear()
+      }
     } else {
+      sessionStorage.clear()
       router.push('/login')
     }
   }
@@ -24,7 +35,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Witaj w panelu admina, zaloguj sie aby kontynuowac: </h1>
-      <button onClick={handleAuth}>Zaloguj się</button>
+      <button onClick={checkAuth}>Zaloguj się</button>
     </div>
   )
 }
