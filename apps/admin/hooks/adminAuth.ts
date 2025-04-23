@@ -30,10 +30,6 @@ export const adminAuth = () => {
         router.push('/login')
       }
     }
-    console.log(
-      'Checking auth..hecking auth..hecking auth..hecking auth..hecking auth..hecking auth..hecking auth..hecking auth..hecking auth...'
-    )
-
     checkAuth()
   }, [router])
 }
