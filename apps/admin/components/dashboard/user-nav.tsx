@@ -12,12 +12,13 @@ import {
 } from '@workspace/ui/components/dropdown-menu'
 
 export function UserNav() {
+  const avatarURL = process.env.NEXT_PUBLIC_AVATAR_URL
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full hover:cursor-pointer">
           <Avatar className="h-8 w-8">
-            <AvatarImage src="/avatars/01.png" alt="@shadcn" />
+            <AvatarImage src={avatarURL} alt="@shadcn" />
             <AvatarFallback>SC</AvatarFallback>
           </Avatar>
         </Button>
