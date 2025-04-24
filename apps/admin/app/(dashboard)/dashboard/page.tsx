@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { data } from '@/data/data'
 
 import { Button } from '@workspace/ui/components/button'
 import {
@@ -24,6 +23,25 @@ export const metadata: Metadata = {
   title: 'Dashboard',
   description: 'Example dashboard app built using the components.',
 }
+
+type Stat = {
+  id: number
+  category: string
+  value: string
+  percentage: string
+  daily: number
+  weekly: number
+  monthly: number
+  desktop: number
+  mobile: number
+  tablet: number
+  since_last_hour: string
+}
+
+const res = await fetch('http://localhost:3001/api/statistics', {
+  cache: 'no-store',
+})
+const statistics: Stat[] = await res.json()
 
 export default function DashboardPage() {
   return (
@@ -218,7 +236,7 @@ export default function DashboardPage() {
                 <CardHeader className="pb-0.5">
                   <CardTitle className="text-xs">Recent Sales</CardTitle>
                   <CardDescription className="text-[10px]">
-                    You made {data.sales.monthly} sales this month.
+                    You made {statistics[2].monthly} sales this month.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="py-0.5 max-h-[469px] overflow-auto">

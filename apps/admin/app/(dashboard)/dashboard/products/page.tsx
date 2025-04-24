@@ -16,7 +16,6 @@ import { MainNav } from '@/components/dashboard/main-nav'
 import { Search } from '@/components/dashboard/search'
 import TeamSwitcher from '@/components/dashboard/team-switcher'
 import { UserNav } from '@/components/dashboard/user-nav'
-import { data } from '@/data/data'
 import { ModeToggle } from '@workspace/ui/components/mode-toggle'
 
 export const metadata: Metadata = {
@@ -24,7 +23,18 @@ export const metadata: Metadata = {
   description: 'Manage your product inventory.',
 }
 
-const products = data.products
+type Product = {
+  id: number
+  name: string
+  description: string
+  price: string
+  stock: number
+}
+
+const res = await fetch('http://localhost:3001/api/products', {
+  cache: 'no-store',
+})
+const products: Product[] = await res.json()
 
 export default function ProductsPage() {
   return (

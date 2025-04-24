@@ -1,8 +1,19 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar'
-import { data } from '@/data/data'
 
-export function RecentSales() {
-  const users = data['recentSales'].users.slice(0, 5)
+export async function RecentSales() {
+  type User = {
+    id: number
+    name: string
+    email: string
+    cash: string
+    phone: string
+    address: string
+  }
+
+  const res = await fetch('http://localhost:3001/api/users', {
+    cache: 'no-store',
+  })
+  const users: User[] = await res.json()
 
   return (
     <div className="space-y-8">

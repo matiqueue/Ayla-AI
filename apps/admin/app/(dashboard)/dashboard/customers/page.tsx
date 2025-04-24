@@ -16,7 +16,6 @@ import { MainNav } from '@/components/dashboard/main-nav'
 import { Search } from '@/components/dashboard/search'
 import TeamSwitcher from '@/components/dashboard/team-switcher'
 import { UserNav } from '@/components/dashboard/user-nav'
-import { data } from '@/data/data'
 import { ModeToggle } from '@workspace/ui/components/mode-toggle'
 
 export const metadata: Metadata = {
@@ -24,7 +23,18 @@ export const metadata: Metadata = {
   description: 'Manage your customer information.',
 }
 
-const customers = data['recentSales'].users
+type User = {
+  id: number
+  name: string
+  email: string
+  phone: string
+  address: string
+}
+
+const res = await fetch('http://localhost:3001/api/users', {
+  cache: 'no-store',
+})
+const users: User[] = await res.json()
 
 export default function CustomersPage() {
   return (
@@ -84,12 +94,12 @@ export default function CustomersPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {customers.map((customer) => (
-                      <TableRow key={customer.id}>
-                        <TableCell className="font-medium">{customer.name}</TableCell>
-                        <TableCell>{customer.email}</TableCell>
-                        <TableCell>{customer.phone}</TableCell>
-                        <TableCell className="max-w-[300px] truncate">{customer.address}</TableCell>
+                    {users.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-medium">{user.name}</TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.phone}</TableCell>
+                        <TableCell className="max-w-[300px] truncate">{user.address}</TableCell>
                         <TableCell>
                           <div className="flex space-x-2">
                             <Button variant="ghost" size="icon" className="hover:cursor-pointer">
