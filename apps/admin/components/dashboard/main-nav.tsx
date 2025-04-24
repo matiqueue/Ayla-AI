@@ -37,10 +37,10 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
         Products
       </Link>
       <Link
-        href="/settings"
+        href="/dashboard/settings"
         className={cn(
           'text-sm font-medium transition-colors hover:text-primary',
-          pathname === '/settings' ? 'text-primary' : 'text-muted-foreground'
+          pathname === '/dashboard/settings' ? 'text-primary' : 'text-muted-foreground'
         )}
       >
         Settings

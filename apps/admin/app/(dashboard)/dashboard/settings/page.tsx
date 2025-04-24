@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import SettingsClientPage from '@/app/(dashboard)/settings/settings-client-page'
+import SettingsClientPage from '@/app/(dashboard)/dashboard/settings/settings-client-page'
 
 // This would normally be in the layout.tsx file, but for demonstration purposes
 export const metadata: Metadata = {
