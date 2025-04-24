@@ -13,6 +13,7 @@ import {
 
 export function UserNav() {
   const avatarURL = process.env.NEXT_PUBLIC_AVATAR_URL
+  const userName = process.env.ADMIN_USERNAME
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,8 +27,8 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">shadcn</p>
-            <p className="text-xs leading-none text-muted-foreground">m@example.com</p>
+            <p className="text-sm font-medium leading-none">{userName}</p>
+            <p className="text-xs leading-none text-muted-foreground">{userName}@example.com</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
