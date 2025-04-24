@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/av
 import { data } from '@/data/data'
 
 export function RecentSales() {
-  const users = data['recent-sales'].users.slice(0, 5)
+  const users = data['recentSales'].users.slice(0, 5)
 
   return (
     <div className="space-y-8">

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: 'Manage your customer information.',
 }
 
-const customers = data['recent-sales'].users
+const customers = data['recentSales'].users
 
 export default function CustomersPage() {
   return (
