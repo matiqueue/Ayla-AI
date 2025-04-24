@@ -21,7 +21,7 @@ export const data = {
     mobile: 231,
     tablet: 89,
   },
-  'recent-sales': {
+  recentSales: {
     monthSales: 265,
     users: [
       {
