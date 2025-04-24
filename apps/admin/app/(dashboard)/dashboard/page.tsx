@@ -80,12 +80,12 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Overview - bez zmian, pokazuje wszystkie elementy */}
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* Overview - dostosowane rozmiary */}
+            <TabsContent value="overview" className="space-y-2 flex-1 overflow-hidden">
+              <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+                    <CardTitle className="text-xs font-medium">Total Revenue</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -94,21 +94,19 @@ export default function DashboardPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
+                      className="h-3 w-3 text-muted-foreground"
                     >
                       <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                     </svg>
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{data.totalRevenue.value}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {data.totalRevenue.percentage} from last month
-                    </p>
+                  <CardContent className="py-1">
+                    <div className="text-lg font-bold">$45,231.89</div>
+                    <p className="text-[10px] text-muted-foreground">+20.1% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+                    <CardTitle className="text-xs font-medium">Subscriptions</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -117,23 +115,21 @@ export default function DashboardPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
+                      className="h-3 w-3 text-muted-foreground"
                     >
                       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                       <circle cx="9" cy="7" r="4" />
                       <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{data.subscriptions.value}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {data.subscriptions.percentage} from last month
-                    </p>
+                  <CardContent className="py-1">
+                    <div className="text-lg font-bold">+2350</div>
+                    <p className="text-[10px] text-muted-foreground">+180.1% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+                    <CardTitle className="text-xs font-medium">Sales</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -142,22 +138,20 @@ export default function DashboardPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
+                      className="h-3 w-3 text-muted-foreground"
                     >
                       <rect width="20" height="14" x="2" y="5" rx="2" />
                       <path d="M2 10h20" />
                     </svg>
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{data.sales.value}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {data.sales.percentage} from last month
-                    </p>
+                  <CardContent className="py-1">
+                    <div className="text-lg font-bold">+12,234</div>
+                    <p className="text-[10px] text-muted-foreground">+19% from last month</p>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Active Now</CardTitle>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+                    <CardTitle className="text-xs font-medium">Active Now</CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -166,34 +160,36 @@ export default function DashboardPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="h-4 w-4 text-muted-foreground"
+                      className="h-3 w-3 text-muted-foreground"
                     >
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                   </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{data.activeNow.value}</div>
-                    <p className="text-xs text-muted-foreground">
-                      {data.activeNow.percentage} since last hour
-                    </p>
+                  <CardContent className="py-1">
+                    <div className="text-lg font-bold">+573</div>
+                    <p className="text-[10px] text-muted-foreground">+201 since last hour</p>
                   </CardContent>
                 </Card>
               </div>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-7 flex-1 overflow-hidden">
                 <Card className="col-span-4">
-                  <CardHeader>
-                    <CardTitle>Overview</CardTitle>
+                  <CardHeader className="pb-0.5">
+                    <CardTitle className="text-xs">Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="pl-2">
-                    <Overview />
+                  <CardContent className="pl-1 py-0.5">
+                    <div className="h-[306px]">
+                      <Overview />
+                    </div>
                   </CardContent>
                 </Card>
                 <Card className="col-span-3">
-                  <CardHeader>
-                    <CardTitle>Recent Sales</CardTitle>
-                    <CardDescription>You made 265 sales this month.</CardDescription>
+                  <CardHeader className="pb-0.5">
+                    <CardTitle className="text-xs">Recent Sales</CardTitle>
+                    <CardDescription className="text-[10px]">
+                      You made 265 sales this month.
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="max-h-[306px] overflow-auto py-0.5">
                     <RecentSales />
                   </CardContent>
                 </Card>
@@ -201,25 +197,29 @@ export default function DashboardPage() {
             </TabsContent>
 
             {/* Analytics - tylko wykres Overview */}
-            <TabsContent value="analytics" className="space-y-4">
+            <TabsContent value="analytics" className="space-y-2 h">
               <Card>
-                <CardHeader>
-                  <CardTitle>Overview</CardTitle>
+                <CardHeader className="pb-0.5">
+                  <CardTitle className="text-xs">Overview</CardTitle>
                 </CardHeader>
-                <CardContent className="pl-2">
-                  <Overview />
+                <CardContent className="pl-1 py-0.5">
+                  <div className="h-[469px]">
+                    <Overview />
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
             {/* Reports - tylko Recent Sales */}
-            <TabsContent value="reports" className="space-y-4">
+            <TabsContent value="reports" className="space-y-2">
               <Card>
-                <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>You made {data.sales.monthly} sales this month.</CardDescription>
+                <CardHeader className="pb-0.5">
+                  <CardTitle className="text-xs">Recent Sales</CardTitle>
+                  <CardDescription className="text-[10px]">
+                    You made {data.sales.monthly} sales this month.
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="py-0.5 max-h-[469px] overflow-auto">
                   <RecentSales />
                 </CardContent>
               </Card>

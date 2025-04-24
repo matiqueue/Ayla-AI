@@ -44,7 +44,7 @@ export default function CustomersPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="hidden flex-col md:flex h-screen overflow-hidden">
+      <div className="hidden flex-col md:flex h-screen">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
@@ -65,12 +65,12 @@ export default function CustomersPage() {
               </Button>
             </div>
           </div>
-          <Card>
+          <Card className="h-[calc(100vh-208px)]">
             <CardHeader>
               <CardTitle>Customer List</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="max-h-[70vh] overflow-y-auto">
+            <CardContent className="h-[calc(100%-2rem)]">
+              <div className="h-full overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
