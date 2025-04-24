@@ -44,7 +44,7 @@ export default function DashboardPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="hidden flex-col md:flex h-screen overflow-hidden">
+      <div className="hidden flex-col md:flex h-screen">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
@@ -199,13 +199,13 @@ export default function DashboardPage() {
             </TabsContent>
 
             {/* Analytics - tylko wykres Overview */}
-            <TabsContent value="analytics" className="space-y-2 h">
+            <TabsContent value="analytics" className="space-y-2 h-screen">
               <Card>
                 <CardHeader className="pb-0.5">
                   <CardTitle className="text-xs">Overview</CardTitle>
                 </CardHeader>
                 <CardContent className="pl-1 py-0.5">
-                  <div className="h-[469px]">
+                  <div className="h-[60vh]">
                     <Overview />
                   </div>
                 </CardContent>
