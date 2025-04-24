@@ -60,6 +60,17 @@ export default function LoginPage() {
     }
   }
 
+  const getProducts = async () => {
+    const res = await fetch('/api/products', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await res.json()
+    console.log(data)
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300">
       <div className="w-full max-w-sm p-8 bg-white/95 dark:bg-black/95 rounded-2xl shadow-xl border border-black/10 dark:border-white/10">
