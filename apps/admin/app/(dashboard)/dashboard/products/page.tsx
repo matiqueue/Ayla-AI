@@ -17,6 +17,7 @@ import { Search } from '@/components/dashboard/search'
 import TeamSwitcher from '@/components/dashboard/team-switcher'
 import { UserNav } from '@/components/dashboard/user-nav'
 import { data } from '@/data/data'
+import { ModeToggle } from '@workspace/ui/components/mode-toggle'
 
 export const metadata: Metadata = {
   title: 'Products',
@@ -44,13 +45,14 @@ export default function ProductsPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="hidden flex-col md:flex h-screen overflow-hidden">
+      <div className="hidden flex-col md:flex h-screen">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
             <MainNav className="mx-6" />
             <div className="ml-auto flex items-center space-x-4">
               <Search />
+              <ModeToggle />
               <UserNav />
             </div>
           </div>
@@ -65,12 +67,12 @@ export default function ProductsPage() {
               </Button>
             </div>
           </div>
-          <Card>
+          <Card className="h-[calc(100vh-208px)]">
             <CardHeader>
               <CardTitle>Product Inventory</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="max-h-[70vh] overflow-y-auto">
+            <CardContent className="h-[calc(100%-2rem)]">
+              <div className="h-full overflow-y-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
