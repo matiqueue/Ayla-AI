@@ -62,7 +62,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300">
-      <div className="w-full max-w-sm p-8 bg-white/95 dark:bg-black/95 rounded-none shadow-xl border border-black/10 dark:border-white/10">
+      <div className="w-full max-w-sm p-8 bg-white/95 dark:bg-black/95 rounded-2xl shadow-xl border border-black/10 dark:border-white/10">
         <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">
           Logowanie Admina
         </h2>
@@ -78,7 +78,7 @@ export default function LoginPage() {
               id="login"
               type="text"
               name="login"
-              className="mt-1 block w-full px-4 py-3 border border-black/10 dark:border-white/10 rounded-none bg-white/95 dark:bg-black/95 text-black dark:text-white placeholder-neutral-700/80 dark:placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white transition-all duration-200"
+              className="mt-1 block w-full px-4 py-3 border border-black/10 dark:border-white/10 rounded-lg bg-white/95 dark:bg-black/95 text-black dark:text-white placeholder-neutral-700/80 dark:placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white transition-all duration-200"
               placeholder="Wpisz login"
             />
           </div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                className="mt-1 block w-full px-4 py-3 border border-black/10 dark:border-white/10 rounded-none bg-white/95 dark:bg-black/95 text-black dark:text-white placeholder-neutral-700/80 dark:placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white transition-all duration-200"
+                className="mt-1 block w-full px-4 py-3 border border-black/10 dark:border-white/10 rounded-lg bg-white/95 dark:bg-black/95 text-black dark:text-white placeholder-neutral-700/80 dark:placeholder-white/80 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white transition-all duration-200"
                 placeholder="Wpisz hasło"
               />
               <button
@@ -108,7 +108,7 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold py-3 rounded-none hover:bg-neutral-700/80 dark:hover:bg-white/80 transition-colors duration-200"
+            className="w-full bg-neutral-900 dark:bg-white text-white dark:text-black font-semibold py-3 rounded-lg hover:bg-neutral-700/80 dark:hover:bg-white/80 transition-colors duration-200"
           >
             Zaloguj się
           </button>
