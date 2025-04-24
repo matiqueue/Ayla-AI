@@ -1,9 +1,9 @@
 'use client'
 
-import type * as React from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Home, User, BookOpen, MessageSquare, Sparkles } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { Home, User, BookOpen, MessageSquare, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -13,7 +13,7 @@ interface MenuItem {
   href: string
   gradient: string
   iconColor: string
-  sectionId?: string // Optional section ID for smooth scrolling
+  sectionId?: string
 }
 
 const menuItems: MenuItem[] = [
@@ -113,26 +113,24 @@ const sharedTransition = {
 export function MenuBar() {
   const { theme } = useTheme()
   const pathname = usePathname()
-  const isDarkTheme = theme === 'dark'
+  const [gradientClass, setGradientClass] = useState('')
+
+  useEffect(() => {
+    const isDarkTheme = theme === 'dark'
+    setGradientClass(isDarkTheme ? 'via-blue-400/30 via-30%' : 'via-blue-400/20 via-60%')
+  }, [theme])
 
   const handleNavigation = (e: React.MouseEvent, item: MenuItem) => {
-    // If we're on the homepage and there's a section ID, scroll to it
     if (pathname === '/home' && item.sectionId) {
       e.preventDefault()
-
-      // Find the section in the scroll container
       const scrollContainer = document.getElementById('scroll-container')
       const sections = document.querySelectorAll('.snap-section')
-
-      // Find the index of the section
       let sectionIndex = -1
       sections.forEach((section, index) => {
         if (section.querySelector(`#${item.sectionId}`)) {
           sectionIndex = index
         }
       })
-
-      // If found, scroll to it
       if (sectionIndex >= 0 && scrollContainer) {
         scrollContainer.scrollTo({
           top: sectionIndex * window.innerHeight,
@@ -149,9 +147,7 @@ export function MenuBar() {
       whileHover="hover"
     >
       <motion.div
-        className={`absolute -inset-2 bg-gradient-radial from-transparent ${
-          isDarkTheme ? 'via-blue-400/30 via-30%' : 'via-blue-400/20 via-60%'
-        } to-transparent rounded-3xl z-0 pointer-events-none`}
+        className={`absolute -inset-2 bg-gradient-radial from-transparent ${gradientClass} to-transparent rounded-3xl z-0 pointer-events-none`}
         variants={navGlowVariants}
       />
       <ul className="flex items-center gap-2 relative z-10">

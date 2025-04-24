@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express'
-import dotenv from 'dotenv'
 import { checkBotStatus, startBot } from './dir/bot-status'
+import { loadEnv } from '@workspace/config/index'
 
-dotenv.config()
+loadEnv()
 
 const app = express()
 const SERVER_PORT = process.env.SERVER_PORT || 4000

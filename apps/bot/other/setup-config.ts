@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as readline from 'readline'
-import * as dotenv from 'dotenv'
+import { loadEnv } from '@workspace/config/index'
 
-dotenv.config()
+loadEnv()
 
 const rl = readline.createInterface({
   input: process.stdin,

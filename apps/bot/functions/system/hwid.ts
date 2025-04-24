@@ -1,4 +1,4 @@
-import si from 'systeminformation'
+import * as si from 'systeminformation'
 
 export const getHWID = async (): Promise<string> => {
   try {

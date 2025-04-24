@@ -27,7 +27,7 @@
     "framer-motion": "^12.7.4",
     "lucide-react": "^0.475.0",
     "motion": "^12.7.4",
-    "next": "^15.2.3",
+    "next": "^15.3.1",
     "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -39,9 +39,6 @@
     "@storybook/blocks": "^8.6.12",
     "@storybook/experimental-addon-test": "^8.6.12",
     "@storybook/experimental-nextjs-vite": "^8.6.12",
-    "eslint-plugin-storybook": "^0.12.0",
-    "storybook": "^8.6.12",
-    "vitest": "^3.1.1",
     "@storybook/nextjs": "^8.6.12",
     "@storybook/react": "^8.6.12",
     "@storybook/test": "^8.6.12",
@@ -50,8 +47,11 @@
     "@types/react-dom": "^19",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
+    "eslint-plugin-storybook": "^0.12.0",
     "prisma": "^6.6.0",
-    "typescript": "^5.7.3"
+    "storybook": "^8.6.12",
+    "typescript": "^5.7.3",
+    "vitest": "^3.1.1"
   },
   "eslintConfig": {
     "extends": [

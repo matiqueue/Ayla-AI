@@ -135,11 +135,6 @@ export function Header() {
     fetchLicense()
   }, [isLoaded, user])
 
-  // Callback, który będzie wywołany po wygenerowaniu licencji
-  // const updateLicenseStatus = (newStatus: boolean) => {
-  //   setHasLicense(newStatus)
-  // }
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent ${
