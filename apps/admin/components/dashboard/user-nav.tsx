@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar'
 import { Button } from '@workspace/ui/components/button'
 import {
@@ -10,6 +12,20 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu'
+
+const handleLogout = async () => {
+  try {
+    const res = await fetch('/api/logout', { method: 'POST' })
+    if (res.ok) {
+      sessionStorage.clear()
+      window.location.href = '/'
+    } else {
+      console.error('Logout failed')
+    }
+  } catch (err) {
+    console.error('Logout error', err)
+  }
+}
 
 export function UserNav() {
   const avatarURL = process.env.NEXT_PUBLIC_AVATAR_URL
@@ -48,7 +64,7 @@ export function UserNav() {
           <DropdownMenuItem className="hover:cursor-pointer">New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="hover:cursor-pointer">
+        <DropdownMenuItem className="hover:cursor-pointer" onClick={handleLogout}>
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
