@@ -58,6 +58,17 @@ export default function LoginPage() {
     }
   }
 
+  const getProducts = async () => {
+    const res = await fetch('/api/products', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await res.json()
+    console.log(data)
+  }
+
   return (
     <div>
       <div>Stronka do logowania admina</div>
@@ -69,6 +80,8 @@ export default function LoginPage() {
         <button type="submit">Zaloguj się</button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      <button onClick={getProducts}>wypisz produkty</button>
     </div>
   )
 }
