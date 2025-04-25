@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Moon, Sun } from 'lucide-react'
+import { Moon, Sun, Palette } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
 import { Button } from '@workspace/ui/components/button'
@@ -30,10 +30,11 @@ export function ModeToggle() {
         <Button variant="ghost" size="sm" className="hover:cursor-pointer">
           {theme === 'light' && <Sun className="h-[1.2rem] w-[1.2rem]" />}
           {theme === 'dark' && <Moon className="h-[1.2rem] w-[1.2rem]" />}
+          {theme === 'custom' && <Palette className="h-[1.2rem] w-[1.2rem]" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="text-lg">
-        {['light', 'dark'].map((mode) => (
+        {['light', 'dark', 'custom'].map((mode) => (
           <DropdownMenuItem
             key={mode}
             onClick={() => setTheme(mode)}
