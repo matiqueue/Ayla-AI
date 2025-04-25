@@ -3,28 +3,16 @@
 import { useUser } from '@clerk/nextjs'
 import { useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogAction,
-  AlertDialogCancel,
-} from '@workspace/ui/components/alert-dialog'
 import { Button } from '@workspace/ui/components/button'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function LicenseInfoPage() {
   const { user, isLoaded } = useUser()
-  interface License {
-    expiresAt: string
-  }
-  const [license, setLicense] = useState<License | null>(null)
+  const [license, setLicense] = useState(null)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(false)
-  const [open, setOpen] = useState(false) // Kontrola stanu AlertDialog
+  const [isModalVisible, setIsModalVisible] = useState(false) // Nowa kontrola widoczności modala
 
   const fetchLicense = useCallback(async () => {
     setLoading(true)
@@ -58,11 +46,11 @@ export default function LicenseInfoPage() {
         throw new Error('Nie udało się usunąć licencji')
       }
       setLicense(null)
-      setOpen(false) // Zamknij dialog po sukcesie
     } catch (error) {
       console.error('Błąd podczas usuwania licencji:', error)
     } finally {
       setDeleting(false)
+      hideModal() // Zamknij modal po zakończeniu
     }
   }
 
@@ -71,6 +59,10 @@ export default function LicenseInfoPage() {
       fetchLicense()
     }
   }, [isLoaded, user, fetchLicense])
+
+  // Funkcje do sterowania widocznością modala
+  const showModal = () => setIsModalVisible(true)
+  const hideModal = () => setIsModalVisible(false)
 
   if (!isLoaded) {
     return (
@@ -133,38 +125,13 @@ export default function LicenseInfoPage() {
                   <strong>Wygasa:</strong> {new Date(license.expiresAt).toLocaleString('pl-PL')}
                 </p>
               </div>
-              <AlertDialog open={open} onOpenChange={setOpen}>
-                <AlertDialogTrigger asChild>
-                  <Button
-                    variant="destructive"
-                    className="hover:cursor-pointer bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900"
-                    onClick={() => setOpen(true)}
-                  >
-                    Anuluj licencję
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent className="bg-white dark:bg-black p-6 rounded-lg shadow-lg z-50">
-                  <AlertDialogTitle>Na pewno?</AlertDialogTitle>
-                  <AlertDialogDescription className="text-muted-foreground dark:text-muted-foreground">
-                    Tej operacji nie można cofnąć. Nie dostaniesz zwrotu pieniędzy ani przeprosin 😈
-                  </AlertDialogDescription>
-                  <div className="flex justify-end space-x-2 mt-4">
-                    <AlertDialogCancel
-                      className="hover:cursor-pointer"
-                      onClick={() => setOpen(false)}
-                    >
-                      Jednak nie
-                    </AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={deleteLicense}
-                      disabled={deleting}
-                      className="bg-red-600 hover:bg-red-700 hover:cursor-pointer custom:text-white"
-                    >
-                      {deleting ? 'Usuwanie...' : 'Usuń licencję'}
-                    </AlertDialogAction>
-                  </div>
-                </AlertDialogContent>
-              </AlertDialog>
+              <Button
+                variant="destructive"
+                className="hover:cursor-pointer bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900"
+                onClick={showModal} // Wywołanie funkcji pokazującej modal
+              >
+                Anuluj licencję
+              </Button>
             </motion.div>
           ) : (
             <motion.p
@@ -181,6 +148,33 @@ export default function LicenseInfoPage() {
           )}
         </div>
       </div>
+
+      {/* Modal sterowany widocznością */}
+      {isModalVisible && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white dark:bg-black p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 className="text-xl font-semibold mb-4">Na pewno?</h2>
+            <p className="text-muted-foreground dark:text-muted-foreground mb-6">
+              Tej operacji nie można cofnąć. Nie dostaniesz zwrotu pieniędzy ani przeprosin 😈
+            </p>
+            <div className="flex justify-end space-x-2">
+              <Button
+                className="hover:cursor-pointer"
+                onClick={hideModal} // Wywołanie funkcji chowającej modal
+              >
+                Jednak nie
+              </Button>
+              <Button
+                onClick={deleteLicense}
+                disabled={deleting}
+                className="bg-red-600 hover:bg-red-700 hover:cursor-pointer custom:text-white"
+              >
+                {deleting ? 'Usuwanie...' : 'Usuń licencję'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
