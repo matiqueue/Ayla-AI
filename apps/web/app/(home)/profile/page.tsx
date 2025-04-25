@@ -25,6 +25,7 @@ export default function ProfilePage() {
   const [passwordError, setPasswordError] = useState('')
   const [mfaEnabled, setMfaEnabled] = useState(user?.twoFactorEnabled || false)
   const [totpSecret, setTotpSecret] = useState('')
+  const [activeTab, setActiveTab] = useState('account') // Dodany stan dla aktywnej zakładki
 
   if (!isLoaded || !user || !sessionsLoaded) {
     return <div>Loading...</div>
@@ -179,7 +180,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <Tabs defaultValue="account">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid grid-cols-5 mb-8">
             {[
               { value: 'account', label: 'Konto' },
@@ -188,7 +189,11 @@ export default function ProfilePage() {
               { value: 'security', label: 'Bezpieczeństwo' },
               { value: 'privacy', label: 'Prywatność' },
             ].map(({ value, label }) => (
-              <TabsTrigger key={value} value={value} className="hover:cursor-pointer">
+              <TabsTrigger
+                key={value}
+                value={value}
+                className={`hover:cursor-pointer ${activeTab === value ? 'bg-primary text-primary-foreground' : ''}`}
+              >
                 {label}
               </TabsTrigger>
             ))}
