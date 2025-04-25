@@ -12,7 +12,7 @@ export default function LicenseInfoPage() {
   const [license, setLicense] = useState(null)
   const [loading, setLoading] = useState(true)
   const [deleting, setDeleting] = useState(false)
-  const [isModalVisible, setIsModalVisible] = useState(false) // Nowa kontrola widoczności modala
+  const [isModalVisible, setIsModalVisible] = useState(false)
 
   const fetchLicense = useCallback(async () => {
     setLoading(true)
@@ -50,7 +50,7 @@ export default function LicenseInfoPage() {
       console.error('Błąd podczas usuwania licencji:', error)
     } finally {
       setDeleting(false)
-      hideModal() // Zamknij modal po zakończeniu
+      hideModal()
     }
   }
 
@@ -60,7 +60,6 @@ export default function LicenseInfoPage() {
     }
   }, [isLoaded, user, fetchLicense])
 
-  // Funkcje do sterowania widocznością modala
   const showModal = () => setIsModalVisible(true)
   const hideModal = () => setIsModalVisible(false)
 
@@ -82,17 +81,14 @@ export default function LicenseInfoPage() {
 
   return (
     <section className="relative overflow-hidden min-h-screen flex items-center justify-center bg-background">
-      {/* Gradient tła */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black/5 dark:to-black/5 pointer-events-none" />
-
-      {/* Animowane kształty w tle */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-cyan-500/5 dark:from-black/5 dark:to-black/5 custom:from-black/5 custom:to-black/5 pointer-events-none" />
       <motion.div
-        className="absolute top-20 right-[10%] w-48 h-48 rounded-full bg-purple-500/10 dark:bg-gray-600/20 blur-3xl"
+        className="absolute top-20 right-[10%] w-48 h-48 rounded-full bg-purple-500/10 dark:bg-gray-600/20 custom:bg-gray-600/20 blur-3xl"
         animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
         transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-20 left-[10%] w-56 h-56 rounded-full bg-cyan-500/10 dark:bg-gray-500/10 blur-3xl"
+        className="absolute bottom-20 left-[10%] w-56 h-56 rounded-full bg-cyan-500/10 dark:bg-gray-500/10 custom:bg-gray-500/10 blur-3xl"
         animate={{ x: [0, -15, 0], y: [0, 15, 0] }}
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
       />
@@ -100,7 +96,7 @@ export default function LicenseInfoPage() {
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center">
           <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 bg-clip-text text-transparent leading-normal"
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 to-cyan-500 dark:from-gray-400 dark:to-gray-200 custom:from-gray-400 custom:to-gray-200 bg-clip-text text-transparent leading-normal"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -127,8 +123,8 @@ export default function LicenseInfoPage() {
               </div>
               <Button
                 variant="destructive"
-                className="hover:cursor-pointer bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900"
-                onClick={showModal} // Wywołanie funkcji pokazującej modal
+                className="hover:cursor-pointer bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900 custom:bg-red-800 custom:hover:bg-red-900"
+                onClick={showModal}
               >
                 Anuluj licencję
               </Button>
@@ -149,25 +145,26 @@ export default function LicenseInfoPage() {
         </div>
       </div>
 
-      {/* Modal sterowany widocznością */}
       {isModalVisible && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white dark:bg-black p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h2 className="text-xl font-semibold mb-4">Na pewno?</h2>
-            <p className="text-muted-foreground dark:text-muted-foreground mb-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white dark:bg-black custom:bg-black p-6 rounded-lg shadow-lg max-w-sm w-full">
+            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100 custom:text-gray-100">
+              Na pewno?
+            </h2>
+            <p className="text-muted-foreground dark:text-muted-foreground custom:text-muted-foreground mb-6">
               Tej operacji nie można cofnąć. Nie dostaniesz zwrotu pieniędzy ani przeprosin 😈
             </p>
             <div className="flex justify-end space-x-2">
               <Button
-                className="hover:cursor-pointer"
-                onClick={hideModal} // Wywołanie funkcji chowającej modal
+                className="hover:cursor-pointer bg-gray-200 dark:bg-gray-700 custom:bg-gray-700 text-gray-900 dark:text-gray-100 custom:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 custom:hover:bg-gray-600"
+                onClick={hideModal}
               >
                 Jednak nie
               </Button>
               <Button
                 onClick={deleteLicense}
                 disabled={deleting}
-                className="bg-red-600 hover:bg-red-700 hover:cursor-pointer custom:text-white"
+                className="bg-red-600 hover:bg-red-700 dark:bg-red-800 dark:hover:bg-red-900 custom:bg-red-800 custom:hover:bg-red-900 text-white custom:text-white hover:cursor-pointer disabled:opacity-50"
               >
                 {deleting ? 'Usuwanie...' : 'Usuń licencję'}
               </Button>
