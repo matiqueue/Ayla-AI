@@ -18,6 +18,7 @@ import { Search } from '@/components/dashboard/search'
 import TeamSwitcher from '@/components/dashboard/team-switcher'
 import { UserNav } from '@/components/dashboard/user-nav'
 import { ModeToggle } from '@workspace/ui/components/mode-toggle'
+import { motion } from 'framer-motion'
 
 export const metadata: Metadata = {
   title: 'Dashboard',
@@ -75,6 +76,31 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="flex-1 space-y-4 p-8 pt-6">
+          <motion.div
+            className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-purple-500/10 dark:bg-gray-600/20 blur-3xl"
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 8,
+              ease: 'easeInOut',
+            }}
+          />
+
+          <motion.div
+            className="absolute bottom-20 left-[10%] w-72 h-72 rounded-full bg-cyan-500/10 dark:bg-gray-500/10 blur-3xl"
+            animate={{
+              x: [0, -20, 0],
+              y: [0, 20, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 10,
+              ease: 'easeInOut',
+            }}
+          />
           <Tabs defaultValue="overview" className="space-y-4">
             <div className="flex items-center justify-between space-y-2">
               <div className="flex items-center space-x-4">
